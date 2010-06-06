@@ -1,0 +1,19 @@
+
+
+<noscript>
+	<p>
+		We apologise for the inconvenience, but for this feature to work, JavaScript must be enabled on your web browser.
+	</p>
+</noscript>
+
+<h3> Files for ${group.postName.toLowerCase().charAt(0)}${group.postName.substring(1)} </h3>
+
+#set( $groupID = $group.id )
+<table width="90%" class="cellpadding5" style="border-collapse: collapse; margin: 0 auto;" id="dir_f22269c8eb15992260c7928dbff44039">
+	<tr>
+		<td style="border: 1px solid #EEE; border-right: #FFF; border-left: #FFF">
+#parse ("frame/groupfiledirectory.vm")
+		</td>
+	</tr>
+</table>
+		

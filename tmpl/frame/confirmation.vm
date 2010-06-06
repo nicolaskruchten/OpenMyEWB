@@ -1,0 +1,39 @@
+
+
+#if($bigMessage)
+<h4 align="center">$bigMessage</h4>
+#end
+
+
+<table style=" margin: 0 auto;">
+<tr>
+<td>
+
+				<form action="$confirmURL" method="post" enctype="multipart/form-data">
+					<input type="hidden" name="datestamp" value="$datestamp"/>
+					<input type="hidden" name="confirmed" value="no"/>
+					<input type="submit" class="button" value="No, cancel" onClick="this.disabled=true; this.style.color='#AAA'; this.form.submit();"/>
+				</form>
+
+
+</td>
+<td>
+
+				<form action="$confirmURL" method="post" enctype="multipart/form-data">
+					<input type="hidden" name="confirmed" value="yes"/>
+					<input type="hidden" name="datestamp" value="$datestamp"/>
+					
+					#foreach ($element in $confirmForm.elements)
+						<input type="hidden" name="$element.internalName" value="$element.getSafeValue()"/>
+					#end
+					
+					<input type="submit" class="button" value="Yes, confirm" onClick="this.disabled=true; this.style.color='#AAA'; this.form.submit();"/>
+				</form>
+
+				</td>
+</tr>
+</table>
+
+#if($littleMessage)
+<p>$littleMessage</p>
+#end

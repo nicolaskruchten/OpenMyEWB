@@ -1,0 +1,36 @@
+#mysql login info (note: mysql connection url is specified in hibernate.cfg.xml, defaults to localhost)
+dbuser = root
+dbpass = root
+
+#database to be used = dbprefix+dbsuffix (use 'dev' when developing, 'deploy' for real)
+dbprefix = eg
+dbsuffix = dev
+
+#domain portion (plus port, if applicable) of the deployment url (localhost:8080 is standard for local tomcat installs) NO SLASHES
+domain = localhost:8080
+
+#anything between the domain name and the app's url's first slash (i.e. the application name in unwrapped tomcat scenarios) STARTS WITH A SLASH, DOESN'T END WITH ONE
+appprefix = /eg
+
+#don't change this
+defaulturl = /home/Posts
+
+#create log4j text log?
+txtlog = no
+
+#send log4j errors by email?
+smtplog = no
+smtphost = localhost
+
+#display run-time errors to users?
+devmode = yes
+
+#the full name of your instance
+longname = Example
+
+#the short forms of the name of your instance, in french and english
+enshortname = eg
+frshortname = eg
+
+#the main contact email address
+systememail = system@example.net

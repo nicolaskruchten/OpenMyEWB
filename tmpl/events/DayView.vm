@@ -1,0 +1,10 @@
+<h2>Events #date($theday)</h2>
+
+
+<br />
+
+
+
+#foreach($event in $events)
+#parse("frame/renderers/eventrenderer.vm")
+#end

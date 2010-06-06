@@ -1,0 +1,7 @@
+
+<ul>
+
+<li><a href="${base}/chapter/MemberInfo/$targetUser.id">view full profile info &raquo;</a></li>
+<li><a href="${base}/mailing/ListMember/new">&laquo; search again</a></li>
+	
+</ul>

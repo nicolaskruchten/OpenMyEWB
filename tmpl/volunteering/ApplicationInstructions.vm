@@ -1,0 +1,18 @@
+<h2>Application Instructions</h2>
+
+<h3 align="center">$session.name</h3>
+
+#if ($app)	
+	<center><input type="submit" align="centre" class="button" value="proceed with application" onClick="this.disabled=true; this.style.color='#AAA'; window.location='${base}/volunteering/ApplicationDetails/$session.id';"/></center>
+
+#end
+
+	<p align="center"  style="font-size: 12px;">If you wish to see these instructions in a different language (and if they are available), you can <br /><a href="$base/profile/EditProfile/">change the default language setting in your profile</a>.</p>
+<br />
+	#wiki($instructions)
+
+<p style="font-size: 12px;"><b>Note:</b> This system will not save answers over 1000 words. Furthermore, to avoid server timeout problems, we recommend that you type your answers in another text editor, and simply paste them into this application, rather than spending a long time typing the answers into this form.</p>
+</p>
+<br />
+
+<center><input type="submit" class="button" value="proceed with application" onClick="this.disabled=true; this.style.color='#AAA'; window.location='${base}/volunteering/ApplicationDetails/$session.id';"/></center>

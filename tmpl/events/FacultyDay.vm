@@ -1,0 +1,10 @@
+
+<h2>Faculty Day Registration</h2>
+
+
+## <p>The cost of attending the conference is $50 for faculty members.</p>
+## 
+## #parse("frame/form.vm")
+
+Faculty Day registration is now closed.
+

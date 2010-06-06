@@ -1,0 +1,6 @@
+<h2>Exec Title Selection</h2>
+
+<p>Please make this title sound professional and descriptive of the person's role in your chapter (e.g. President, VP Finance, Director of Events etc). Please stay away from titles like VP Nicolas (not very descriptive of role), or Director of Awesomeness or Super-Duper Princess of Communications (not very professional) etc.</p>
+
+#parse("frame/form.vm")
+

@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+      "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="ca.myewb.model">
+
+    <class name="DailyStatsModel" table="dailystats">
+
+        <id name="id" type="int" unsaved-value="0">
+            <generator class="native"/>
+        </id>
+
+        <property name="day" type="date"/>
+        <property name="signups" type="int"/>
+        <property name="mailinglistsignups" type="int"/>
+        <property name="signins" type="int"/>
+        <property name="posts" type="int"/>
+        <property name="events" type="int"/>
+        <property name="replies" type="int"/>
+        <property name="eventMailings" type="int"/>
+        <property name="whiteboardEdits" type="int"/>
+        <property name="regupgrades" type="int"/>
+        <property name="regdowngrades" type="int"/>
+        <property name="deletions" type="int"/>
+        <property name="renewals" type="int"/>
+        <property name="mailinglistupgrades" type="int"/>
+        <property name="filesadded" type="int"/>
+        
+
+    </class>
+
+</hibernate-mapping>

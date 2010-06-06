@@ -1,0 +1,22 @@
+
+
+
+<div style="width: 532px; float: left; overflow: hidden;">
+
+
+	<h2>Discussion Board</h2>
+
+
+<div id="postlistcontainer">
+
+
+		<div align="center" style="font-size: 11px;"> <br /> 
+		<img src="$base/images/indicator.white.gif" /> <br />  <br /> Loading...
+		</div>
+		<script> 
+		$('#postlistcontainer').load('$base/ajax/postlist', {"filter":"$filterParam","pagenum":"$pagenum"});
+		</script>
+
+</div>
+
+</div> <!-- extra -->

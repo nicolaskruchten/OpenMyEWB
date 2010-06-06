@@ -1,0 +1,63 @@
+<h2>
+	
+#if ($newPosts == 0)
+	No New Posts
+#elseif ($newPosts == 1)
+	1 New Post
+#else
+	$newPosts New Posts
+#end
+
+and
+
+#if ($newReplies == 0)
+	No New Replies
+#elseif ($newReplies == 1)
+	1 New Reply
+#else
+	$newReplies New Replies
+#end
+
+</h2>
+
+#if(!$user.lastLogin)
+	
+	<p>The next time you sign in, this page will show you all posts since your current sign-in.</p>
+	
+#elseif ($posts.isEmpty())
+
+	<p>No new posts since you last signed in (#postDateWithTime($user.lastLogin)) match your current display settings.</p>
+	
+	#if($modeShowEmails.equals("no") || $modeShowReplies.equals("no"))
+	<p align="center"><i>Note: Your current display settings may be hiding some posts or replies (see sidebar).</i></p>
+	#end
+	
+#else
+
+    <p>The following posts are new since you last signed in (#postDateWithTime($user.lastLogin)) and match your current display settings.</p>
+	
+		#if(!$user.currentLogin.equals($user.lastLogin))
+			<p align="center"><a href="#" onclick="pushBackNewPosts('$base/actions/PushBackNewPosts', this)">click here to make these posts stay 'new' next time you sign in</a></p>
+		#end
+	
+	#if($modeShowEmails.equals("no") || $modeShowReplies.equals("no"))
+	<p align="center"><i>Note: Your current display settings may be hiding some posts or replies (see sidebar).</i></p>
+	#end
+	
+    <br />
+	
+	#parse("frame/postpagination.vm")
+	<br />
+    #foreach($post in $posts)
+			#if($post.getParent())
+			<div class="post">
+				#parse("frame/renderers/replyrenderer.vm")
+			</div>
+			#else
+				#parse("frame/renderers/postrenderer.vm")
+			#end
+    #end
+	
+	#parse("frame/postpagination.vm")
+#end
+	

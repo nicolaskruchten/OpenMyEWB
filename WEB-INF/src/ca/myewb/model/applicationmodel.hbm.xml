@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+      "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="ca.myewb.model">
+
+    <class name="ApplicationModel" table="applications">
+
+        <id name="id" type="int" unsaved-value="0">
+            <generator class="native"/>
+        </id>
+        
+        <property name="englishWriting" type="int"/>
+        <property name="englishReading" type="int"/>
+        <property name="englishSpeaking" type="int"/>
+        <property name="frenchWriting" type="int"/>
+        <property name="frenchReading" type="int"/>
+        <property name="frenchSpeaking" type="int"/>
+        <property name="schooling" type="text"/>
+        <property name="resume" type="text"/>
+        <property name="refs" type="text"/>
+        
+        <many-to-one name="user" class="UserModel" column="userid" />
+        <many-to-one name="session" class="ApplicationSessionModel" column="sessionid" />
+        
+        <bag name="answers" inverse="true" cascade="save-update">
+        	<key column="appid"/>
+        	<one-to-many class="ApplicationAnswerModel"/>
+        </bag>
+		
+		<property name="GPA" type="float"/>
+   		<property name="created" type="date"/>
+    	<property name="modified" type="date"/>
+    	
+    	<one-to-one name="evaluation" class="EvaluationModel" property-ref="app"/>
+    	
+    </class>
+    
+
+</hibernate-mapping>

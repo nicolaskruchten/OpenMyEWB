@@ -1,0 +1,129 @@
+<h2>Mailing List Info</h2>
+
+#if($list.id!=1)
+<h3 align="center">$list.name<br /> 
+<small>#if(!$list.visible) (archived: no one may join this list, or post/send email to it) #elseif($list.public) (public: anyone may become a recipient) #else (private: only members added by list leaders are on this list) #end</small></h3>
+#else
+<h3 align="center">E-newsletter list</h3>
+#end
+
+#set( $value = $list.getNumRecipients() + $list.getNumMembers())
+
+<table border="0" class="cellpadding5" style="margin: 0 auto;" width="700">
+<tr>
+<td width="200" class="labelcell">List Description:</td><td>$list.description</td>
+</tr>
+<tr>
+<td width="200" class="labelcell">Email subject prefix:</td><td>[$list.totalShortname]</td>
+</tr>
+#if($list.parent)
+<tr>
+<td width="200" class="labelcell">List belongs to:</td>
+<td><a href="${base}/chapter/ChapterInfo/$list.parent.shortname">$list.parent.name</a></td>
+</tr>
+#end
+
+
+#if($list.isChapter())
+<tr>
+<td width="200" class="labelcell">List belongs to:</td>
+<td><a href="${base}/chapter/ChapterInfo/$list.shortname">$list.name</a></td>
+</tr>
+#end
+
+
+#if($list.visible)
+#if(!$isGuest && ($list.id!=1))
+<tr>
+<td width="200" class="labelcell">List size:</td><td>$value subscribers</td>
+</tr>
+#end
+<tr>
+<td class="labelcell">Your status:</td><td>
+#if ($level)
+	#if($level.equals("leader"))
+		You are a <b>leader</b> of this list. <br />You can send messages to this list as well as add or remove people from the list. You receive messages sent to this list.
+	#else
+		#if($level.equals("sender"))
+			You are a <b>sender</b> of this list. <br />You can send messages to this list and you receive messages sent to this list.
+		#else
+			#if($level.equals("recipient"))
+				You are a <b>recipient</b> of this list. <br />You receive messages sent to this list.
+			#end
+		#end
+		
+		#if($user.isAdmin())
+			<br/>That said, you are an administrator, and thus also have <b>leader</b> abilities.
+		#else
+			#if($isLeader)
+			<br/>That said, you are an exec, and thus also have <b>leader</b> abilities.
+			#end
+		#end
+		
+	#end
+#else <!-- no level, OR toolbar code not invoked -->
+	#if($isGuest) <!-- toolbar code not invoked -->
+		#if($form)
+			#parse("frame/form.vm")
+		#else
+			<form action="${base}/actions/ModifyListMembership/$list.id" method="post" enctype="multipart/form-data">
+				<input type="text" name="Emails" onFocus="this.value='';" onBlur="if(this.value=='')this.value='(your email address)'" value="(your email address)""/>
+				<input type="hidden" name="ActionType" value="add"/>
+				<input type="submit" class="button" value="join this list" onClick="this.disabled=true; this.style.color='#AAA'; this.form.submit();"/>
+			</form>
+		#end
+	#else
+			You are not on this list (you don't receive messages sent to it), but you may join it! (see sidebar)
+		#if($user.isAdmin())
+			<br/>That said, you are an administrator, and thus have <b>leader</b> abilities.
+		#else
+			#if($isLeader)
+			<br/>That said, you are an exec, and thus have <b>leader</b> abilities.
+			#end
+		#end
+	#end
+#end
+</td>
+</tr>
+#end
+#if($perms.guestsCanReadPostsInGroup($list))
+	<tr>
+		<td width="200" class="labelcell">Syndication:</td>
+		<td><a href="$base/api/list/$list.id" class="nodeco"><img src="$base/images/feed.gif" border="0" /> RSS feed for this list</a></td>
+	</tr>
+#end
+</table>
+
+#if($list.id != 1 && $list.visible )
+	#set( $parent = $list )
+	#set( $type = "group" )
+	
+	<br />
+	<h3 align="center">List Whiteboard</h3>
+	#set($fullDisplay = true)
+	#parse("frame/renderers/whiteboardrenderer.vm")
+	#set($fullDisplay = false)
+	
+#end
+	
+#if($list.id != 1)
+	<br />
+	<h3 align="center">List Archives</h3>
+
+
+	#if ($posts.isEmpty())
+
+		<p>No posts have ever been made to this list.<p>
+		
+	#else
+
+		#parse("frame/postpagination.vm")
+		<br />
+			#foreach($post in $posts)
+				#parse("frame/renderers/postrenderer.vm")
+			#end
+			
+			#parse("frame/postpagination.vm")
+			
+	#end
+#end

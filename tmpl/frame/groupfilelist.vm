@@ -1,0 +1,22 @@
+<tr>
+	<td style="border: 1px solid #EEE; border-right: #FFF;">
+		<p>
+			<a href="${base}/mailing/ShowGroupFiles/${list.id}" class="nodeco nohover">
+				<b>$list.name</b>
+			</a>
+			<br />
+			<p class="more">
+				<a href="${base}/mailing/ShowGroupFiles/${list.id}" class="nodeco nohover">
+					$list.postName can access these files.
+				</a>
+			</p>
+    		
+		</p>
+	</td>
+		
+	<td valign="middle" align="center" style="border: 1px solid #EEE; border-left: #FFF; width: 250px;">
+		<a href="$base/mailing/ShowGroupFiles/$list.id" class="more">
+			file list &raquo;
+		</a>
+	</td>
+</tr>

@@ -1,0 +1,48 @@
+<h2>Send an Email</h2>
+
+#if(!$lists.isEmpty())
+
+
+    <p>You can send emails to the following mailing lists:</p>
+    
+    <table width="90%" class="cellpadding5" style="border-collapse: collapse; margin: 0 auto;">
+        #foreach ($list in $lists)
+            #if(($list.id!=1))
+                #if(!$user.isAdmin())  #set( $value = $list.getNumRecipients() + $list.getNumMembers()) #end
+                <tr>
+                    <td style="border: 1px solid #EEE; border-right: #FFF;">
+                        <p>
+							<a href="${base}/mailing/SendEmail/$list.id" class="nodeco nohover">
+    							<b>$list.name</b>
+                                
+								<br />
+    							
+								<span style="font-size: 10px;">
+    								[$list.totalShortname] &nbsp;&nbsp; #if(!$user.isAdmin())($value subscribers)#end
+    							</span>
+                                
+								<br />
+    							
+								$list.getDescription()
+							</a>							
+                        </p>
+					</td>
+                    		
+                    <td valign="middle" align="center" style="border: 1px solid #EEE; border-left: #FFF; width: 250px;">
+						<a href="${base}/mailing/SendEmail/$list.id" class="more">send an email to the list &raquo;</a>
+                    </td>
+                </tr>
+            #end
+        	
+        #end
+    </table>
+
+#else
+
+	<p align="center">You don't have the permissions required to send emails to 
+		any mailing list. Only chapter executives and mailing list "senders" 
+		and "leaders" may do so. If you need to send an email to a list or feel 
+		you should be given sender or leader powers, please contact your chapter
+		executive.</p>
+	
+#end

@@ -1,0 +1,28 @@
+
+<div style="margin: 0 auto; width: 700px;">
+<h4>Email Info</h4>
+<ul style="font-size: 12px;">
+	#if($list.id == 5)
+		<li><span><b style="color: red">Sending to all-chapter exec list</b></span></li>
+	#else
+		<li><span><b>List</b>: $list.name</span></li>
+	#end
+	<li><span><b>Subject</b>: $subject</span></li>
+	#if($list.id != 1)
+		<li><span><b>Response Mode</b>: $responseMode</span></li>
+	#end
+	<li><span><b>$tags.size() Tag(s)</b></span>
+	#if(!$tags.isEmpty())
+			<ul>
+				#foreach($tag in $tags)
+				<li><span>$tag</span></li>
+				#end
+			</ul>
+	#end
+	</li>
+	<li><span><b>Has file(s) attached</b>: $hasFile</span></li>
+</ul>
+
+<h4 style="margin-top: 20px;">Email Body</h4>
+#wiki($body)
+</div>

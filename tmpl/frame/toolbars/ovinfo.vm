@@ -1,0 +1,5 @@
+
+<ul>
+		<li><a href="$base/volunteering/EditOVInfo/$ov.id">edit OV info</a></li>
+		<li><a href="$base/profile/UserProfile/$ov.id">view full profile info &raquo;</a></li>
+</ul>			

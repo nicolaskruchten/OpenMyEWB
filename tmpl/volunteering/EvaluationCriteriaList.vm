@@ -1,0 +1,15 @@
+
+<h2>$session.name Application Evaluation Criteria</h2>
+
+#if ($criteria.isEmpty())
+ <ul><li><span>none</span></li></ul>
+#else
+ <ol>
+	#foreach($c in $criteria)
+		<li><span>$c.formattedCriteria
+				(<a href="$base/volunteering/EditEvaluationCriteria/$session.id/$c.id">edit</a>)
+				(<a href="$base/actions/DeleteEvaluationCriteria/$c.id">delete</a>)
+		</span></li>
+	#end
+ </ol>
+#end

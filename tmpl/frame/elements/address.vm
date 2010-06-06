@@ -1,0 +1,182 @@
+<table border="0">
+
+	<tr>
+		#if ($element.isRequired(0) == true)
+			#set ($req = "required")
+		#else
+			#set ($req = "")
+		#end
+		
+		#if ($element.getHighlight(0) == true)
+			#set ($highlight = "highlight")
+		#else
+			#set ($highlight = "")
+		#end
+		<td style="font-size: 10px">
+			<label class="$req $highlight" for="formelem${element.internalName}0">Line 1</label>
+		</td>
+		<td>
+			<input type="text" id="formelem${element.internalName}0" name="${element.internalName}0" value="$element.showValue(0)" size="25"/>
+		</td>
+		
+		<td style="font-size: 10px">
+			#if ($element.isRequired(1) == true)
+				#set ($req = "required")
+			#else
+				#set ($req = "")
+			#end
+			
+			#if ($element.getHighlight(1) == true)
+				#set ($highlight = "highlight")
+			#else
+				#set ($highlight = "")
+			#end
+			<label class="$req $highlight" for="formelem${element.internalName}1">Apt</label>
+			<input type="text" id="formelem${element.internalName}1" name="${element.internalName}1" value="$element.showValue(1)" size="3"/>
+		</td>
+	</tr>
+
+	<tr>
+		#if ($element.isRequired(2) == true)
+			#set ($req = "required")
+		#else
+			#set ($req = "")
+		#end
+		
+		#if ($element.getHighlight(2) == true)
+			#set ($highlight = "highlight")
+		#else
+			#set ($highlight = "")
+		#end
+		<td style="font-size: 10px">
+			<label class="$req $highlight" for="formelem${element.internalName}2">Line 2</label>
+		</td>
+		<td>
+			<input type="text" id="formelem${element.internalName}2" name="${element.internalName}2" value="$element.showValue(2)" size="25"/>
+		</td>
+	</tr>
+
+	<tr>
+		#if ($element.isRequired(3) == true)
+			#set ($req = "required")
+		#else
+			#set ($req = "")
+		#end
+		
+		#if ($element.getHighlight(3) == true)
+			#set ($highlight = "highlight")
+		#else
+			#set ($highlight = "")
+		#end
+		<td style="font-size: 10px">
+			<label class="$req $highlight" for="formelem${element.internalName}3">City</label>
+		</td>
+		<td>
+			<input type="text" id="formelem${element.internalName}3" name="${element.internalName}3" value="$element.showValue(3)" size="15"/>
+		</td>
+	</tr>
+
+	<tr>
+		#if ($element.isRequired(4) == true)
+			#set ($req = "required")
+		#else
+			#set ($req = "")
+		#end
+		
+		#if ($element.getHighlight(4) == true)
+			#set ($highlight = "highlight")
+		#else
+			#set ($highlight = "")
+		#end
+		<td style="font-size: 10px">
+			<label class="$req $highlight" for="formelem${element.internalName}4">Province/State</label>
+		</td>
+		<td>
+			<select name="${element.internalName}4" id="formelem${element.internalName}4">
+    			#set($openOptGroup = false)
+				<option value="">Choose...</option>
+				
+				#foreach ($option in $element.provinces)
+					#if($option.size() == 1)
+            			#if($openOptGroup)
+            				</optgroup>
+            			#end
+            			<optgroup label="&nbsp;&nbsp;&nbsp;&nbsp;$option.get(0)">
+            			#set($openOptGroup = true)
+					#else
+						<option value="$option.get(0)" #if($option.get(0).equals($element.showValue(4)))selected="selected"#end>
+								$option.get(1)
+						</option>
+					#end
+				#end
+	
+            	#if($openOptGroup)
+            		</optgroup>
+            	#end
+			</select>
+		
+		</td>
+	</tr>
+
+	<tr>
+		#if ($element.isRequired(5) == true)
+			#set ($req = "required")
+		#else
+			#set ($req = "")
+		#end
+		
+		#if ($element.getHighlight(5) == true)
+			#set ($highlight = "highlight")
+		#else
+			#set ($highlight = "")
+		#end
+		<td style="font-size: 10px">
+			<label class="$req $highlight" for="formelem${element.internalName}5">Postal/Zip Code</label>
+		</td>
+		<td>
+			<input type="text" id="formelem${element.internalName}5" name="${element.internalName}5" value="$element.showValue(5)" size="7"/>
+		</td>
+	</tr>
+
+	<tr>
+		#if ($element.isRequired(6) == true)
+			#set ($req = "required")
+		#else
+			#set ($req = "")
+		#end
+		
+		#if ($element.getHighlight(6) == true)
+			#set ($highlight = "highlight")
+		#else
+			#set ($highlight = "")
+		#end
+		<td style="font-size: 10px">
+			<label class="$req $highlight" for="formelem${element.internalName}6">Country</label>
+		</td>
+		<td>
+			<select name="${element.internalName}6" id="formelem${element.internalName}6">
+				#set($openOptGroup = false)
+				<option value="">Choose...</option>
+				
+				#foreach ($option in $element.countries)
+					#if($option.size() == 1)
+            			#if($openOptGroup)
+            				</optgroup>
+            			#end
+            			<optgroup label="$option.get(0)">
+            			#set($openOptGroup = true)
+					#else
+						<option value="$option.get(0)" #if($option.get(0).equals($element.showValue(6)))selected="selected"#end>
+								$option.get(1)
+						</option>
+					#end
+				#end
+	
+            	#if($openOptGroup)
+            		</optgroup>
+            	#end
+			</select>
+		
+		</td>
+	</tr>
+</table>

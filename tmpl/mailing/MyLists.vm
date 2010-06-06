@@ -1,0 +1,40 @@
+<h2>My Mailing Lists</h2>
+
+#if($user.isAdmin())
+<p align="center">Special admin functions that don't fit in the navbar: 
+	<a href="$base/mailing/MainListSignup">Main List Signup</a>, <a href="$base/mailing/MassDelete">Silent Mass Delete</a>.</p>
+#end
+
+<p>You currently subscribe to the following mailing lists:</p>
+
+<table width="90%" class="cellpadding5" style="border-collapse: collapse; margin: 0 auto;">
+#foreach ($list in $lists)
+	<tr>
+		<td style="border: 1px solid #EEE; border-right: #FFF;">
+		<p><a href="$base/mailing/ListInfo/$list.id" class="nodeco nohover"><b>$list.name</b>
+		<br /><span style="font-size: 10px;">[$list.totalShortname] &nbsp;&nbsp;
+		#if(($list.id!=1))
+#set( $value = $list.getNumRecipients() + $list.getNumMembers())
+($value subscribers)
+#end</span>
+		<br />$list.getDescription()</a>
+		<br /><a href="$base/mailing/ListInfo/$list.id" class="more">more info & list archives &raquo;</a>
+		</p></td>
+		
+		<td valign="middle" align="center" style="border: 1px solid #EEE; border-left: #FFF; width: 250px;">
+
+		#if($list.admin == false)
+			<form action="${base}/actions/ModifyListMembership/$list.id" method="post" enctype="multipart/form-data" onsubmit="return confirm('Please confirm: really leave this list?');">
+				<input type="hidden" name="Emails" value="$user.email"/>
+				<input type="hidden" name="ActionType" value="remove"/>
+				<input type="submit" class="button" value="unsubscribe"/>
+			</form>
+		#elseif($list.shortname.equals("Org"))
+			<p style="font-size: 10px;">To unsubscribe from this list, you must <br /><a href="$base/profile/DeleteUser" class="more">delete your account</a></p>
+		#end
+
+		</td>
+	</tr>
+	
+#end
+</table>

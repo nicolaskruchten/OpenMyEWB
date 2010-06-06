@@ -1,0 +1,20 @@
+
+<div style="margin: 0 auto; width: 700px;">
+<h4>Reply Info</h4>
+<ul style="font-size: 12px;">
+	<li><span><b>$tags.size() Tag(s) to add to parent</b></span>
+	#if(!$tags.isEmpty())
+			<ul>
+				#foreach($tag in $tags)
+				<li><span>$tag</span></li>
+				#end
+			</ul>
+	#end
+	</li>
+	<li><span><b>Has file(s) attached</b>: $hasFile</span></li>
+	<li><span><b>Send as email</b>: $asEmail</span></li>
+</ul>
+
+<h4 style="margin-top: 20px;">Reply Body</h4>
+#wiki($body)
+</div>

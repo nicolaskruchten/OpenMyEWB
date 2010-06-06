@@ -1,0 +1,5 @@
+
+<ul>
+<li><a href="$base/volunteering/SendEmailToApplicants/$session.id">send an email to applicants</a></li>
+<li><a href="$base/volunteering/ApplicationSessionInfo/$session.id">&laquo; back to the session information</a></li>
+</ul>

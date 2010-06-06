@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?xml-stylesheet type="text/xsl" href="$base/resources/rss.xsl" media="screen"?>
+
+<rss version="2.0">
+	<channel>
+		<title>RSS Feed: Events</title>
+		<link>$base/api/calendar/${chapterShortName}</link>
+		<lastBuildDate>$now</lastBuildDate>
+		<description>This feed lists events in the $chapterShortName calendar for this month, the previous month and the next month.</description>
+		
+		#foreach($event in $events)
+		
+			<item>
+				<title><![CDATA[$event.name]]></title>
+				<link>$base/events/EventInfo/$event.id</link>
+				<guid>$base/events/EventInfo/$event.id</guid>
+				<pubDate>#rfcDate($event.startDate)</pubDate>
+				<author>$helpers.systemEmail (Calendar System)</author>
+				<description><![CDATA[ 
+				<p class="postbody"><b>Start:</b> #dateWithTime($event.startDate)<br/>
+				<b>End:</b> #dateWithTime($event.endDate)<br/>
+				<b>Location:</b> $event.location</p>
+				#wiki($event.notes)  ]]></description>
+			</item>
+	
+		#end
+		
+	</channel>
+</rss>

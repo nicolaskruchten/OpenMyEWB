@@ -1,0 +1,19 @@
+#if($mode.equals("alreadyPaid"))
+
+<h2>Already a Regular Member</h2>
+
+<p>As you are already a Regular Member, you do not need to pay your dues at this time. Your current membership expires <b>#date($user.expiry)</b>.
+
+#elseif($mode.equals("canRenew") || $mode.equals("canPay"))
+
+<h2>Pay Regular Membership Dues</h2>
+
+	#if($mode.equals("canRenew"))
+		<h3>Membership Expires #date($user.expiry)</h3>
+	#end
+
+	<p>You may use the form below to update your profile information and use a credit card to pay your dues online immediately.
+	</p>
+<br />
+	#parse ("frame/form.vm")
+#end

@@ -1,0 +1,33 @@
+ 
+
+<table width="70%" class="cellpadding5" style="border-collapse: collapse; margin: 0 auto;">
+<tr>
+<th align="center" style="border: 1px solid black;">Item</th>
+<th align="center" style="border: 1px solid black;">Cost</th>
+</tr>
+
+
+<tr>
+<td align="center" style="border: 1px solid black;">Collaboration Day Registration</td>
+<td align="center" style="border: 1px solid black;"> $150.00</td>
+</tr>
+
+#if($num != 0)
+<tr>
+<td align="center" style="border: 1px solid black;">$num Gala Banquet Ticket(s)</td>
+#set($subtotal = $num*250)
+<td align="center" style="border: 1px solid black;">#dollars($subtotal)</td>
+</tr>
+
+#set($total = $subtotal+150)
+
+<tr>
+<td align="right" style="border: 1px solid black;">Total</td>
+<td align="center" style="border: 1px solid black;">#dollars($total)</td>
+</tr>
+#end
+
+
+</table>
+
+<br /><br />

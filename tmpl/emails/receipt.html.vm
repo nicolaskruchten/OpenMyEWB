@@ -1,0 +1,28 @@
+<br />
+<h2>$helpers.longName Credit Card Transaction Receipt</h2>
+<h3>Issued to $txn.name on #absDate($txn.date)</h3>
+<h3>Transaction ID: $txn.orderNumber</h3>
+
+<br />
+
+<table width="70%" class="cellpadding5" style="border-collapse: collapse; margin: 0 auto;">
+<tr>
+<th align="center" style="border: 1px solid black;">Quantity</th>
+<th align="center" style="border: 1px solid black;">Item</th>
+<th align="center" style="border: 1px solid black;">Unit Cost</td>
+</tr>
+#foreach($item in $txn.items)
+<tr>
+<td align="center" style="border: 1px solid black;">$item.get("quantity")</td>
+<td align="center" style="border: 1px solid black;">$item.get("name")</td>
+<td align="center" style="border: 1px solid black;">$$item.get("cost")0</td>
+</tr>
+#end
+<tr>
+<td align="right" colspan="2" style="border: 1px solid black; font-weight: bold;">Total Amount: &nbsp;</td>
+<td align="center" style="border: 1px solid black;">#dollars($txn.totalAmount)</td>
+</tr>
+</table>
+
+<br />
+

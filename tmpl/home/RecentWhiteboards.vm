@@ -1,0 +1,40 @@
+
+<h2>
+
+#if ($numEdits == 0)
+	No Recently Edited Whiteboards
+#elseif ($numEdits == 1)
+	1 Recently Edited Whiteboard
+#else
+	$numEdits Recently Edited Whiteboards
+#end
+</h2>
+
+#if(!$user.lastLogin)
+	
+	<p>The next time you sign in, this page will show you all whiteboards edited since your current sign-in.</p>
+	
+#elseif ($whiteboards.isEmpty())
+
+	<p>No whiteboards were edited since you last signed in (#postDateWithTime($user.lastLogin)).</p>
+	
+#else
+	<p>The following whiteboards were edited since you last signed in (#postDateWithTime($user.lastLogin)).</p>
+
+
+    #set($filterParam = "Any")
+	#parse("frame/postpagination.vm")
+    
+    <br />
+    
+    #foreach($whiteboard in $whiteboards)
+		#set($parent = $whiteboard.parent)
+		#set($type = $whiteboard.parentType)
+		#parse("frame/renderers/whiteboardrenderer.vm")
+    #end
+    
+    <br/>
+    
+    #parse("frame/postpagination.vm")
+
+#end

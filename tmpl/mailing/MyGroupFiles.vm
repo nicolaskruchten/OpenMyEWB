@@ -1,0 +1,27 @@
+<h2>File Sharing</h2>
+
+#if(!$writable.isEmpty())
+<p>You can manage files in the following mailing lists:</p>
+
+<table width="90%" class="cellpadding5" style="border-collapse: collapse; margin: 0 auto;">
+
+<!-- Writable GroupFiles -->
+#foreach ($list in $writable)
+#parse("frame/groupfilelist.vm")
+#end
+</table>
+
+#end
+
+#if(!$readable.isEmpty())
+
+<!-- Readable GroupFiles -->
+<p>You can access files in the following mailing lists:</p>
+<table width="90%" class="cellpadding5" style="border-collapse: collapse; margin: 0 auto;">
+#foreach ($list in $readable)
+#parse("frame/groupfilelist.vm")
+
+#end
+</table>
+
+#end

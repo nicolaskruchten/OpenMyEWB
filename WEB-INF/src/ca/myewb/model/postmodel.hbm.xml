@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+      "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="ca.myewb.model">
+
+    <class name="PostModel" table="posts">
+        <cache usage="nonstrict-read-write"/>
+
+        <id name="id" type="int" unsaved-value="0">
+            <generator class="native"/>
+        </id>
+
+        <property name="subject" type="string"/>
+        <property name="intro" type="text"/>
+        <property name="body" type="text"/>
+        <property name="date" type="timestamp"/>
+        <property name="lastReply" type="timestamp"/>
+        <property name="featured" type="boolean"/>
+        <property name="emailed" type="boolean"/>
+        <property name="hasfile" type="boolean"/>
+
+        <bag name="whiteboards" cascade="save-update" inverse="true">
+            <cache usage="read-write"/>
+        	<key column="parentPost"/>
+        	<one-to-many class="WhiteboardModel"/>
+        </bag>
+
+        <bag name="searchables" cascade="save-update" inverse="true">
+            <cache usage="read-write"/>
+        	<key column="parentPost"/>
+        	<one-to-many class="SearchableModel"/>
+        </bag>
+ 
+        <many-to-one name="parent" column="parent" class="PostModel"   />
+      	<many-to-one name="poster" column="posterid" class="UserModel"   />
+      	<many-to-one name="group" column="groupid" class="GroupModel"  />
+
+        <set name="tags" table="tags2posts" cascade="all">
+                <cache usage="nonstrict-read-write"/>
+        	<key column="postid"/>
+        	<many-to-many column="tagid" class="TagModel"/>
+        </set>
+
+        <set name="replies" inverse="true">
+                <cache usage="read-write"/>
+        	<key column="parent"/>
+        	<one-to-many class="PostModel"/>
+        </set>
+        
+        <set name="flaggedByUsers" table="flaggedposts" inverse="true">
+        	<key column="postid"/>
+        	<many-to-many column="userid" class="UserModel"/>
+        </set>
+
+    </class>
+
+</hibernate-mapping>

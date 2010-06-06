@@ -1,0 +1,49 @@
+<h2>People at the National Office</h2>
+
+<div align="center">
+
+#if($user.isAdmin())
+<p><b>Office members:</b> download full contact list spreadsheet <a href="$base/actions/csv.NmtContactListCsv">here &raquo;</a></p>
+#end
+
+</div>
+
+<table border="0" style="margin: 0 auto;">
+	
+	#foreach($exec in $staff)
+
+		#if($velocityCount % 3 ==0)
+		<tr>
+		#end
+
+			<td #if($velocityCount % 3 ==0) align="left" #elseif($velocityCount % 3 ==2) align="right" #else align="center" #end valign="top" width="250">
+				<table height="225" width="205">
+					<tr>
+						<td #if($velocityCount % 3 ==0) align="left" #elseif($velocityCount % 3 ==2) align="right" #else align="center" #end>
+							<a href="$base/profile/UserProfile/$exec.id" class="nodeco">
+			#if($exec.hasPicture())
+							<img src="/userpictures/thumbs/${exec.id}.jpg"/ border="0" style="border: 1px solid black;">
+			#else
+				<img src="$base/userpictures/nophoto.gif" style="border: 1px solid black;"/>
+			#end
+							</a>
+						</td>
+					</tr>
+				</table>
+				<a href="$base/profile/UserProfile/$exec.id" class="nodeco">
+				<b>$exec.firstname $exec.lastname</b>
+				<br/>$exec.getNMTTitle()</a>
+
+				#if(!$isGuest)
+				<br /><a href="mailto:$exec.email" style="font-size: 11px;">$exec.email</a>
+				#if($user.isAdmin())
+				<br /><span style="font-size: 10px;">$exec.businessno</span>
+				#end
+				#end
+				<br /><br /><br />
+			</td>
+		#if($velocityCount % 3 == 2)
+		</tr>
+		#end
+	#end
+</table>

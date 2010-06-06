@@ -1,0 +1,42 @@
+<h2>Registration Summary</h2>
+
+
+
+#if($chapter)
+
+
+#if($chapter.registrations.isEmpty())
+<p>No one has yet registered from the $chapter.name</p>
+#else
+
+<p>Currently registered from the $chapter.name</p>
+
+<ul>
+#foreach($reg in $chapter.registrations)
+<li><a href="$base/chapter/MemberInfo/$reg.user.id">$reg.user.firstname $reg.user.lastname</a> #if($reg.subsidized) (subsidized) #end</li>
+#end
+</ul>
+
+#end
+
+#elseif($chapterlist)
+
+
+<table width="90%" style="border-collapse: collapse; margin: 0 auto;" class="cellpadding5">
+<tr>
+<th style="border: 1px solid black">Chapter</th>
+<th style="border: 1px solid black"># Registered</th>
+</tr>
+
+#foreach($chapter in $chapterlist)
+
+<tr>
+<td align="center" style="border: 1px solid black"><a href="$base/events/ChapterRegistrations/$chapter.shortname">$chapter.shortname</a></td>
+<td align="center" style="border: 1px solid black">$chapter.registrations.size()</td>
+</tr>
+
+#end
+
+</table>
+
+#end

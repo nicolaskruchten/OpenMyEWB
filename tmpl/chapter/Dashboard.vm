@@ -1,0 +1,29 @@
+
+#if($chapter)
+<h2>${chapter.name} Graphs and Stats</h2>
+
+<div align="center">
+<p>&nbsp;</p>
+<img src="$base/graph/chapterrankpie/${chapter.id}.png" class="graphborder" width="800" height="600">
+<p>&nbsp;</p>
+<img src="$base/graph/chaptermemberships/${chapter.id}.png" class="graphborder" width="800" height="600">
+</div>
+<br />
+#end
+
+#if($chapterList)
+<h2>Choose a chapter...</h2>
+
+	<div align="center" >
+
+		<select onchange="window.location='$base/chapter/Dashboard/' + this.value;" style="font-size: 18px; height: 26px; margin: 15px 0;">
+			<option value="nofilter">Choose...</option>
+			#foreach($c in $chapterList)
+				<option value="$c.shortname" #if($filter.equals($c.shortname)) selected #end>$c.name</option>
+			#end
+		</select>
+
+
+	</div>
+
+#end

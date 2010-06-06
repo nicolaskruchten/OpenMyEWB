@@ -1,0 +1,103 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+      "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="ca.myewb.model">
+    <class name="GroupModel" table="groups">
+        <cache usage="nonstrict-read-write"/>
+
+        <id name="id" type="int" unsaved-value="0">
+            <generator class="native"/>
+        </id>
+        <property name="name" type="string"/>
+        <property name="description" type="string"/>
+        <property name="postName" type="string"/>
+        <property name="welcomeMessage" type="text"/>
+        <property name="public" type="boolean"/>
+        <property name="admin" type="boolean"/>
+        <property name="visible" type="boolean"/>
+        <property name="chapter" type="boolean"/>
+        <property name="execList" type="boolean"/>
+        <property name="shortname" type="string"/>
+        <property name="message" type="text"/>
+        <property name="nationalRepType" type="char"/>
+
+
+
+        <bag name="selfWhiteboards" cascade="save-update" inverse="true">
+            <cache usage="read-write"/>
+        	<key column="parentGroup"/>
+        	<one-to-many class="WhiteboardModel"/>
+        </bag>
+
+        <many-to-one name="parent" class="GroupChapterModel"   />
+        
+        <bag name="roles" cascade="all" inverse="true">
+        	<key column="groupid"/>
+        	<one-to-many class="RoleModel"/>
+        </bag>
+        
+        <bag name="posts" cascade="save-update" inverse="true">
+                <cache usage="read-write"/>
+        	<key column="groupid"/>
+        	<one-to-many class="PostModel"/>
+        </bag>
+        
+        <bag name="events" cascade="save-update" inverse="true">
+                <cache usage="nonstrict-read-write"/>
+        	<key column="groupid"/>
+        	<one-to-many class="EventModel"/>
+        </bag>
+        
+        <bag name="whiteboards" cascade="save-update" inverse="true">
+                <cache usage="read-write"/>
+        	<key column="groupid"/>
+        	<one-to-many class="WhiteboardModel"/>
+        </bag>
+
+        <set name="pages" table="pages2groups" inverse="true">
+                <cache usage="nonstrict-read-write"/>
+        	<key column="groupid"/>
+        	<many-to-many column="pageid" class="PageModel"/>
+        </set>
+        
+        <set name="invisiblePages" table="pages2invisible" inverse="true">
+                <cache usage="nonstrict-read-write"/>
+        	<key column="groupid"/>
+        	<many-to-many column="pageid" class="PageModel"/>
+        </set>
+        
+        <joined-subclass name="GroupChapterModel" table="groupchapter">
+        	<key column="id"/>
+        	
+        	<property name="address1" type="string"/>
+        	<property name="suite" type="string"/>
+        	<property name="address2" type="string"/>
+        	<property name="city" type="string"/>
+        	<property name="province" type="string"/>
+        	<property name="postalcode" type="string"/>
+        	<property name="country" type="string"/>
+            <property name="email" type="string"/>
+            <property name="url" type="string"/>
+        	
+        	<property name="phone" type="string"/>
+        	<property name="fax" type="string"/>
+	        <property name="francophone" type="boolean"/>
+	        <property name="professional" type="boolean"/>
+        	<many-to-one name="exec" class="GroupModel"    />
+        	
+        	<set name="children" inverse="true">
+                        <cache usage="nonstrict-read-write"/>
+        		<key column="parent"/>
+        		<one-to-many class="GroupModel"/>
+        	</set>
+            <bag name="registrations" inverse="true" cascade="save-update">          
+                    <key column="chapterid"/>           
+                    <one-to-many class="ConferenceRegistrationModel"/>           
+            </bag>           
+        	
+        </joined-subclass>
+    </class>
+
+</hibernate-mapping>

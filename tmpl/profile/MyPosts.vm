@@ -1,0 +1,24 @@
+<h2>My Posts & Replies</h2>
+<br />
+
+#if ($posts.isEmpty())
+
+	<p>You have not posted anything! <a href="$base/home/NewPost">Click here to post something.</a></p>
+
+#else
+		#parse("frame/postpagination.vm")
+
+		<br />
+		#foreach($post in $posts)
+			#if ($post.parent)
+			<div class="post">
+				#parse("frame/renderers/replyrenderer.vm")
+			</div>
+			#else
+				#parse("frame/renderers/postrenderer.vm")
+			#end
+		#end
+		
+		#parse("frame/postpagination.vm")
+		
+#end

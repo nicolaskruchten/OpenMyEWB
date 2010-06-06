@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+      "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="ca.myewb.model">
+
+    <class name="ConferenceRegistrationModel" table="confregs">
+
+        <id name="id" type="int" unsaved-value="0">
+            <generator class="native"/>
+        </id>
+        
+        
+      	<property name="subsidized" type="boolean"/>
+        <property name="amountPaid" type="int"/>
+        <property name="roomSize" type="int"/>
+        <property name="prevConfs" type="int"/>
+        <property name="prevRetreats" type="int"/>
+        <property name="emergName" type="string"/>
+        <property name="emergPhone" type="string"/>
+        <property name="code" type="string"/>
+        <property name="specialNeeds" type="text"/>
+      	<property name="headset" type="boolean"/>
+        <property name="foodPrefs" type="string"/>
+        <property name="type" type="string"/>
+        <property name="receiptNum" type="string"/>
+        <property name="date" type="timestamp"/> 
+        <property name="cancelled" type="boolean"/>
+        <property name="africafund" type="boolean"/>
+
+      	<many-to-one name="user" column="userid" class="UserModel" fetch="join"/>
+      	<many-to-one name="chapter" column="chapterid" class="GroupChapterModel" fetch="join"/>
+
+
+    </class>
+
+</hibernate-mapping>

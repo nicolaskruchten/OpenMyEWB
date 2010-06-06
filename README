@@ -1,0 +1,32 @@
+INSTALLATION
+
+These instructions are pretty terse, so if you want to tinker around and you can't figure it out, please email nicolas@kruchten.com!
+
+Read through them and make sure you understand how Tomcat and Ant (and the other underlying technologies) work and you should be fine. 
+
+Instead of doing this all on the command line, you might have more luck with installing this within Eclipse using the Sysdeo plugin.
+
+Look out for classpath/environment variable/permissions issues.
+
+- you will need to have Java 1.5+, Tomcat 5.5+, MySQL 5+ installed, as well as Ant and JUnit
+- unpack the archive in a place that makes sense given that it will be a Tomcat application
+- run 'ant make' after ensuring that you've exported the TOMCAT_HOME environment variable
+- configure the app by copying app.properties.format to app.properties and filling in the variables and *deleting the comments!*
+- create a database named [dbprefix]test (dbprefix as configured in app.properties)
+- run 'ant testDB test' to create a test database and run junit tests on it
+- create the database named [dbprefix]dev and run 'ant devDB' to create the database
+- run 'ant staticfiles' to generate the CSS
+- configure a Tomcat context for the app at whatever domain/apprefix you've configured in 
+- launch Tomcat
+- browse to http://[domain][apprefix][defaulturl] and you should see the app running
+  - sign in using the email address/password combo: sample@email.com/admin
+
+  
+EXTRAS
+
+- for the app to manage itself, set up crontabs similar to cron/mycrontab to perform various types of db maintenance nightly
+- profile picture uploads will require the 'convert' command from imagemagick
+- post searching will require you to alter the table called 'searchables': drop all key constraints and change the engine to MyISAM, add a fulltext engine to all the text fields
+- bulk-mailing will require you to install Perl and all the dependencies of cron/cronmailerdaemon.pl (e.g. from CPAN) and configuration of Mail::Bulkmail, followed by a cron job that calls this script every minute or so (see cron/mycrontab)
+- online credit-card processing will require an account with a processor, and for you to populate the class ca.myewb.frame.CreditCardTransaction
+- the conference registration system is there as a sample

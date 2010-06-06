@@ -1,0 +1,46 @@
+<h2>Similar Accounts</h2>
+
+<p align="center"><a href="$base/chapter/MemberInfo/$targetUser.id">full profile &raquo;</a></p>
+#parse ("frame/memberinfo.vm")
+
+
+#macro(userList $key $list)
+	<h3>$key</h3>
+    #if (!$list.isEmpty())
+    	<ul>
+    		#foreach ($userx in $list)
+    			<li><span><a 
+href="$base/chapter/FindDupes/$userx.id">
+    			#if(!$userx.lastname.equals("")) $userx.lastname, $userx.firstname #end 
+    			#if($userx.email) ($userx.email) #else (deleted) #end
+    			</a></span></li> 
+    		#end
+    	</ul>
+    #else
+    	<p>Either zero or too many matches were found.</p>
+    #end
+#end
+
+<table style="margin: 0 auto;"><tr><td>
+
+
+<!-- $lastnameInEmail.remove($targetUser) -->
+#userList("Last Name in Email" $lastnameInEmail)
+
+
+<!-- $usernameInEmail.remove($targetUser) -->
+#userList("Username in Email" $usernameInEmail)
+
+
+<!-- $emailUserInEmail.remove($targetUser) -->
+#userList("Similar Email" $emailUserInEmail)
+
+
+<!-- $sameNames.remove($targetUser) -->
+#userList("Same Names" $sameNames)
+
+
+<!-- $emailUserInUsername.remove($targetUser) -->
+#userList("Username Similar to Email" $emailUserInUsername)
+
+</td></tr></table>

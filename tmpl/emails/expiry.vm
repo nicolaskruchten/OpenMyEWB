@@ -1,0 +1,14 @@
+[$helpers.enShortName] Regular Membership Expired
+
+
+Dear $name,
+
+Over the past 2 weeks, we sent you 3 reminders regarding the renewal of your regular $helpers.longName membership which expired yesterday. As of today, we have not received your payment for the coming year, and thus your regular membership has been changed to an associate membership. 
+
+As an associate member of $helpers.longName you are still able to access $helpers.longName, and will continue to receive updates about our activities. We will however miss you support and participation as a regular member of $helpers.longName. 
+
+If there was a mistake in processing your payment, or if you are dissatisfied with $helpers.longName in any way, we would very much like to hear from you. You can email us anytime at $helpers.systemEmail with comments and recommendations.
+
+If you would like to become a regular member of $helpers.longName again, you can do so at anytime through $helpers.longName at http://${helpers.domain}${helpers.appPrefix}/profile/PayDues.
+
+Thank you for your support to date and we hope to see you back as a regular member sometime soon!

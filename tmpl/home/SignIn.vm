@@ -1,0 +1,30 @@
+<h2>Sign in</h2>
+
+#parse("frame/form.vm")
+
+#if($message)
+
+<p style="font-size: 12px;"><b>If you do not yet have an account</b>, <a href="$base/profile/SignUp">click here</a> to sign up and create one.</p>
+
+
+<p style="font-size: 12px;"><b>If you are having trouble signing in</b>, please ensure that:</p>
+<ul>
+<li><span style="font-size: 12px;">your browser is set to accept cookies from this system (<a href="$base/home/NoCookies">cookie enabling instructions</a>).</span></li>
+<li><span style="font-size: 12px;">you are typing or copy-pasting your email address and password with no spaces before or after.</span></li>
+</ul>
+
+
+<p style="font-size: 12px;"><b>If you have forgotten your password or do not have one</b>, <a href="$base/profile/ForgotPassword">click here</a> for a way to reset it and have it emailed to you.</p>
+
+<p style="font-size: 12px;"><b>If problems persist</b>, please feel free to contact <a href="mailto:$helpers.systemEmail">$helpers.systemEmail</a>.
+
+#else
+
+<br />
+<p style="font-size: 12px; text-align: center;"><b>Don't have an account?</b> <a href="$base/profile/SignUp">Sign up!</a></p>
+
+
+<p style="font-size: 12px; text-align: center;"><b>Forgot your password or don't have one?</b> <a href="$base/profile/ForgotPassword">Click here!</a></p>
+
+
+#end

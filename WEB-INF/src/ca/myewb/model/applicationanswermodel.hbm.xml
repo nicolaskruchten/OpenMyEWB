@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+      "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="ca.myewb.model">
+
+    <class name="ApplicationAnswerModel" table="appanswers">
+
+        <id name="id" type="int" unsaved-value="0">
+            <generator class="native"/>
+        </id>
+
+        <property name="answer" type="text"/>
+        
+        <many-to-one name="app" class="ApplicationModel" column="appid" fetch="join"/>
+        <many-to-one name="question" class="ApplicationQuestionModel" column="questionid" fetch="join"/>
+
+    </class>
+
+</hibernate-mapping>

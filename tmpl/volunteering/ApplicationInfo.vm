@@ -1,0 +1,96 @@
+<h2>Application View: $app.user.firstname $app.user.lastname</h2>
+
+<h4>$app.session.name</h4>
+
+<br />
+<div align="center"><a href="$base/chapter/MemberInfo/${app.user.id}" style="text-decoration: none;">
+			#if($app.user.hasPicture())
+<img src="$base/userpictures/thumbs/${app.user.id}.jpg" style="border: 1px solid black;"/>
+			#else
+				<img src="$base/userpictures/nophoto.gif" style="border: 1px solid black;"/>
+			#end
+<br /><b>$app.user.firstname $app.user.lastname</b>
+</a>
+
+<p><b>Application Created: </b>#date($app.created) - <b>Last Modified: </b>#date($app.modified)</p>
+
+</div>
+
+
+<h3>General Information</h3>
+<h4>Language Skills</h4>
+<table border="0" style=" margin: 0 auto;" class="cellpadding5">
+	<tr>
+		<td>English Reading:</td>
+		<td style="padding-right:10px">
+		#set($width = $app.englishReading * 20)
+		<div style="height: 18px; width: 100px; border: 1px solid black;">
+		<div style=" background-color: #888; height: 18px; width: ${width}px; text-align: center; color: white;">$app.englishReading</div>
+		</div>
+		</td>
+		<td>French Reading:</td>
+		<td>
+		#set($width = $app.frenchReading * 20)
+		<div style="height: 18px; width: 100px; border: 1px solid black;">
+		<div style=" background-color: #888; height: 18px; width: ${width}px; text-align: center; color: white;">$app.frenchReading</div>
+		</div>
+		</td>
+	</tr>
+	<tr>
+		<td>English Writing:</td>
+		<td style="padding-right:10px">
+		#set($width = $app.englishWriting * 20)
+		<div style="height: 18px; width: 100px; border: 1px solid black;">
+		<div style=" background-color: #888; height: 18px; width: ${width}px; text-align: center; color: white;">$app.englishWriting</div>
+		</div>
+		</td>
+		<td>French Writing:</td>
+		<td>
+		#set($width = $app.frenchWriting * 20)
+		<div style="height: 18px; width: 100px; border: 1px solid black;">
+		<div style=" background-color: #888; height: 18px; width: ${width}px; text-align: center; color: white;">$app.frenchWriting</div>
+		</div>
+		</td>
+	</tr>
+	<tr>
+		<td>English Speaking:</td>
+		<td>
+		#set($width = $app.englishSpeaking * 20)
+		<div style="height: 18px; width: 100px; border: 1px solid black;">
+		<div style=" background-color: #888; height: 18px; width: ${width}px; text-align: center; color: white;">$app.englishSpeaking</div>
+		</div>
+		</td>
+		<td>French Speaking:</td>
+		<td>
+		#set($width = $app.frenchSpeaking * 20)
+		<div style="height: 18px; width: 100px; border: 1px solid black;">
+		<div style=" background-color: #888; height: 18px; width: ${width}px; text-align: center; color: white;">$app.frenchSpeaking</div>
+		</div>
+		</td>
+	</tr>
+</table>
+
+<h4>Schooling</h4>
+#wiki($app.schooling)
+
+<h4>Graduation Average</h4>
+<p class="postbody">$app.GPA</p>
+
+<h4>Resum&eacute;</h4>
+#wiki($app.resume)
+
+<h4>References</h4>
+#wiki($app.refs)
+
+<h3>Application Question Answers</h3>
+#foreach ($ans in $answers)
+	<h4>$ans.question.questionOrder. $ans.question.formattedQuestion</h4>
+	#if($ans.answer && !$ans.answer.equals(""))
+		#wiki($ans.answer)
+	#else
+		<p class="postbody"><i>No Answer Submitted</i></p>
+	#end		
+#end
+
+<h3>Application Evaluation Form</h3>
+#parse("frame/form.vm")

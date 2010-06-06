@@ -1,0 +1,2 @@
+<input type="text" name="$element.internalName" value="$element.safeValue" style="width: 80px;" id="formelem$element.internalName" onclick="displayDatePicker('$element.internalName', false, 'ymd', '-');" />
+<img src="$base/images/cal.gif" onclick="displayDatePicker('$element.internalName', false, 'ymd', '-');">

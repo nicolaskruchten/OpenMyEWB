@@ -1,0 +1,77 @@
+#if ($message)
+
+	#if ($message.isSticky())
+		#set ($msgcolor = "blue")
+		#set ($marginhack = "0 150px")
+		#set ($msgwidth = "600px")
+		#if($message.groupMsg)
+			#set ($msgtext = "Announcement")
+		#else
+			#set ($msgtext = "Attention")
+		#end
+	#else
+    	#if ($message.isError())
+    		#set ($msgcolor = "red")
+    		#set ($msgtext = "Error!")
+    	#else
+    		#set ($msgcolor = "green")
+    		#set ($msgtext = "Message")
+		#end
+		
+		#set ($msgwidth = "400px")
+		
+		#if($rbar)
+			#set ($marginhack = "0 80px")
+		#else
+			#set ($marginhack = "0 auto")
+		#end
+	#end
+
+
+	<div style=" 
+		border-top: 0; 
+		margin: $marginhack ; 
+		width: $msgwidth;"
+		id="$msgcolor">
+<br />
+		<div style="
+	
+				padding-left:5px;
+				
+				background-position:top left;
+				background-repeat:no-repeat;
+				background-image:url('$base/images/message_${msgcolor}_l.gif');
+
+			"><div style="
+				background-position:top right;
+				background-repeat:no-repeat;
+				background-image:url('$base/images/message_${msgcolor}_r.gif');
+				
+				padding: 3px;
+				padding-left:6px;
+
+				font-size: 12px; 
+				color: white; 
+				font-weight: bold; 
+			
+				"><a href="#" 
+				onclick=" #if($message.isSticky()) jQuery.get('$base/ajax/hidestickies'); #end    $('#$msgcolor').slideUp('normal');" 
+				style="color: white; text-decoration:none; float: right; margin-right: 3px;">x</a>$msgtext</div></div>
+		
+		
+		<div style="
+				border-left:2px solid $msgcolor;
+				border-bottom:2px solid $msgcolor;
+				border-right:2px solid $msgcolor;
+				padding: 8px; 
+				text-align: center; 
+				font-size: 12px;
+				background: white;
+				line-height: 1.6;
+			
+			">$message.getMessage()</div>
+<br />
+	</div>
+		
+
+#end

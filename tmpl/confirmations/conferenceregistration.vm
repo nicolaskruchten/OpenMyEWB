@@ -1,0 +1,42 @@
+ 
+
+<table width="70%" class="cellpadding5" style="border-collapse: collapse;margin: 0 auto;">
+<tr>
+<th align="center" style="border: 1px solid black;">Item</th>
+<th align="center" style="border: 1px solid black;">Cost</td>
+</tr>
+
+<tr>
+<td align="center" style="border: 1px solid black;">$name</td>
+<td align="center" style="border: 1px solid black;"> $$cost.00</td>
+</tr>
+
+
+#if(($regularfee == 20) || ($regularfee == 40))
+<tr>
+<td align="center" style="border: 1px solid black;">1 year of Regular Membership</td>
+<td align="center" style="border: 1px solid black;"> #dollars($regularfee)</td>
+</tr>
+#end
+
+
+#set($supp = 0)
+#if($africafund)
+<tr>
+<td align="center" style="border: 1px solid black;">Support for an African Delegate</td>
+<td align="center" style="border: 1px solid black;">#dollars(20)</td>
+</tr>
+#set($supp = 20)
+#end
+
+#set($total = ($cost + $regularfee + $supp))
+
+<tr>
+<td align="right" style="border: 1px solid black;"><b>Total:</b></td>
+<td align="center" style="border: 1px solid black;"> #dollars($total)</td>
+</tr>
+
+</table>
+
+
+#parse("frame/refundpolicy.vm")

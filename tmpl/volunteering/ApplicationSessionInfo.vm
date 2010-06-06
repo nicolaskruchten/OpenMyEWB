@@ -1,0 +1,35 @@
+<h2>Application Session Info</h2>
+
+<h4 align="center">$session.name</h4>
+
+<ul>
+ <b>
+#if($session.isOpen())
+ <li><span>State: Open</span></li>
+#elseif($session.isClosed())
+ <li><span>State: Closed</span></li>
+#else
+ <li><span>State: Future Session</span></li>
+#end
+ <li><a href="$base/volunteering/ApplicationList/name/asc/$session.id">$session.numApplicants Applicants</a></li>
+ </b>
+ <br/> 
+<li><span>Open date: #dateWithTime($session.openDate)</span></li>
+<li><span>Due date: #dateWithTime($session.dueDate)</span></li>
+<li><span>Close date: #dateWithTime($session.closeDate)</span></li>
+</ul>
+
+<h3>English Application Instructions</h3>
+#wiki($session.instructions)
+
+<h3>French Application Instructions</h3>
+#wiki($session.frenchInstructions)
+
+<h3>Application Thank You Message</h3>
+#wiki($session.completedApplicationMessage)
+	
+<h3>Application Session Closing E-Mail</h3>
+#wiki($session.closeEmailText)
+
+<h3>Application Rejection E-Mail</h3>
+#wiki($session.rejectionEmailText)

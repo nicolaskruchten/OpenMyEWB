@@ -1,0 +1,16 @@
+
+<ul>
+<li><a href="$base/volunteering/EditApplicationSession/$session.id">edit session info</a></li>
+#if($session.isOpen())
+<li><a href="$base/actions/ApplicationSessionLifecycle/close/$session.id">close session</a></li>
+#elseif($session.isClosed())
+<li><a href="$base/volunteering/ReopenApplicationSession/$session.id">re-open session</a></li>
+#else
+<li><a href="$base/actions/ApplicationSessionLifecycle/open/$session.id">open session</a></li>	
+#end
+<li><a href="$base/volunteering/ApplicationQuestionList/$session.id">view questions</a></li>
+<li><a href="$base/volunteering/EvaluationCriteriaList/$session.id">view criteria</a></li>
+#if($session.numApplicants > 0)
+<li><a href="$base/volunteering/ApplicationList/name/asc/$session.id">evaluate applications</a></li>
+#end
+</ul>

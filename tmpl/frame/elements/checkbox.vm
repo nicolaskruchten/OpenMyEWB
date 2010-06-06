@@ -1,0 +1,10 @@
+#if ($element.lock)
+	$element.value
+#else
+	#if ($element.value.equals("on"))
+		#set ($checked = " checked=\"checked\"")
+	#else
+		#set ($checked = "")
+	#end
+	<input type="checkbox" id="checkelem$element.internalName" name="$element.internalName"$checked/> <label for="checkelem$element.internalName" style="font-size: 10px;">$element.boxLabel</label>
+#end

@@ -1,0 +1,13 @@
+<h2>Mass Delete Mailing List Accounts</h2>
+
+<p>You can use the form below to delete mailing list accounts in bulk without sending out
+	deletion emails to them. Basically you should only use this for addresses which are consistently
+	generating "permanent" bounce messages.</p>
+
+<p>This page cannot be used to delete Associate accounts or above. We don't yet have a strategy for 
+	dealing with Associate or higher accounts with bouncing addresses.</p>
+	
+#parse("frame/form.vm")
+
+
+

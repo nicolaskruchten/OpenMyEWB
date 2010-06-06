@@ -1,0 +1,21 @@
+
+<h2>$session.name Application Questions</h2>
+
+#if ($questions.isEmpty())
+ <ul><li><span>none</span></li></ul>
+#else
+ <ol>
+	#foreach($question in $questions)
+		<li><span>$question.formattedQuestion 
+				#if ($question.getQuestionOrder() > 1) 
+					(<a href="$base/actions/ApplicationQuestionLifecycle/moveup/$question.id">move up</a>) 
+				#end
+				#if ($question.getQuestionOrder() < $questions.size()) 
+					(<a href="$base/actions/ApplicationQuestionLifecycle/movedown/$question.id">move down</a>) 
+				#end
+				(<a href="$base/volunteering/EditApplicationQuestion/$session.id/$question.id">edit</a>)
+				(<a href="$base/actions/ApplicationQuestionLifecycle/delete/$question.id">delete</a>)
+		</span></li>
+	#end
+ </ol>
+#end

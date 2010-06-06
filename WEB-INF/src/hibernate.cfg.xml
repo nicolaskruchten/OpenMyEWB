@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+    "-//Hibernate/Hibernate Configuration DTD//EN"
+    "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+ 
+<hibernate-configuration>
+
+    <session-factory>
+    	<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    	<property name="hibernate.connection.url">jdbc:mysql://localhost/</property>
+    	<property name="hibernate.connection.username"></property> <!-- overridden by app.properties -->
+    	<property name="hibernate.connection.password"></property> <!-- overridden by app.properties -->
+    	<property name="hibernate.jdbc.batch_size">20</property>
+    	<property name="hibernate.max_fetch_depth">2</property>
+        <property name="show_sql">false</property>
+        <property name="dialect">org.hibernate.dialect.MySQLInnoDBDialect</property>
+        
+        <!-- still not sure if this one causes problems if 'true' -->
+        <property name="hibernate.connection.useServerPrepStmts">false</property> 
+
+        <!-- configuration pool via c3p0-->     
+        <property name="hibernate.connection.provider_class">org.hibernate.connection.C3P0ConnectionProvider</property>
+        <property name="hibernate.c3p0.acquire_increment">1</property> 
+        <property name="hibernate.c3p0.idle_test_period">90</property> <!-- seconds --> 
+        <property name="hibernate.c3p0.max_size">20</property> 
+        <property name="hibernate.c3p0.max_statements">0</property> 
+        <property name="hibernate.c3p0.min_size">1</property> 
+        <property name="hibernate.c3p0.timeout">100</property> <!-- seconds --> 
+
+        <!-- Enable cache -->
+        <property name="hibernate.cache.provider_class">net.sf.ehcache.hibernate.EhCacheProvider</property>
+        <property name="net.sf.ehcache.configurationResourceName">ehcache.xml</property>
+
+        <!-- Mapping files -->
+        <mapping resource="ca/myewb/model/dailystatsmodel.hbm.xml"/>
+        <mapping resource="ca/myewb/model/emailmodel.hbm.xml"/>
+        <mapping resource="ca/myewb/model/groupmodel.hbm.xml"/>
+        <mapping resource="ca/myewb/model/pagemodel.hbm.xml"/>
+        <mapping resource="ca/myewb/model/postmodel.hbm.xml"/>
+        <mapping resource="ca/myewb/model/rolemodel.hbm.xml"/>
+        <mapping resource="ca/myewb/model/tagmodel.hbm.xml"/>
+        <mapping resource="ca/myewb/model/usermodel.hbm.xml"/>
+        <mapping resource="ca/myewb/model/placementmodel.hbm.xml"/>
+        <mapping resource="ca/myewb/model/ovinfomodel.hbm.xml"/>
+        <mapping resource="ca/myewb/model/applicationsessionmodel.hbm.xml"/>
+        <mapping resource="ca/myewb/model/applicationmodel.hbm.xml"/>
+        <mapping resource="ca/myewb/model/applicationquestionmodel.hbm.xml"/>
+        <mapping resource="ca/myewb/model/applicationanswermodel.hbm.xml"/>
+        <mapping resource="ca/myewb/model/eventmodel.hbm.xml"/>
+        <mapping resource="ca/myewb/model/evaluationmodel.hbm.xml"/>
+        <mapping resource="ca/myewb/model/evaluationcriteriamodel.hbm.xml"/>
+        <mapping resource="ca/myewb/model/evaluationresponsemodel.hbm.xml"/>
+        <mapping resource="ca/myewb/model/whiteboardmodel.hbm.xml"/>
+        <mapping resource="ca/myewb/model/searchablemodel.hbm.xml"/>
+        <mapping resource="ca/myewb/model/conferenceregistrationmodel.hbm.xml"/>  	 	 
+	    <mapping resource="ca/myewb/model/cdayregistrationmodel.hbm.xml"/>  	 	 
+	    <mapping resource="ca/myewb/model/facultyregistrationmodel.hbm.xml"/>  	 	 
+	    <mapping resource="ca/myewb/model/ticketordermodel.hbm.xml"/>  	 	 
+        
+        
+    </session-factory>
+
+</hibernate-configuration>

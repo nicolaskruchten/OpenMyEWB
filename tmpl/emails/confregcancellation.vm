@@ -1,0 +1,9 @@
+Confreg Cancellation: $reg.user.firstname $reg.user.lastname
+
+
+==Refund #dollars($reg.refundableAmount) from txn $reg.receiptNum==
+
+User: $reg.user.firstname $reg.user.lastname ($reg.user.email)
+Reg Type: $reg.type
+Chapter: $reg.user.chapter.name
+Position: $reg.user.execTitle 

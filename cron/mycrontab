@@ -1,0 +1,4 @@
+*/1 * * * * perl ~/cron/cronmailerdaemon.pl > /dev/null
+0 4 * * * ~/cron/dailyCron.sh
+31 * * * * ~/cron/applicationCron.sh
+1 * * * * ~/cron/applicationCron.sh

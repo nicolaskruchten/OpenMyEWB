@@ -1,0 +1,8 @@
+<h2>Add Email Addresses to Main List</h2>
+
+<p>You can use the form below to quickly add multiple email addresses to the main list (basically the e-news list). The form allows you to choose which 'welcome email' is automatically sent out. Please note that if any address is already in the database, it will be ignored, and no welcome email will be sent.</p>
+
+#parse("frame/form.vm")
+
+
+

@@ -1,0 +1,65 @@
+
+<h2>Applications Submitted</h2>
+
+<h4 align="center">$session.name</h4>
+<form name="rejectForm" action="${base}/actions/SendApplicationRejectionEmails/$session.id" method="post" enctype="multipart/form-data">
+<table style="font-size: 12px; border-collapse: collapse; margin: 0 auto;" class="cellpadding3">
+	<tr>
+			<td style="border: 1px solid #888;">&nbsp;</td>
+		<td style="border: 1px solid #888;" align="center"><b><a href="$base/volunteering/ApplicationList/name/#if($curfilter.equals("name") && $curorder.equals("desc"))asc#else
+			desc#end/$session.id">Name</a></b>#if($curfilter.equals("name") && $curorder.equals("asc")) &#9651; #elseif($curfilter.equals("name") && $curorder.equals("desc")) &#9661; #end</td>
+		<td style="border: 1px solid #888;" align="center"><b><a href="$base/volunteering/ApplicationList/gender/#if($curfilter.equals("gender") && $curorder.equals("desc"))asc#else
+			desc#end/$session.id">Gndr</a></b>#if($curfilter.equals("gender") && $curorder.equals("asc")) &#9651; #elseif($curfilter.equals("gender") && $curorder.equals("desc")) &#9661; #end</td>
+		<td style="border: 1px solid #888;" align="center"><b><a href="$base/volunteering/ApplicationList/language/#if($curfilter.equals("language") && $curorder.equals("desc"))asc#else
+			desc#end/$session.id">Lang</a></b>#if($curfilter.equals("language") && $curorder.equals("asc")) &#9651; #elseif($curfilter.equals("language") && $curorder.equals("desc")) &#9661; #end</td>
+		
+		<td style="border: 1px solid #888;" align="center"><b><a href="$base/volunteering/ApplicationList/gpa/#if($curfilter.equals("language") && $curorder.equals("desc"))asc#else
+			desc#end/$session.id">GPA</a></b>#if($curfilter.equals("gpa") && $curorder.equals("asc")) &#9651; #elseif($curfilter.equals("gpa") && $curorder.equals("desc")) &#9661; #end</td>
+		
+		<td style="border: 1px solid #888;" align="center"><b><a href="$base/volunteering/ApplicationList/total/#if($curfilter.equals("total") && $curorder.equals("desc"))asc#else
+			desc#end/$session.id">Total</b></a>#if($curfilter.equals("total") && $curorder.equals("asc")) &#9651; #elseif($curfilter.equals("total") && $curorder.equals("desc")) &#9661; #end</td>
+		#foreach($crit in $criteria)
+			
+			<td style="border: 1px solid #888;" align="center"><b><a href="$base/volunteering/ApplicationList/$crit.idString/#if($curfilter.equals($crit.idString) && $curorder.equals("desc"))asc#else
+			desc#end/$session.id" title="$crit.criteria">$crit.colheader</a></b>#if($curfilter.equals($crit.idString) && $curorder.equals("asc")) &#9651; #elseif($curfilter.equals($crit.idString) && $curorder.equals("desc")) &#9661; #end</td>
+		#end
+		
+		<!--<td style="border: 1px solid #888;" align="center"><b>Notes</b></td>-->
+		<td style="border: 1px solid #888;" align="center"><b><a href="$base/volunteering/ApplicationList/rejection/#if($curfilter.equals("rejection") && $curorder.equals("desc"))asc#else
+			desc#end/$session.id">Reject</a></b>#if($curfilter.equals("rejection") && $curorder.equals("asc")) &#9651; #elseif($curfilter.equals("rejection") && $curorder.equals("desc")) &#9661; #end</td>
+	</tr>
+	#set($i=0)
+	#foreach($app in $applications)
+		<tr #if($i%2==0) style="background: #DDD" #end>
+		#set($i=$i+1)
+			<td style="border: 1px solid #888;">$i</td>
+			<td style="border: 1px solid #888;"><a href="$base/volunteering/ApplicationInfo/$app.id">$app.user.lastname, $app.user.firstname</a></td>
+			<td align="center" style="border: 1px solid #888;">$app.user.gender </td>
+			<td align="center" style="border: 1px solid #888;">$app.user.language</td> 
+			<td align="center" style="border: 1px solid #888;">$app.getGPA()</td> 
+			#if($app.evaluation)
+				<td align="center" style="border: 1px solid #888;"><b>$app.evaluation.total</b></td>
+				#foreach($crit in $criteria)
+					<td align="center" style="border: 1px solid #888;">$app.evaluation.getResponseStringForCriteria($crit)</td>
+				#end
+				<!--<td style="border: 1px solid #888;">$app.evaluation.notes</td>-->
+				<td align="center" style="border: 1px solid #888;">#if($app.evaluation.rejectionSent) Yes #else <center><input type="checkbox" align="middle" name="app-$app.id" value="send"/></center> #end</td>
+			#else
+				<td align="center" style="border: 1px solid #888;">&nbsp;</td>
+				#foreach($crit in $criteria)
+					<td align="center" style="border: 1px solid #888;">&nbsp;</td>
+				#end
+				<td align="center" style="border: 1px solid #888;">&nbsp;</td>
+			#end
+		</tr>
+	#end
+</table>
+<br/>
+<center><input name="sendButton" type="submit" value="send rejection emails according to checkboxes" class="button" onClick="this.disabled=true;this.style.color='#AAA';this.form.submit()"/></center>
+</form>
+	
+<br /><br />
+<ul>
+<li><a href="$base/volunteering/SendEmailToApplicants/$session.id">send a freeform email to applicants</a></li>
+<li><a href="$base/volunteering/ApplicationSessionInfo/$session.id">&laquo; back to the session information</a></li>
+</ul>

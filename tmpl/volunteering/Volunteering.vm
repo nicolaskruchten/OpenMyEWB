@@ -1,0 +1,118 @@
+#if($open.size() > 0)
+<script language="javascript">
+function countdown_clock(ms, session, due)
+         {
+         html_code = '<span id="countdown-' + session + '"></span>';
+         
+         document.write(html_code);
+         
+         countdown(ms, session, due, true);                
+         }
+         
+function countdown(ms, session, due, init)
+         {
+         
+		 if(init)
+		 {
+		 	days = new Array();
+			hours = new Array();
+			minutes = new Array();
+		    seconds = new Array();
+			dps = new Array();
+			hps = new Array();
+			mps = new Array();
+			sps = new Array();
+		 }
+                         
+         Time_Left = Math.round(ms / 1000);
+         
+         days[session] = Math.floor(Time_Left / (60 * 60 * 24));
+         Time_Left %= (60 * 60 * 24);
+         hours[session] = Math.floor(Time_Left / (60 * 60));
+         Time_Left %= (60 * 60);
+         minutes[session] = Math.floor(Time_Left / 60);
+         Time_Left %= 60;
+         seconds[session] = Time_Left;
+                    
+         dps[session] = 's'; hps[session] = 's'; mps[session] = 's'; sps[session] = 's';
+         //ps is short for plural suffix.
+         if(days[session] == 1) dps[session] ='';
+         if(hours[session] == 1) hps[session] ='';
+         if(minutes[session] == 1) mps[session] ='';
+         if(seconds[session] == 1) sps[session] ='';
+                    
+         if(due)
+		 {
+		 	document.getElementById('countdown-'+ session).style.color = '#cc0000';
+		 }
+		 
+		 if(ms > 0)
+		 {
+		 	if(due)
+			{
+				document.getElementById('countdown-'+ session).innerHTML = 'Applications due immediately! Grace period ends in ';
+			}
+			else
+			{
+				document.getElementById('countdown-'+ session).innerHTML = 'Applications due in ';
+			}
+			if(days[session] > 0) document.getElementById('countdown-'+ session).innerHTML += days[session] + ' day' + dps[session] + ' ';
+         	if(hours[session] > 0) document.getElementById('countdown-'+ session).innerHTML += hours[session] + ' hour' + hps[session] + ' and ';
+         	if(minutes[session] > 0) document.getElementById('countdown-'+ session).innerHTML += minutes[session] + ' minute' + mps[session] ;
+         	else document.getElementById('countdown-'+ session).innerHTML += seconds[session] + ' second' + sps[session];
+         }
+		 else
+		 {
+		 	document.getElementById('countdown-'+ session).innerHTML = '<b>Applications due immediately!</b>';
+		 }
+		 
+         //Recursive call, keeps the clock ticking.
+         if(ms > 0)
+		 {
+		 	setTimeout('countdown(' + (ms - 1000) + ', ' + session + ', ' + due + ', false);', 1000);
+		 }
+         }
+</script>
+#end
+
+<h2>Volunteering</h2>
+
+#if($apps.size() > 0)
+<h4>Your Submitted Applications</h4>
+<ul>
+#foreach ($app in $apps)
+	<li><span>$app.session.name</span></li>
+#end
+</ul>
+<p>In the next few weeks your application will be reviewed and you will be contacted shortly with the results.</p>
+#end
+
+#if($closed.size() > 0)
+<h4>Recently Closed Application Sessions</h4>
+<ul>
+#foreach ($session in $closed)
+	<li><span>$session.name</span></li>
+#end
+</ul>
+<p>These application sessions have been closed and are no longer taking new applicants.</p>
+#end
+
+#if($open.size() > 0)
+<h4>Current Application Sessions</h4>
+<p>We is currently looking for applications for the following positions.
+Please click on one of the application sessions to find out more about the position and the application process.</p>
+
+<ul>
+#foreach($session in $open)
+ <li><a href="$base/volunteering/ApplicationInstructions/$session.id">$session.name</a><br /> <span style="font-size: 12px;">(<script>countdown_clock($session.remainingMS, $session.id, $session.isDue())</script>#if(!$session.isDue()), #dateWithTime($session.dueDate) Eastern Time#end)</span></li>
+#end
+</ul>
+#else
+<br />
+<p align="center" style="font-weight: bold;">We are not currently accepting applications for any positions.  <br />We look forward to seeing your application in the future.</p>
+#end
+
+<br />
+<p>For further information on becoming an overseas volunteer please visit our website.  Overseas placement applications are typically accepted in February and August each year.</p>
+
+		<br />

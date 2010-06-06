@@ -1,0 +1,11 @@
+
+<ul>
+
+#if ($advanced)
+	<li><a href="$target">basic search</a></li>
+	<li><a href="$target/advanced" style="font-weight:bold;">advanced search</a></li>
+#else
+	<li><a href="$target" style="font-weight:bold;">basic search</a></li>
+	<li><a href="$target/advanced">advanced search</a></li>
+#end
+</ul>

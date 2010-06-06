@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+      "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="ca.myewb.model">
+
+    <class name="ApplicationSessionModel" table="appsessions">
+
+        <id name="id" type="int" unsaved-value="0">
+            <generator class="native"/>
+        </id>
+
+        <property name="name" type="string"/>
+        <property name="instructions" type="text"/>
+        <property name="closeEmailText" type="text"/>
+         <property name="rejectionEmailText" type="text"/>
+        <property name="completedApplicationMessage" type="text"/>
+        <property name="closeDate" type="timestamp"/>
+        <property name="dueDate" type="timestamp"/>
+        <property name="openDate" type="timestamp"/>
+        <property name="emailSent" type="boolean"/>
+        
+        <bag name="questions" inverse="true" order-by="questionOrder" cascade="all">
+        	<key column="sessionid"/>
+        	<one-to-many class="ApplicationQuestionModel"/>
+        </bag>
+
+        <bag name="applications" inverse="true" cascade="save-update">
+        	<key column="sessionid"/>
+        	<one-to-many class="ApplicationModel"/>
+        </bag>
+        
+        <bag name="evalCriteria" inverse="true" cascade="all">
+        	<key column="sessionid"/>
+        	<one-to-many class="EvaluationCriteriaModel"/>
+        </bag>
+        
+        <property name="frenchInstructions" type="text"/>
+
+    </class>
+
+</hibernate-mapping>

@@ -1,0 +1,174 @@
+<h2>$chapter.name</h2>
+
+
+<table border="0" class="cellpadding5" style="margin: 0 auto;" width="700">
+
+
+<tr><td colspan="2" align="center"> 
+
+
+#if (! $isguest)
+	#if ($thischapter)
+		<p><i>You are currently a member of this chapter.</i></p>	
+	#else
+		<p><i>You are currently not a member of this chapter.</i></p>	
+	#end
+#else
+
+
+		<p>
+		<form action="${base}/actions/ModifyListMembership/$chapter.id" method="post" enctype="multipart/form-data">
+			<input type="text" name="Emails" onFocus="this.value='';" onBlur="if(this.value=='')this.value='(your email address)'" value="(your email address)"/>
+			<input type="hidden" name="ActionType" value="add"/>
+			<input type="submit" class="button" value="join chapter mailing list" onClick="this.disabled=true; this.style.color='#AAA'; this.form.submit();"/>
+		</form>
+</p>
+<br />
+#end
+</td></tr>
+
+<tr>
+<td class="labelcell">Email:</td>
+<td>
+<a href="mailto:$chapter.email">$chapter.email</a>
+
+</td></tr>
+
+<tr>
+<td class="labelcell">Website URL:</td>
+<td>
+<a href="$chapter.url">$chapter.url</a>
+
+</td></tr>
+
+<tr>
+	<td class="labelcell" valign="top">Mailing list:</td>
+	<td><a href="$base/mailing/ListInfo/$chapter.shortname">http://${helpers.domain}${helpers.appPrefix}/mailing/ListInfo/$chapter.shortname</a>
+		<br/><a href="$base/api/list/${chapter.shortname}" class="nodeco"><img src="$base/images/feed.gif"  style="margin-top: 8px;" border="0" /> RSS feed for email list</a>
+</td>
+</tr>
+
+<tr>
+	<td class="labelcell" valign="top">Events Calendar:</td>
+	<td><a href="$base/events/MonthView/$chapter.shortname">http://${helpers.domain}${helpers.appPrefix}/events/MonthView/$chapter.shortname</a>
+	<br /><a href="$base/api/calendar/${chapter.shortname}.ics" class="nodeco"><img src="$base/images/ical.gif"  style="margin-top: 8px;" border="0" /> iCalendar feed for calendar events</a>
+	</td>
+</tr>
+
+
+
+#if (!$chapter.city.equals(""))
+
+<tr>
+<td class="labelcell">Address:</td>
+<td>
+
+$chapter.address1#if($chapter.suite && !$chapter.suite.equals("")), $chapter.suite #end<br />
+#if($chapter.address2 && !$chapter.address2.equals(""))$chapter.address2<br />#end
+$chapter.city, $chapter.province<br />
+$chapter.postalcode
+
+</td></tr>
+#end
+
+
+#if (!$chapter.phone.equals(""))
+<tr>
+<td class="labelcell">Phone:</td>
+<td>
+$chapter.phone
+
+</td></tr>
+#end
+
+#if (!$chapter.fax.equals(""))
+<tr>
+<td class="labelcell">Fax:</td>
+<td>
+$chapter.fax
+
+</td></tr>
+#end
+
+#if(!$execs.isEmpty())
+#set($isExec = $user.isMember("Exec"))
+	<tr>
+		<td colspan="2" align="center">
+		<h3>Chapter Executive</h3>
+
+		<table border="0">
+			
+			#foreach($exec in $execs)
+
+				#if($velocityCount % 2 ==0)
+				<tr>
+				#end
+
+					<td #if($velocityCount % 2 ==0) align="left" #else align="right" #end valign="top" width="250">
+						<table height="225" width="205">
+							<tr>
+								<td #if($velocityCount % 2 ==0) align="left" #else align="right" #end >
+									<a href="$base/profile/UserProfile/$exec.id" class="nodeco">
+			#if($exec.hasPicture())
+									<img src="/userpictures/thumbs/${exec.id}.jpg"/ border="0" style="border: 1px solid black;">
+			#else
+				<img src="$base/userpictures/nophoto.gif" style="border: 1px solid black;"/>
+			#end
+									</a>
+								</td>
+							</tr>
+						</table>
+						<a href="$base/profile/UserProfile/$exec.id" class="nodeco">
+						<b>$exec.firstname $exec.lastname</b>
+						<br/>$exec.execTitle</a>
+						#if($isExec)
+							#foreach($role in $exec.roles)
+								#if(!$role.end && $role.formattedLevel.equals("member") && $role.group.isNationalRepGroup() )
+										<br /><span style="font-size: 11px;">($role.group.postName.substring(4))</span>
+
+								#end
+							#end
+						#end
+
+						#if(!$isguest)
+						<br /><a href="mailto:$exec.email" style="font-size: 11px;">$exec.email</a>
+						#end
+
+						<br /><br /><br />
+					</td>
+				#if($velocityCount % 2 == 1)
+				</tr>
+				#end
+			#end
+		</table>
+
+		</td>
+	</tr>
+
+#end
+</table>
+
+<br />
+		<h3 align="center">Chapter Mailing Lists</h3>
+		
+		<table width="90%" class="cellpadding5" style="margin: 0 auto; border-collapse: collapse;">
+#foreach ($list in $lists)
+	<tr>
+		<td style="border: 1px solid #EEE; border-right: #FFF;">
+		<p><a href="$base/mailing/ListInfo/$list.id" class="nodeco nohover"><b>$list.name</b>
+		<br /><span style="font-size: 10px;">[$list.totalShortname] &nbsp;&nbsp;
+			#if(!$isGuest) #set( $value = $list.getNumRecipients() + $list.getNumMembers()) ($value subscribers) #end</span> 
+		<br />$list.getDescription()</a>
+		</p></td>
+		
+		<td valign="middle" align="center" style="border: 1px solid #EEE; border-left: #FFF; width: 250px;">
+
+			<a href="$base/mailing/ListInfo/$list.id" class="more">more info & list archives &raquo;</a>
+			<br/>
+			<span style="font-size: 10px;">Last used #postDate( $list.lastPostOrResponseDate )</span>
+
+		</td>
+	</tr>
+	
+#end
+</table>

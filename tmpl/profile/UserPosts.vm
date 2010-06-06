@@ -1,0 +1,31 @@
+<h2>Posts & Replies by $targetUser.firstname $targetUser.lastname</h2>
+
+
+#if ($posts.isEmpty())
+
+	<p>This user has neither posted anything you can see nor replied to anything you can see. </p>
+
+	#if($isGuest) 
+		<p><i>You are not currently signed in and so you may be able to see more by signing in.</i></p>
+	#end
+#else
+   <p>Here is the list of posts that you can currently see which were authored by $targetUser.firstname $targetUser.lastname.</p>
+	#if($isGuest) 
+		<p><i>You are not currently signed in and so you may be able to see more by signing in.</i></p>
+	#end
+<br />
+		#parse("frame/postpagination.vm")
+		<br />
+		#foreach($post in $posts)
+			#if ($post.parent)
+			<div class="post">
+				#parse("frame/renderers/replyrenderer.vm")
+			</div>
+			#else
+				#parse("frame/renderers/postrenderer.vm")
+			#end
+		#end
+		
+		#parse("frame/postpagination.vm")
+		
+#end

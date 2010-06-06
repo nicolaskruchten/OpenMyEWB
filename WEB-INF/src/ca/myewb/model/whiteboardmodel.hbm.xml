@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+      "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="ca.myewb.model">
+
+    <class name="WhiteboardModel" table="whiteboard">
+        <cache usage="read-write"/>
+
+        <id name="id" type="int" unsaved-value="0">
+            <generator class="native"/>
+        </id>
+
+        <property name="body" type="text"/>
+        <property name="lastEditDate" type="timestamp"/>
+        <property name="hasfile" type="boolean"/>
+        <property name="numEdits" type="int"/>
+        <property name="enabled" type="boolean"/>
+        
+        <many-to-one name="parentEvent" column="parentEvent" class="EventModel"  />
+        <many-to-one name="parentPost" column="parentPost" class="PostModel"  />
+        <many-to-one name="parentGroup" column="parentGroup" class="GroupModel"  />
+      	<many-to-one name="group" column="groupid" class="GroupModel"  />
+      	<many-to-one name="lastEditor" column="lastEditorId" class="UserModel"  />
+ 
+        <bag name="searchables" cascade="save-update" inverse="true">
+            <cache usage="read-write"/>
+        	<key column="parentWhiteboard"/>
+        	<one-to-many class="SearchableModel"/>
+        </bag>
+
+    </class>
+
+</hibernate-mapping>

@@ -1,0 +1,37 @@
+#if(!$renderWhosonline)
+
+<div id="whosonlinesidebar">
+
+<div align="center" style="font-size: 11px;"> <br /> 
+<img src="$base/images/indicator.white.gif" /> <br />  <br /> Loading...
+</div>
+<script> 
+$('#whosonlinesidebar').load('$base/ajax/whosonlinesidebar');
+</script>
+
+</div>
+
+#else
+
+<p style="padding:0px; margin: 2px 0px;font-size: 11px;">In the past 15 minutes:</p>
+<ul>
+	#foreach ($user in $userList)
+		<li>
+			<a href="$base/profile/UserProfile/$user">$userTable.get($user)</a> 
+		</li>
+	#end
+	
+	<li style="color: black;">
+		#if ($userList.size() != 0)
+			and 
+		#end
+	
+		#if ($numGuests == 1)
+			$numGuests guest
+		#else
+			$numGuests guests
+		#end
+	</li>
+</ul>
+
+#end

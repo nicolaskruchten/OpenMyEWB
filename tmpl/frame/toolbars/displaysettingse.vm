@@ -1,0 +1,9 @@
+
+<ul>
+	#if(!$currentPage.equals("listView"))
+		<li><a href="$base/events/ListView/$!filter" style="text-decoration: none">View All Events</a></li>		
+	#elseif(!$currentPage.equals("listUpcoming"))
+		<li><a href="$base/events/ListUpcoming/$!filter" style="text-decoration: none">View Upcoming Events</a></li>
+	#end
+
+</ul>

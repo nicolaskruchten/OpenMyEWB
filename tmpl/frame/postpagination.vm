@@ -1,0 +1,43 @@
+
+#set($safeFilter = $helpers.htmlSafe($filterParam))
+#if($numPages > 1)
+
+	<div class="pagination">
+		#if($pageNum != 1)
+			#set ($prevPageNum = $pageNum - 1)
+			<a href="${base}/$area/$herepage/$safeFilter/$prevPageNum">&laquo;</a> 
+		#end
+
+		#if($pageNum > 10)
+			<a href="${base}/$area/$herepage/$safeFilter/1">1</a> .. 
+			#set($first = $pageNum - 10) 
+		#else
+			#set($first =1)
+		#end
+
+
+		#if(($numPages - $pageNum) > 10)
+			#set($last = $pageNum + 10)
+		#else
+			#set($last = $numPages)
+		#end
+
+		#foreach ($pageLink in [$first .. $last])
+			#if ($pageLink == $pageNum)
+				<b>$pageNum</b>
+			#else
+				<a href="${base}/$area/$herepage/$safeFilter/$pageLink">$pageLink</a>
+			#end
+		#end 
+
+		#if(($numPages - $pageNum) > 10)
+			.. <a href="${base}/$area/$herepage/$safeFilter/$numPages">$numPages</a>
+		#end
+
+		#if($pageNum != $numPages)
+			#set ($nextPageNum = $pageNum + 1)
+			<a href="${base}/$area/$herepage/$safeFilter/$nextPageNum">&raquo;</a>
+		#end
+	</div>
+
+#end

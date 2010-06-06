@@ -1,0 +1,55 @@
+<ul id="dir_$pathHash" class="filetree">
+	#if($canEdit)
+    	<div class="diroptions">
+    		<a href="$base/mailing/UploadGroupFile/$groupID$relPath" class="more">
+        		[add file(s)]
+        	</a>
+        	<a href="$base/mailing/CreateGroupDirectory/$groupID$relPath" class="more">
+        		[add subfolder]
+        	</a>
+        	#if($relPath != "")
+            	<a href="javascript:deleteFile('$base', '$groupID', '$relPath', '$pathHash' )" class="more">
+            		[delete folder]
+            	</a>
+    		#end
+    	</div>
+    #end
+	
+	#if($files.isEmpty() && $directories.isEmpty())
+		<li class="fileshare folder_empty">(empty folder)</li>
+	#else
+		#if( !$directories.isEmpty() )
+			#foreach( $dir in $directories )
+        		#set($relPath=${dir.getRelativePath()})
+        		#set($pathHash=${dir.getMD5Hash()})
+        		#set($onclick="javascript:showHideDirectory( '$base', '$groupID', '$relPath', '$pathHash' )")
+        		
+        		<li class="fileshare folder" id="file_$pathHash">
+        			<a href="$onclick">$dir.getName()</a>
+        		</li>
+        	#end
+		#end
+		
+		#if( !$files.isEmpty() )
+			#foreach( $file in $files )
+        		#set($relPath=${file.getRelativePath()})
+        		#set($pathHash=${file.getMD5Hash()})
+        		#set($onclick="javascript:showHideFileOptions('$pathHash')")
+        		
+				<li class="fileshare file_${file.getExtension()}" id="file_$pathHash">
+        			<a href="$onclick">$file.getName()</a>
+        			<div id="fileoptions_$pathHash" class="fileoptions" style="display: none;">
+        				<a href="$base/groupfiles/$groupID$relPath"  #if($file.needsThickBox()) class="thickbox more" #else class="more" #if($file.needsNewWindow()) target="_blank" #end #end>
+        					[view/save ($file.getFormattedSize())]
+        				</a>
+        				#if($canEdit)
+            				<a href="javascript:deleteFile('$base', '$groupID', '$relPath', '$pathHash' )" class="more">
+            					[delete]
+            				</a>
+        				#end
+        			</div>
+        		</li>
+        	#end
+		#end
+	#end
+</ul>

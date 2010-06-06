@@ -1,0 +1,65 @@
+
+<div id="statsbox" class="#if($inline) centered #end "  #if(!$inline) style="width: 370px;" #end >
+
+	<div id="statsboxtop" class=" #if(!$inline) inside #end">&nbsp;</div>
+
+					<div id="statsboxmid" class=" #if(!$inline) inside #end">
+
+					#if ($inline)
+
+						<form action="${base}/actions/DoSignIn" method="post" style="padding: 0; margin: 0;" enctype="multipart/form-data">
+
+						<input type="hidden" name="targetURL" value="$targetURL" />
+							<table>
+								<tr>
+									<td align="right">
+						<label for="username" style="font-size: 11px;">email</label> <input id="username" type="text" name="Username" style="border: 1px solid black; margin: 1px; width: 80px;"/><br />
+						<label for="password" style="font-size: 11px;">password</label> <input id="password" type="password" name="Password" style="border: 1px solid black; margin: 1px; width: 80px;"/><br />
+									<td>
+						<input type="hidden" name="action" value="login"/>
+						<input type="submit" value="sign in" class="button" style="background: #DDD;" onclick="this.disabled=true; this.style.color='#AAA'; this.form.submit();"/></td>
+								</tr>
+								<tr>
+									<td colspan="2" align="center">
+									<p style="font-size: 10px; line-height: 1.5em; padding: 0; margin:5px;">Don't 
+					have an account? <a href="${base}/profile/SignUp" style="color: black; font-size: 
+					10px;">Sign up!</a>
+									<br />Forgot/don't have a password? <a href="${base}/profile/ForgotPassword" style="color: black; font-size: 10px;">Click here!</a></p></td>
+								</tr>
+							</table>
+							</form>
+
+					#else
+
+#if($isGuest)
+
+	<b>Not signed in.</b> &nbsp; <a href="javascript: $('#signinform').submit()" style="color: black;">sign in &raquo;</a><br /><br />
+
+
+
+<form id="signinform" action="$base/home/SignIn" method="post" 
+enctype="multipart/form-data" style="position: absolute;">
+<input type="hidden" name="targetURL" value="$targetURL" />
+</form>
+
+#else
+
+	Signed in as <a href="$base/profile/Profile" class="nodeco"><b>$user.firstname $user.lastname</b></a>. &nbsp; <a href="${base}/actions/DoSignOut" id="signoutlink" style="color: black;" target="_top">sign out</a><br /><br />
+
+#end
+
+	<form name="searchForm" action="${base}/home/Search/" method="post" enctype="multipart/form-data">
+		<label for="searchbox" style="font-size: 12px;">$helpers.longName Search: </label> <input type="text" name="Body" id="searchbox" style="border: 1px solid black; margin: 1px; width: 160px;"/>
+		<input name="searchButton" type="submit" value="go!" class="button" style="background: #DDD;" onClick="this.disabled=true; this.form.submit()"/>
+	</form>
+
+
+
+
+
+					#end
+					</div>
+
+	<div id="statsboxbottom" class="#if(!$inline) inside #end">&nbsp;</div>
+
+</div>

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+      "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="ca.myewb.model">
+
+    <class name="EvaluationResponseModel" table="evalresponses">
+
+        <id name="id" type="int" unsaved-value="0">
+            <generator class="native"/>
+        </id>
+
+        <property name="response" type="int"/>
+        
+        <many-to-one name="eval" class="EvaluationModel" column="evalid" fetch="join"/>
+        <many-to-one name="criteria" class="EvaluationCriteriaModel" column="critid" fetch="join"/>
+
+    </class>
+
+</hibernate-mapping>

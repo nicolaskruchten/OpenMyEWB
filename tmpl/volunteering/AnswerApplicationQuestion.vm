@@ -1,0 +1,10 @@
+<h2>Application Question $question.questionOrder of $numQuestions</h2>
+
+<p style="font-size: 12px;"><b>Note:</b> This system will not save answers over 1000 words. Furthermore, to avoid server timeout problems, we recommend that you type your answers in another text editor, and simply paste them into this application, rather than spending a long time typing the answers into this form.</p>
+
+
+<h4 style="margin-bottom: 0; margin-top: 15px;">$question.formattedQuestion</h4>
+
+
+
+#parse("frame/form.vm")

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?xml-stylesheet type="text/xsl" href="/resources/rss.xsl" media="screen"?>
+
+<rss version="2.0" xmlns:myewb='http://${helpers.domain}/'>
+	<channel>
+		<title>RSS Feed: Posts</title>
+		<link>$base/api/$feedType/${filterParam}</link>
+		<lastBuildDate>$now</lastBuildDate>
+		#if($feedType.equals("posts"))
+    		<description>This feed lists the front page posts 
+				(filtered by the tag '$filterParam')
+				as visible to a user who is not signed in.</description>
+		#elseif($feedType.equals("list"))
+    		<description>This feed lists all the posts and emails from a mailing lists: $list.name.</description>
+		#end
+		
+		#foreach($post in $posts)
+		
+			<item>
+			#if($post.parent)
+				<title><![CDATA[Re: $post.parent.subject]]></title>
+				<link>$base/home/ShowPost/$post.parent.id#$post.id</link>
+				<guid>$base/home/ShowPost/$post.parent.id#$post.id</guid>
+				<myewb:reply>yes</myewb:reply>
+			#else
+				<title><![CDATA[$post.subject]]></title>
+				<link>$base/home/ShowPost/$post.id</link>
+				<guid>$base/home/ShowPost/$post.id</guid>
+				<myewb:reply>no</myewb:reply>
+				<myewb:numreplies>$post.replies.size()</myewb:numreplies>
+			#end
+			#if($post.emailed)
+				<myewb:email>yes</myewb:email>
+			#else
+				<myewb:email>no</myewb:email>
+			#end
+			#if($post.hasfile)
+				<myewb:files>yes</myewb:files>
+			#else
+				<myewb:files>no</myewb:files>
+			#end
+				<pubDate>#rfcDate($post.date)</pubDate>
+				<author>private@emailaddress.com ($post.poster.firstname $post.poster.lastname)</author>
+				<description><![CDATA[ 
+			
+			(by $post.poster.firstname $post.poster.lastname)
+
+			#if($post.parent)
+				#if ($post.body.length() < 600 || $fullPost)
+					#wiki($post.body)
+				#elseif ($post.body.indexOf(" ", 300) != -1)
+					#wiki( $post.body.substring(0, $post.body.indexOf(" ", 300)).concat("...") )
+				#elseif ($fullPost == true)
+					#wiki($post.stitchedPost)
+				#else
+					#wiki($post.body)
+				#end
+			#elseif ($fullPost)
+				#wiki($post.stitchedPost)
+			#else
+				#wiki($post.intro)
+			#end
+				
+				  ]]></description>
+			</item>
+	
+		#end
+		
+	</channel>
+</rss>

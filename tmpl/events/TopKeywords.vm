@@ -1,0 +1,24 @@
+<h2>Tag Cloud and Tag Search</h2>
+
+<br />
+
+<form onSubmit="window.location = '$base/events/ListView/' + $('#formelemKeywords').val().replace(',',''); return false;">
+<p align="center"><span class="fieldname required">Tag search:</span>		
+<input type="text" id="formelemKeywords" style="width: 150px;"  onFocus="this.value='';" />
+<input name="searchButton" type="submit" value="go!" class="button" />
+<br /><span class="instructions">does partial matches, so "book" will match "book" and "books"</span>
+ </p> </form>
+
+ <br />
+
+<div style="text-align:center; margin: 0px 50px;">
+		#foreach ($word in $tags)
+#set ($size =  14 + 18 * $percentTagged.get($word) /100 )
+
+<a href="${base}/events/ListView/$word"  style="text-decoration:none; font-size: ${size}px; line-height: 1.6em;" title="used $usage.get($word) times">$word</a>,&nbsp;&nbsp;&nbsp;
+
+#end
+		</div>
+
+
+</p>

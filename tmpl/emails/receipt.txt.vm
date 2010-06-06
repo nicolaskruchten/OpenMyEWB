@@ -1,0 +1,13 @@
+
+== $helpers.longName Credit Card Transaction Receipt ==
+
+Issued to $txn.name on #absDate($txn.date)
+
+Transaction ID: $txn.orderNumber
+
+Receipt for:
+#foreach($item in $txn.items)
+- $item.get("quantity") x $item.get("name") @ $$item.get("cost")0
+#end
+
+Total Amount: #dollars($txn.totalAmount)

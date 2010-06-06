@@ -1,0 +1,25 @@
+
+<div style="margin: 0 auto; width: 700px;">
+<h4>Post Info</h4>
+<ul style="font-size: 12px;">
+	<li><span><b>Subject</b>: $subject</span></li>
+	<li><span><b>Visibility</b>: $visibility</span></li>
+	<li><span><b>Response Mode</b>: $responseMode</span></li>
+	<li><span><b>$tags.size() Tag(s)</b></span>
+	#if(!$tags.isEmpty())
+			<ul>
+				#foreach($tag in $tags)
+				<li><span>$tag</span></li>
+				#end
+			</ul>
+	#end
+	</li>
+	<li><span><b>Has file(s) attached</b>: $hasFile</span></li>
+</ul>
+
+<h4 style="margin-top: 20px;">Post Intro</h4>
+#wiki($intro)
+
+<h4 style="margin-top: 20px;">Post Body, which includes Intro</h4>
+#wiki($bodyWithIntro)
+</div>

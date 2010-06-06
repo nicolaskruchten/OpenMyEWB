@@ -1,0 +1,13 @@
+
+<h2>Add A New Mailing List</h2>
+
+
+#if($adminchapter)
+
+<p>Note: You are an administrator who is in a chapter (the $adminchapter). Any lists you create now will be in that chapter. To create non-chapter lists you must not be in a chapter.</p>
+
+#end
+
+#parse("frame/form.vm")
+
+	

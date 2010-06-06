@@ -1,0 +1,216 @@
+
+#if (!$printable)
+
+<div class="post">
+	<div class="postheader"> <!-- header row -->		
+		#if($post.hasActiveWhiteboard())
+			<a href="${base}/home/EditPostWhiteboard/$post.whiteboard.id" style="float: right; margin-left: 4px; padding: 0;" border="0"><img src="$base/images/whiteboard.gif" border="0"/></a>
+		#end
+		#if ($post.hasFilesInSelfOrResponses())
+		<a href="${base}/home/ShowPost/$post.id"><img src="$base/images/paperclip.gif" style="float: right; margin-left: 4px; padding: 0;" border="0"/></a>
+		#end
+
+		<div style="float: right; font-size: 10px; font-weight: normal; padding-top: 3px;">
+			#if($post.hasActiveWhiteboard())
+				#if($post.whiteboard.numEdits != 1)
+					(<a href="${base}/home/ShowPost/$post.id" style="color: white;" class="nodeco">$post.whiteboard.numEdits whiteboard edits</a>)
+				#else
+					(<a href="${base}/home/ShowPost/$post.id" style="color: white;" class="nodeco">1 whiteboard edit</a>)
+				#end
+			#else
+				#set($numReplies = $post.replies.size())
+				#if ($numReplies == 0)
+					(<a href="${base}/home/ShowPost/$post.id" style="color: white;" class="nodeco">0 replies</a>)
+				#elseif ($numReplies == 1)
+					(<a href="${base}/home/ShowPost/$post.id" style="color: white;" class="nodeco">1 reply#if(!$isGuest) - $post.getNewReplies($user.lastLogin) new#end</a>)
+				#else
+					(<a href="${base}/home/ShowPost/$post.id" style="color: white;" class="nodeco">$numReplies replies#if(!$isGuest) - $post.getNewReplies($user.lastLogin) new#end</a>)
+				#end
+			#end
+		</div>
+		#if ($post.emailed)
+			<a href="${base}/home/ShowPost/$post.id"><img src="${base}/images/envelope.gif"
+			style="float: left; margin-right: 5px; margin-top: 3px; padding: 0;" border="0" title="this post was sent as an email"/></a>
+		#end 
+		<a href="${base}/home/ShowPost/$post.id" class="postheaderlink">#htmlSafe($post.subject)</a>
+
+	</div>
+
+	<div class="postsubheader"> <!-- stat row -->
+		<table width="100%" style="margin:0; padding: 0;">
+			<tr>
+				<td>By <a href="$base/profile/UserProfile/${post.poster.id}">$post.poster.firstname $post.poster.lastname</a>, #postDateWithTime($post.date)</td>
+				<td align="right" width="330">
+					#if(!$post.group.visible)
+						Post from an archived list:<br /><a href="${base}/mailing/ListInfo/$post.group.id">[$post.group.totalShortname]</a>
+					#elseif($post.emailed)
+						Sent to the <a href="${base}/mailing/ListInfo/$post.group.id">[$post.group.totalShortname]</a> list
+					#elseif($post.group.id != 1)
+						<a href="${base}/mailing/ListInfo/$post.group.id">$post.group.postName</a><br /> can see this post
+					#else
+						Anyone can see this post
+					#end
+				</td>
+			</tr>
+		</table>
+	</div>
+
+	<div class="postcontent" style="width: 98%"> <!-- main row -->
+
+		#if ($fullDisplay)
+		<div align="right" style="font-size:10px; margin-bottom: 15px;">
+			printable version: 
+			<a href="${base}/home/Print/$post.id/replies" class="more">with replies</a> | 
+			<a href="${base}/home/Print/$post.id" class="more">without replies</a>
+		</div>
+		#end
+
+		#if($post.poster.hasPicture())
+		<div style="border: 
+1px solid #CCC; float:right; margin: 10px; margin-left:14px; padding:5px; line-height: 0;">
+		<a href="$base/profile/UserProfile/${post.poster.id}">
+			<img 
+src="$base/userpictures/minithumbs/${post.poster.id}.jpg" width="75"
+ title="$post.poster.firstname $post.poster.lastname" alt="Picture of $post.poster.firstname $post.poster.lastname"
+ style="border: 0;"/>
+		</a>
+		</div>
+		#end
+
+
+		#if ($fullDisplay)
+			#wiki($post.stitchedPost)
+		#elseif($post.intro.endsWith("..."))
+			#wiki($post.intro.concat(" ^^(more inside)^^"))
+		#else
+			#wiki($post.intro)
+		#end
+		
+		<br style="clear:both; height: 1px; line-height: 1px;" />
+	
+		<table width="100%" style="margin:0; padding: 0; margin-top: 6px;"> <!-- tags and drill-in link table -->
+		#if (!$fullDisplay)
+			#if($post.hasActiveWhiteboard())
+				#if ($post.whiteboard.numEdits != 0)
+				<tr>
+					<td align="right" valign="top" colspan="2" style="font-size: 10px; padding-right: 10px;">
+								Latest edit by <a href="$base/profile/UserProfile/${post.whiteboard.lastEditor.id}" class="nodeco">$post.whiteboard.lastEditor.firstname $post.whiteboard.lastEditor.lastname</a>, #postDateWithTime($post.whiteboard.lastEditDate)
+					</td>
+				</tr>
+				#end
+			#else
+				#if ($numReplies != 0)
+				<tr>
+					<td align="right" valign="top" colspan="2" style="font-size: 10px; padding-right: 10px;">
+							#set ($lreply = $post.latestReply)
+							<a href="$base/home/ShowPost/${post.id}#${post.latestReply.id}" class="nodeco">Latest reply</a> by <a href="$base/profile/UserProfile/${lreply.poster.id}" class="nodeco">$lreply.poster.firstname $lreply.poster.lastname</a>, #postDateWithTime($lreply.date)
+					</td>
+				</tr>
+				#end
+			#end
+		#end
+		
+		<tr>
+			<td valign="top" style="padding-left: 15px; font-size: 10px;">
+				
+			#if(!$fullDisplay)
+
+    		#if(!$isGuest)
+    			#if($user.hasFlagged($post))
+    				<a href="#" onclick="return togglePostFlag('$base/actions/UnFlagPost/$post.id', this, '$base/home/FlaggedPosts', 'removed from watch list')"  class="more">[remove from watch-list]</a>
+    			#else
+    				<a href="#" onclick="return togglePostFlag('$base/actions/FlagPost/$post.id', this, '$base/home/FlaggedPosts', 'added to watch list')"  class="more">[add to watch-list]</a>
+    			#end
+			#end
+
+			#else
+				#if ($post.hasfile)
+					
+					attached files:
+
+					<ul style="margin-top: 0px; margin-bottom: 5px; margin-left: 25px;">
+						#foreach ($file in $post.getAttachedFiles())
+						
+						<li class="file_$file.extension"><a href="$base/postfile/$post.id/$file.getURLEncodedname()" #if($file.needsThickBox()) class="thickbox more" rel="$post.getId()" #else class="more" #if($file.needsNewWindow()) target="_blank" #end #end>$file.getName()</a> <span style="font-size: 10px;">($file.getFormattedSize())</span></li>
+						#end
+					</ul>
+
+				#end
+			#end
+
+			
+			</td>
+			<td align="right" valign="top" width="300" style="font-size: 10px; padding-right: 10px;">
+			#if (!$fullDisplay)
+				<a href="${base}/home/ShowPost/$post.id" class="more">read more or#if(!$post.hasActiveWhiteboard()) reply#else edit whiteboard#end &raquo;</a>
+
+			#else
+					<div style="margin-bottom: 6px;">
+				#if ($isLeader)<a href="$base/actions/DeletePost/$post.id">[delete this post &amp; #if($post.hasActiveWhiteboard()) whiteboard #else all replies #end]</a></div>
+				#end
+
+				#if(!$isGuest)
+					<div style="margin-bottom: 6px; width: 200px;">
+					#if($user.hasFlagged($post))
+						<a href="#" onclick="return togglePostFlag('$base/actions/UnFlagPost/$post.id', this, '$base/home/FlaggedPosts', 'removed from watch list')"  class="more">[remove from watch-list]</a>
+					#else
+						<a href="#" onclick="return togglePostFlag('$base/actions/FlagPost/$post.id', this, '$base/home/FlaggedPosts', 'added to watch list')"  class="more">[add to watch-list]</a>
+					#end
+					<br /><br />get replies to watch-listed <br />posts  as emails <a href="$base/home/FlaggedPosts">click here &raquo;</a>
+					</div>
+				#end
+
+				#if($user.isAdmin())
+					<div style="margin: 0; padding: 0; margin-bottom: 6px;">
+					#if($post.isFeatured())
+						<a href="#" onclick="return togglePostFlag('$base/actions/UnFeaturePost/$post.id', this, '$base/home/Posts', 'removed from global hot-list')"  class="more">[remove from global hot-list]</a>
+					#else
+						<a href="#" onclick="return togglePostFlag('$base/actions/FeaturePost/$post.id', this, '$base/home/Posts', 'added to global hot-list')"  class="more">[add to global hot-list]</a>
+					#end
+					</div>
+				#end
+			#end
+			
+
+
+			</td>
+		</tr>
+
+
+		</table> <!-- end tags and drill-in link table -->	
+
+
+		#if ($fullDisplay)
+		
+				<p style="font-size: 10px; text-align: center; margin-bottom: 0;">
+
+
+			#if(!$post.tags.isEmpty())tags: 
+				#foreach ($tag in $post.sortedTags)
+					<a href="$base/home/Posts/$tag" class="more">$tag</a>
+				#end
+			#end
+				</p>
+				
+			<br style="clear:both; height: 1px; line-height: 1px;" />
+
+    		#if($post.hasActiveWhiteboard())
+				#set($parent = $post)
+				#set($type = "post")
+    			#parse("frame/renderers/whiteboardrenderer.vm")
+    		#end
+		
+		#end
+		
+	</div>
+
+</div>
+
+#else
+	<p><b><font style="font-size: 20px;">#htmlSafe($post.subject)</font></b>
+	<br /><i>Posted by $post.poster.firstname $post.poster.lastname #postDateWithTime($post.date)</i></p>
+	<br />
+	#wiki($post.stitchedPost)
+	<br />
+	<br />
+#end	

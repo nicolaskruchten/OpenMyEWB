@@ -1,0 +1,108 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+      "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="ca.myewb.model">
+
+    <class name="UserModel" table="users">
+        <cache usage="nonstrict-read-write"/>
+
+        <id name="id" type="int" unsaved-value="0">
+            <generator class="native"/>
+        </id>
+
+        <property name="username" type="string"/>
+        <property name="passhash" type="string"/>
+        <property name="firstname" type="string"/>
+        <property name="lastname" type="string"/>
+        <property name="email" type="string"/>
+        <property name="language" type="string"/>
+ 
+        	<property name="address1" type="string"/>
+        	<property name="suite" type="string"/>
+        	<property name="address2" type="string"/>
+        	<property name="city" type="string"/>
+        	<property name="province" type="string"/>
+        	<property name="postalcode" type="string"/>
+        	<property name="country" type="string"/>
+
+        <property name="phone" type="string"/>
+        <property name="businessno" type="string"/>
+        <property name="cellno" type="string"/>
+        <property name="alternateno" type="string"/>
+        <property name="gender" type="char"/>
+        <property name="birth" type="int"/>
+        <property name="student" type="char"/>
+        <property name="canadianinfo" type="char"/>
+        <property name="expiry" type="date"/>
+        <property name="currentLogin" type="timestamp"/>
+        <property name="lastLogin" type="timestamp"/>
+        <property name="logins" type="int"/>
+        <property name="adminToggle" type="boolean"/>
+        <property name="showreplies" type="boolean"/>
+        <property name="showemails" type="boolean"/>
+        <property name="sortByLastReply" type="boolean"/>
+        <property name="repliesAsEmails" type="boolean"/>
+        
+        <property name="studentnumber" type="string"/>
+		<property name="studentinstitution" type="string"/>
+		<property name="studentfield" type="string"/>
+		<property name="studentlevel" type="int"/>
+		<property name="studentgradmonth" type="int"/>
+		<property name="studentgradyear" type="int"/>
+		
+		<property name="proemployer" type="string"/>
+		<property name="prosector" type="string"/>
+		<property name="proposition" type="string"/>
+		<property name="procompsize" type="int"/>
+		<property name="proincomelevel" type="int"/>
+		
+		<property name="upgradeLevel" type="char"/>
+		
+		<property name="additionalInfo" type="text"/>
+        <property name="addressUpdated" type="date"/>
+        
+        <bag name="roles" inverse="true" cascade="all">
+        	<key column="userid"/>
+        	<one-to-many class="RoleModel"/>
+        </bag>
+        
+        <set name="emails" table="useremails">
+                <cache usage="nonstrict-read-write"/>
+    		<key column="userid"/>
+    		<element type="string" column="email"/>
+		</set>
+
+        <bag name="posts" inverse="true" cascade="save-update">
+                <cache usage="nonstrict-read-write"/>
+        	<key column="posterid"/>
+        	<one-to-many class="PostModel"/>
+        </bag>
+        
+
+        <bag name="placements" inverse="true" cascade="save-update">
+        	<key column="userid"/>
+        	<one-to-many class="PlacementModel"/>
+        </bag>
+
+        
+        <bag name="applications" inverse="true" cascade="save-update">
+        	<key column="userid"/>
+        	<one-to-many class="ApplicationModel"/>
+        </bag>
+        
+        <set name="flaggedPosts" table="flaggedposts">
+        	<key column="userid"/>
+        	<many-to-many column="postid" class="PostModel"/>
+        </set>
+
+	        <bag name="registrations" inverse="true" cascade="save-update">  	 	 
+	                <key column="userid"/>  	 	 
+	                <one-to-many class="ConferenceRegistrationModel"/>  	 	 
+	        </bag>  	 	 
+
+
+    </class>
+
+</hibernate-mapping>

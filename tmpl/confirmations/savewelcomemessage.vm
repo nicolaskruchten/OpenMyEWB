@@ -1,0 +1,10 @@
+
+<div style="margin: 0 auto; width: 700px;">
+<h4>Welcome Message Info</h4>
+<ul style="font-size: 12px;">
+	<li><span><b>From</b>: $from</span></li>
+	<li><span><b>Subject</b>: $subject</span></li>
+</ul>
+<h4 style="margin-top: 20px;">Message Body</h4>
+#wiki($body)
+</div>

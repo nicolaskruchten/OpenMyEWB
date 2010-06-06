@@ -1,0 +1,43 @@
+
+<ul>
+
+#if ($isLeader)
+	<li><a href="$base/chapter/EditChapter/$chapter.id">update chapter info</a></li>
+		<li><a href="$base/mailing/EditWelcomeMessage/$chapter.id">update welcome e-mail</a></li>
+	<li><a href="$base/actions/csv.MemberList/$chapter.id">view member 
+spreadsheet</a></li>
+	<li><a href="$base/actions/csv.RenewalList/$chapter.id" >view 
+regular member spreadsheet</a></li>
+#end
+
+#if ($nochapter)
+	<li><a href="$base/actions/JoinChapter/$chapter.id">join chapter</a></li>
+#elseif ($thischapter)
+	<li><a href="$base/actions/LeaveChapter">leave chapter</a></li>
+#end
+	
+#if ($isAdmin)
+	<li><a href="$base/actions/DeleteChapter/$chapter.id">delete chapter</a></li>
+#end
+
+
+#if($perms.canPostToGroup($user, $chapter))
+	<li><a href="$base/home/NewPost/$chapter.shortname">post to chapter</a></li>
+#end
+
+
+#if($perms.canSendEmailToGroup($user, $chapter))
+	<li><a href="$base/mailing/SendEmail/$chapter.shortname">send email</a></li>
+#end
+
+
+#if($perms.canUpdateEventInGroup($user, $chapter))
+	<li><a href="$base/events/EditEvent/new/$chapter.shortname">add event to calendar</a></li>
+#end
+
+#if($perms.canUpdateGroupInfo($user, $chapter))
+	<li><a href="$base/chapter/Dashboard/$chapter.id">view dashboard</a></li>
+#end
+
+
+</ul>			

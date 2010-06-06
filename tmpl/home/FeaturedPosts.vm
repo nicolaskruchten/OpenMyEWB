@@ -1,0 +1,41 @@
+
+<h2>Hot Posts</h2>
+
+#if ($thetag)
+	<h3>Tag: $thetag</h3> 
+#end
+
+<p>A post is added to the hot-list once it receives a certain number of replies, is added to a certain number of users' watch-lists, or is manually marked as such by a system administrator.</p>
+
+
+#if ($posts.isEmpty())
+
+    #if($filterParam.equals("Any"))
+    <p align="center"><i>There are no posts on the hot-list yet!</i></p>
+    #else
+    <p align="center"><i>No hot-list posts match the current display settings!</i></p>
+    #end
+#else
+
+    #if ($thetag)
+    	<p>Here are the hot-list posts which 
+    		were tagged by their authors with tags containing "$thetag".</p>
+    #end
+    <br />
+    
+    	
+    #parse("frame/postpagination.vm")
+    <br />
+    #foreach($post in $posts)
+			#if($post.getParent())
+			<div class="post">
+				#parse("frame/renderers/replyrenderer.vm")
+			</div>
+			#else
+				#parse("frame/renderers/postrenderer.vm")
+			#end
+    #end
+    
+    #parse("frame/postpagination.vm")
+
+#end

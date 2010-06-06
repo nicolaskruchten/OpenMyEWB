@@ -1,0 +1,38 @@
+
+<h2>Application Session List</h2>
+
+<h4>Open Sessions</h4>
+<ul>
+#if ($open.isEmpty())
+	<li><span>none</span></li>
+	#else
+		#foreach($session in $open)
+	<li><a href="$base/volunteering/ApplicationSessionInfo/$session.id">$session.name</a> <br /><span style="font-size: 12px;">Closes on #dateWithTime($session.closeDate) - <a href="$base/volunteering/ApplicationList/name/asc/$session.id">$session.numApplicants applicants</a></span></span></li>
+	#end
+	#end
+		</ul>
+	
+	<br />
+<h4>Closed Sessions</h4>
+<ul>
+#if ($closed.isEmpty())
+	<li><span>none</span></li>
+	#else
+		#foreach($session in $closed)
+	<li><a href="$base/volunteering/ApplicationSessionInfo/$session.id">$session.name</a> <br /><span style="font-size: 12px;">Closed on #dateWithTime($session.closeDate) - <a href="$base/volunteering/ApplicationList/name/asc/$session.id">$session.numApplicants applicants</a></span></span></li>
+	#end
+	#end
+		</ul>
+	
+	<br />
+<h4>Future Sessions</h4>
+<ul>
+#if ($future.isEmpty())
+	<li><span>none</span></li>
+	#else
+		#foreach($session in $future)
+	<li><a href="$base/volunteering/ApplicationSessionInfo/$session.id">$session.name</a>  <br /><span style="font-size: 12px;">Open from #dateWithTime($session.openDate) to #dateWithTime($session.closeDate) - <a href="$base/volunteering/ApplicationList/name/asc/$session.id">$session.numApplicants applicants</a></span></li>
+	#end
+	#end
+		</ul>
+	

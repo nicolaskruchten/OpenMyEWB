@@ -1,0 +1,5 @@
+<h2>Edit a Mailing List</h2>
+
+#parse("frame/form.vm")
+
+	

@@ -1,0 +1,4 @@
+(<input type="text" name="${element.internalName}0" value="$element.showValue(0)" size="3" maxlength="3" id="formelem$element.internalName"/>)&nbsp;
+<input type="text" name="${element.internalName}1" value="$element.showValue(1)" size="3" maxlength="3"/>&nbsp;-&nbsp;
+<input type="text" name="${element.internalName}2" value="$element.showValue(2)" size="4" maxlength="4"/>&nbsp;&nbsp;
+<span style="font-size: 10px">ext <input type="text" name="${element.internalName}3" value="$element.showValue(3)" size="4"/></span>

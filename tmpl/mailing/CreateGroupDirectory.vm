@@ -1,0 +1,8 @@
+<h2>Create new subfolder in ${group.name}'s Files #if($dirPath.equals(""))/#else$dirPath#end</h2>
+	<span class="instructions">$group.postName will be able to view these files</span>
+
+<p>
+#parse("frame/form.vm")
+</p>
+
+

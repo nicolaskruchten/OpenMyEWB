@@ -1,0 +1,17 @@
+<h2>Whiteboard for $parent.getSubject()</h2>
+
+
+#if($newerWhiteboard)
+<h3>Here is what you tried to save</h3>
+
+<div align="center">
+<textarea cols="75" rows="17"  style="background-color: #DDD">$expiredWhiteboard</textarea>
+</div>
+<br />
+
+<h3>Here is what $newerWhiteboard.lastEditor.firstname $newerWhiteboard.lastEditor.lastname</a> saved #postDateWithTime($newerWhiteboard.lastEditDate)</h3>
+#end
+
+#parse("frame/form.vm")
+
+<br />

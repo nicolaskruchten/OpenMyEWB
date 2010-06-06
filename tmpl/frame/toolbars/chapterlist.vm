@@ -1,0 +1,19 @@
+
+<ul>
+
+	
+ <li><a href="$base/actions/csv.GlobalMemberList">past/present members spreadsheet</a></li> 
+ <li><a href="$base/actions/csv.RenewalList">upgrades spreadsheet</a></li> 
+	<li><a href="$base/actions/csv.ChapterContactListCsv">chapter contact list</a></li>
+	<li><a href="$base/actions/csv.ExecContactListCsv/5" 
+		onclick="return confirm('This could take up to several minutes.');">all-exec 
+contact list</a></li>
+	<li><a href="$base/actions/csv.ExecContactListCsv/12" 
+		onclick="return confirm('This could take up to several minutes.');">presidents 
+contact list</a></li>
+
+#if($user.isAdmin())
+
+ <li><a href="$base/chapter/ChapterAdmin">add a chapter</a></li> 
+#end
+</ul>			

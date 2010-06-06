@@ -1,0 +1,12 @@
+
+<ul>
+	#if(!$currentPage.equals("listView"))
+		<li><a href="$base/events/ListView/$!filter">View All Events</a></li>		
+	#elseif(!$currentPage.equals("listUpcoming"))
+		<li><a href="$base/events/ListUpcoming/$!filter">View Upcoming Events</a></li>
+	#end
+	#if($user.isMember("Users"))
+		<li><a href="$base/events/EditEvent/">Add Event</a></li>
+	#end
+    <li><a href="$base/events/MonthView/">&laquo; back to calendar</a></li>
+</ul>

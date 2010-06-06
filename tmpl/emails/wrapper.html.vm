@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title>$subject</title>
+</head>
+<body bgcolor="#FFFFFF" text="#000000" style="background: #FFFFFF; font-family: Verdana; line-height: 1.4; word-spacing: 0.1em; font-size: 14px;">
+
+<style>
+p
+{
+font-family: Verdana;
+font-size: 14px;
+line-height: 1.4;
+word-spacing: 0.1em;
+}
+</style>
+
+<div style="width: 700px;">
+<img src="http://${helpers.domain}${helpers.appPrefix}/images/emaillogo.jpg" style="float: right; margin-bottom: 10px; margin-left: 10px;" height="103" width="200"/> 
+
+
+$content
+
+
+<br />
+<hr /> 
+This message was sent to you through <a href="http://${helpers.domain}${helpers.appPrefix}/">$helpers.longName</a>. <br /> 
+#if($showUnsubscribe)Unsubscribe from this list at <a href="http://${helpers.domain}${helpers.appPrefix}/mailing/Unsubscription" target="_blank">http://${helpers.domain}${helpers.appPrefix}/mailing/Unsubscription</a> <br /> #end
+
+<br /> 
+</div>
+</body>
+</html>

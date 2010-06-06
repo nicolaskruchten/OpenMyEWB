@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+      "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="ca.myewb.model">
+
+    <class name="PlacementModel" table="placements">
+
+        <id name="id" type="int" unsaved-value="0">
+            <generator class="native"/>
+        </id>
+
+        <property name="name" type="string"/>
+        <property name="active" type="boolean"/>
+        <property name="deleted" type="boolean"/>
+        <property name="startdate" type="string"/>
+        <property name="enddate" type="string"/>
+        <property name="country" type="string"/>
+        <property name="town" type="string"/>
+        <property name="accountingid" type="string"/>
+        <property name="description" type="text"/>
+        <property name="longterm" type="boolean"/>
+		
+      	<many-to-one name="ov" column="userid" class="UserModel" />
+
+
+        
+    </class>
+
+</hibernate-mapping>

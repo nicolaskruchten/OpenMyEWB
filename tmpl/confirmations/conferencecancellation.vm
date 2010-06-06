@@ -1,0 +1,5 @@
+
+<p>If you cancel your registration, your credit card shall be refunded <b>#dollars($reg.refundableAmount)</b>, as per
+our policy below.</p>
+
+#parse("frame/refundpolicy.vm")

@@ -1,0 +1,135 @@
+#if($filter.equals("nofilter") && $isGuest)
+
+<h2>Choose Calendar (or Sign in!)</h2>
+
+<br />
+	<div align="center" style="border: 2px solid black; margin: 20px auto; padding: 10px; width: 500px;">Please choose a chapter's events calendar to look at, or <a href="$base/home/SignIn">sign in</a> to see events from your chapter!
+
+		<select onchange="window.location='$base/events/MonthView/' + this.value +'/$year/$month';" style="font-size: 18px; height: 26px; margin: 15px 0;">
+			<option value="nofilter">Choose...</option>
+			#foreach($c in $chapters)
+				<option value="$c.shortname" #if($filter.equals($c.shortname)) selected #end>$c.name Calendar</option>
+			#end
+		</select>
+
+
+	</div>
+
+#else
+<h2>Events in $monthName $year</h2>
+
+	<div align="center">
+
+		#if($filter.equals("nofilter"))
+			#if($user.isAdmin())
+			<p>For Admins, "My Calendar" lists all National Rep-level events (e.g. webtrains).</p>
+			#elseif(!$user.getChapter())
+			<p>"My Calendar" lists all the events associated with your chapter, any mailing lists you are on. Note: You aren't currently a member of a chapter so this page may not list many events. You can <a href="$base/chapter/ListChapters">join a chapter</a> or choose a chapter's calendar below to view more events.</p>
+			#else
+			<p>"My Calendar" lists all the events associated with your chapter and any mailing lists you are on.</p>
+				#if($user.chapter)
+			<p align="center"><a href="$base/api/calendar/${user.chapter.shortname}.ics" class="nodeco"><img src="$base/images/ical.gif" border="0" /> iCalendar feed for your chapter's calendar</a></p>
+				#end
+			#end
+		#else
+
+		<p align="center"><a href="$base/api/calendar/${filter}.ics" class="nodeco"><img src="$base/images/ical.gif" border="0" /> iCalendar feed for $filter chapter calendar</a></p>
+
+		#end
+
+		<select onchange="window.location='$base/events/MonthView/' + this.value +'/$year/$month';" style="font-size: 18px; height: 26px; margin: 15px 0;">
+			#if(!$isGuest) <option value="nofilter" #if($filter.equals("nofilter")) selected #end>My Calendar</option> #end
+			#foreach($c in $chapters)
+				<option value="$c.shortname" #if($filter.equals($c.shortname)) selected #end>$c.name Calendar</option>
+			#end
+		</select>
+	</div>
+
+	#if($month == 12)
+		#set($nextMonth= 1)
+		#set($nextYear= $year + 1)
+	#else
+		#set($nextMonth= $month + 1)
+		#set($nextYear= $year)
+	#end
+
+	#if($month == 1)
+		#set($prevMonth= 12)
+		#set($prevYear= $year - 1)
+	#else
+		#set($prevMonth= $month - 1)
+		#set($prevYear= $year)
+	#end
+
+	<p style="float: left;"><a href="$base/events/MonthView/$filter/$prevYear/$prevMonth" class="more">&laquo; previous month</a></p>
+	
+	<p style="float: right;"><a href="$base/events/MonthView/$filter/$nextYear/$nextMonth" class="more">next month &raquo;</a></p>
+
+	<p align="center"><a href="$base/events/MonthView/$filter" class="more">[ jump to current month ]</a></p>
+	
+
+		#set($day=1)
+		<table style="border-collapse: collapse;border: 1px solid black; margin: 0 auto;">
+		<tr>
+			<th align="center" style="border: 1px solid black; width: 120px; background: #DDD;">Sun</th>
+			<th align="center" style="border: 1px solid black; width: 120px;">Mon</th>
+			<th align="center" style="border: 1px solid black; width: 120px;">Tue</th>
+			<th align="center" style="border: 1px solid black; width: 120px;">Wed</th>
+			<th align="center" style="border: 1px solid black; width: 120px;">Thu</th>
+			<th align="center" style="border: 1px solid black; width: 120px;">Fri</th>
+			<th align="center" style="border: 1px solid black; width: 120px; background: #DDD;">Sat</th>
+		</tr>
+		#foreach($week in $datelist)
+			<tr>
+			#foreach($date in $week)
+				$cal.setTime($date)
+				#set($curr_day = $cal.get(5))
+				#set($curr_month = $cal.get(2) + 1)
+				#set($curr_year = $cal.get(1))
+				
+				<td style="border: 1px solid black; height: 120px; 
+				#if(($curr_day == $today) && ($curr_month == $month)) border-width: 3px; #end
+				#if($velocityCount==0 || $velocityCount==6) background: #DDD; 
+				#end padding:0; margin:0; text-align:left;" valign="top" >
+					<div style="
+					#if( $curr_month == ($month) )border-right: 1px solid grey; border-bottom: 1px solid grey; #end 
+					width: 23px; margin-bottom: 10px;text-align: center;
+						"><a href="$base/events/EditEvent/new/$filter/${curr_year}-${curr_month}-${curr_day}" class="nodeco" 
+						#if( $curr_month != ($month) ) style="color: #BBB;" #end>$date.getDate()</a></div>
+					<!-- key exists: $calendar.containsKey($date) -->
+					#if($calendar.containsKey($date))
+    					#foreach($event in $calendar.get($date))
+        					#if($velocityCount < 5)
+        						<a href="$base/events/EventInfo/$event.id" class="more" style="text-decoration :none; line-height: 12px;  display:block; height: 12px; overflow: hidden; padding: 1px 3px;font-family: 'Lucida Console', Monaco, monospace !important; 
+									$cal.setTime($date)
+            						
+        						" title="#htmlSafe($event.name)">
+        						
+        						#if($event.name.length() < 19)
+        						$event.name.replaceAll(" ", "&nbsp;")
+        						#else
+        						$event.name.substring(0,18).replaceAll(" ", "&nbsp;")&hellip;
+        						#end
+        						</a>
+        					#end
+        				#end
+        
+        				#if($calendar.get($date).size() > 5)				
+        				<a href="$base/events/DayView/$filter/$curr_year/$curr_month/$curr_day" class="more" style="text-decoration :none; line-height: 12px; float: right; display:block; height: 12px; overflow: hidden; padding: 1px 3px;font-family: 'Lucida Console', Monaco, monospace !important;">
+        					#set($number = $calendar.get($date).size() - 5)
+        					$number more &raquo;
+        				</a>
+						#end
+					#end
+				</td>
+			#end
+			</tr>
+		#end
+		</table>
+
+			<p style="float: left;"><a href="$base/events/MonthView/$filter/$year/$prevMonth" class="more">&laquo; previous month</a></p>
+	
+	<p style="float: right;"><a href="$base/events/MonthView/$filter/$year/$nextMonth" class="more">next month &raquo;</a></p>
+
+	<p align="center"><a href="$base/events/MonthView/$filter" class="more">[ jump to current month ]</a></p>
+#end

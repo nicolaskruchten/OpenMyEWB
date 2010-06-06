@@ -1,0 +1,7 @@
+
+		
+	<form name="searchForm" action="${base}/home/Search/" method="post" enctype="multipart/form-data">
+		<input type="text" name="Body" size="12"/>
+		<input name="searchButton" type="submit" value="go!" class="button" onClick="this.disabled=true;this.style.color='#AAA';this.form.submit()"/>
+	</form>
+	

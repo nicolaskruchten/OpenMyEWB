@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+      "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="ca.myewb.model">
+
+    <class name="OVInfoModel" table="ovinfo">
+
+        <id name="id" type="int" unsaved-value="0">
+            <generator class="native"/>
+        </id>
+
+        <property name="userid" type="int"/>
+        
+        <property name="healthnumber" type="string"/>
+        <property name="sin" type="string"/>
+        <property name="dob" type="timestamp"/>
+        
+        <property name="passportnumber" type="string"/>
+        <property name="passportname" type="string"/>
+        <property name="passportplace" type="string"/>
+        <property name="passportstart" type="timestamp"/>
+        <property name="passportend" type="timestamp"/>
+       
+        <property name="e1name" type="string"/>
+        <property name="e1relation" type="string"/>
+        <property name="e1address" type="string"/>
+        <property name="e1business" type="string"/>
+        <property name="e1home" type="string"/>
+        <property name="e1fax" type="string"/>
+        <property name="e1email" type="string"/>
+        <property name="e1language" type="string"/>
+        <property name="e1updates" type="boolean"/>
+       
+        <property name="e2name" type="string"/>
+        <property name="e2relation" type="string"/>
+        <property name="e2address" type="string"/>
+        <property name="e2business" type="string"/>
+        <property name="e2home" type="string"/>
+        <property name="e2fax" type="string"/>
+        <property name="e2email" type="string"/>
+        <property name="e2language" type="string"/>
+        <property name="e2updates" type="boolean"/>
+		
+    </class>
+
+</hibernate-mapping>

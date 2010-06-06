@@ -1,0 +1,7 @@
+<h2>Add Members</h2>
+
+Enter a list of email addresses, one per line, of people you would like to 
+add to your mailing list.
+<br /><br />
+#parse("frame/form.vm")
+

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+      "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="ca.myewb.model">
+
+    <class name="EvaluationModel" table="evaluations">
+
+        <id name="id" type="int" unsaved-value="0">
+            <generator class="native"/>
+        </id>
+        
+        <property name="notes" type="text"/>
+        <property name="rejectionSent" type="boolean"/>
+        
+        <set name="evalResponses" inverse="true" cascade="save-update">
+        	<key column="evalid"/>
+        	<one-to-many class="EvaluationResponseModel"/>
+        </set>
+    	
+    	<many-to-one name="app" class="ApplicationModel" column="appid" unique="true"/>
+    	
+    </class>
+    
+
+</hibernate-mapping>

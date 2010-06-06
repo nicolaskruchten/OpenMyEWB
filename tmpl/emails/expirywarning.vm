@@ -1,0 +1,16 @@
+[$helpers.enShortName] Regular Membership Expiry Reminder: $numdays
+
+
+Dear $name,
+
+We hope that you are enjoying your involvement with $helpers.longName. Your support and involvement are helping to ensure $helpers.longName's continued success. 
+
+We are sending this e-mail for two reasons: first, because your status as a regular member of $helpers.longName is coming up for renewal in just $numdays, on $expiry, and second, because around the time when you are renewing your regular membership in $helpers.longName, we invite you to send us your feedback about how we are doing! 
+
+On the first point, instructions regarding renewing your regular membership can be found at $helpers.longName (http://${helpers.domain}${helpers.appPrefix}/profile/PayDues). As you may recall, regular membership in $helpers.longName means that FILL THIS IN
+
+We would like very much to hear from you, so please send your feedback to $helpers.systemEmail. 
+
+We look forward to your involvement in $helpers.longName during the upcoming year!
+
+NOTE: this reminder is automatically sent 14 days, 7 days and finally, 1 day before your regular membership expires.

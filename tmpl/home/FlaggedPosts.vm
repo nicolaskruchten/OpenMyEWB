@@ -1,0 +1,71 @@
+
+<h2>My Watch-list</h2>
+
+#if ($thetag)
+	<h3>Tag: $thetag</h3> 
+#end
+
+<p>This is your watch-list, which is a list of posts you want to keep track of, to find again later for reference or to better follow a discussion.
+When you view any post, you can click on the link provided that says "add this post to my watch-list" to do just that.</p>
+
+
+<h3 align="center"><span style="color:red;">NEW!</span>  &nbsp;&nbsp;
+		#if ($user.repliesAsEmails)
+			<input type="checkbox" id="repliesAsEmails" checked="checked"/>
+		#else
+			<input type="checkbox" id="repliesAsEmails"/>
+		#end
+		<label for="repliesAsEmails">email me replies to posts on my watch-list </label>
+</h3>
+
+<script type="text/javascript">
+
+
+	$('#repliesAsEmails').change(function()
+		{
+			if ($('#repliesAsEmails').attr('checked'))
+			{
+				jQuery.get("${base}/actions/users.SetRepliesAsEmails/on");
+			}
+			else
+			{
+				jQuery.get("${base}/actions/users.SetRepliesAsEmails/off");
+			}
+			
+		}
+	);
+
+</script>
+
+
+#if ($posts.isEmpty())
+
+    #if($filterParam.equals("Any"))
+    <p align="center"><i>You have not added any posts to your watch-list!</i></p>
+    #else
+    <p align="center"><i>No posts on your watch-list match the current display settings!</i></p>
+    #end
+#else
+
+    #if ($thetag)
+    	<p>Here are the posts on your watch-list which 
+    		were tagged by their authors with tags containing "$thetag".</p>
+    #end
+    <br />
+    
+    	
+    #parse("frame/postpagination.vm")
+    <br />
+    #foreach($post in $posts)
+			#if($post.getParent())
+			<div class="post">
+				#parse("frame/renderers/replyrenderer.vm")
+			</div>
+			#else
+				#parse("frame/renderers/postrenderer.vm")
+			#end
+    #end
+    
+    #parse("frame/postpagination.vm")
+
+#end

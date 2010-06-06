@@ -1,0 +1,23 @@
+#if($element.twoCols)
+	&nbsp;</td>
+</tr>
+<tr>
+	<td align="right" colspan="2" style="padding: 0px;">
+#end
+	<textarea name="$element.internalName" cols="$element.cols" rows="$element.rows" id="formelem$element.internalName">$element.value</textarea>
+#if($element.twoCols)
+	</td>
+</tr>
+<tr>
+	<td align="right" valign="top" width="200">&nbsp;</td>
+	<td align="left" width="350" style="padding-top: 0px;">
+#end
+
+
+
+
+#if($element.instructionTemplate.equals("formatting"))
+<div class="instructions" style="margin-bottom: 3px; width: 400px;">
+Formatting allowed: <a href="$base/ajax/help?fragment=formatting&height=450&width=850" class="thickbox">popup formatting guide &raquo;</a>
+</div>
+#end

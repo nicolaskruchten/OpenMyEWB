@@ -1,0 +1,70 @@
+
+#if ($formmessage)
+	#set ($message = $formmessage)
+	#parse("frame/message.vm")
+#end
+
+<form action="$form.getTarget()" method="post" enctype="multipart/form-data" style="width: 600px; margin: 0 auto;" name="app_form">
+	<input type="hidden" name="action" value="save"/>
+	<table border="0" class="cellpadding5" style=" margin: 0 auto;">
+		#set ($numReq = 0)
+		#set ($numNotReq = 0)
+		#foreach ($element in $form.getElements())
+		
+			#if ($element.isRequired() == true)
+				#set ($req = "required")
+                #if(!$element.type.equals("hidden") && !$element.type.equals("header"))
+					#set ($numReq = $numReq + 1)
+				#end
+			#else
+				#set ($req = "")
+				 #if(!$element.type.equals("hidden") && !$element.type.equals("header"))
+					#set ($numNotReq = $numNotReq + 1)
+				#end
+			#end
+			
+			#if ($element.getHighlight() == true)
+				#set ($highlight = "highlight")
+			#else
+				#set ($highlight = "")
+			#end
+		
+			#if($element.type.equals("hidden") || $element.type.equals("header"))
+				#parse($element.template)
+			#else
+				<tr>
+					<td valign="top"  #if($element.twoColQuestion) colspan="2"  align="left" #else  align="right" #end style="padding-right: 0;">
+						<label for="formelem$element.internalName" class="fieldname $req $highlight">$element.getName()#if(!$element.name.contains("?")):#end</label>
+						<br />
+						<span class="formerror">$element.getError()</span>
+						#if(!$element.twoColQuestion)
+					</td>
+					<td align="left" >
+					#end
+					#parse($element.template)
+					
+					
+					#if(!$element.instructions.equals(""))
+					<div class="instructions" style="margin-bottom: 3px; width: 400px;">$element.instructions</div>
+					#end
+					</td>
+				</tr>
+			#end
+		#end
+		
+		#if (($numReq > 0) && ($numNotReq > 0)) <!-- not shown when none are required or when all are required -->
+		<tr>
+			<td colspan="2" align="center">
+				<span style="font-size: 10px;"><span class="required">Bold fields</span> are required</span><br />
+			</td>
+		</tr>
+		#end
+		
+		<tr>
+			<td colspan="2" align="center">
+				<input type="submit" value="$form.getSubmitText()" class="button" 
+onclick="this.disabled=true; this.style.color='#AAA'; this.form.submit();"/>
+			</td>
+		</tr>
+	</table>
+</form>

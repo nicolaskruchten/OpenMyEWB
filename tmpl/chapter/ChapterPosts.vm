@@ -1,0 +1,40 @@
+#if ($posts.isEmpty())
+
+<h2>No visible posts...</h2>
+#if ($thetag)
+	<h3>Tag: $thetag</h3> 
+#end
+
+<p>No posts could be found that you can currently see in your chapter discussion board matching 
+	the current display settings.</p>
+	
+	<p align="center"><a href="$base/home/NewPost/$user.chapter.shortname">click here to post to your chapter discussion board &raquo;</a>
+
+#else
+	
+		<h2>Chapter Discussion Board</h2>
+    	#if ($thetag)
+    		<h3>Tag: $thetag</h3> 
+    		<p>The following posts in your chapter
+				were tagged by their authors or repliers with  with tags containing "$thetag".</p>
+		#end
+			<p align="center"><a href="$base/home/NewPost/$user.chapter.shortname">click here to post to your chapter discussion board &raquo;</a>
+
+		<br />
+	
+
+		#parse("frame/postpagination.vm")
+		<br />
+
+		#foreach($post in $posts)
+			#if($post.getParent())
+			<div class="post">
+				#parse("frame/renderers/replyrenderer.vm")
+			</div>
+			#else
+				#parse("frame/renderers/postrenderer.vm")
+			#end
+		#end		
+		#parse("frame/postpagination.vm")
+		
+#end

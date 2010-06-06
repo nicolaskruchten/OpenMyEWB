@@ -1,0 +1,24 @@
+<select name="$element.internalName" id="formelem$element.internalName">
+	#set($openOptGroup = false)
+	<option value="">Choose...</option>
+	
+	#foreach ($option in $element.options)
+		#if($option.size() == 1)
+			#if($openOptGroup)
+				</optgroup>
+			#end
+			<optgroup label="&nbsp;&nbsp;&nbsp;&nbsp;$option.get(0)">
+			#set($openOptGroup = true)
+		#else
+			<option value="$option.get(0)" #if($option.get(0).equals($element.value))selected="selected"#end>
+					$option.get(1)
+			</option>
+		#end
+	#end
+	
+	#if($openOptGroup)
+		</optgroup>
+	#end
+</select>
+
+

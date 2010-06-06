@@ -1,0 +1,5 @@
+
+<ul>
+<li><a href="$base/events/EditEvent/$event.id">edit event info</a></li>
+<li><a href="$base/actions/DeleteEvent/$event.id">delete event</a></li>
+</ul>

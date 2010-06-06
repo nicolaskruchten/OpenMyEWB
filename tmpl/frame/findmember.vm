@@ -1,0 +1,57 @@
+
+#if ($searchmode.equals("yes"))
+
+<h3>Results preview</h3>
+#if (!$tempresults.isEmpty())
+
+		<p>Click on the member whose info you want to see, or try another search if the member you're looking for isn't listed</p>
+		
+		<ul>
+			#foreach ($targetUser in $tempresults)
+				<li><span><a href="$target/$targetUser.id">
+				
+				#if(!$targetUser.lastname.equals(""))
+					$targetUser.lastname, $targetUser.firstname
+				#end
+				
+				#if($targetUser.email)
+					($targetUser.email)
+				#else
+					(deleted)
+				#end
+
+				#if($user.isAdmin() && $targetUser.chapter)
+					#if($targetUser.isMember("Exec", false))
+						[$targetUser.execTitle, $targetUser.chapter.shortname]
+					#else
+						[$targetUser.chapter.shortname]
+					#end
+				#end
+				
+				</a></span></li> 
+			#end
+		</ul>
+	
+	
+#else
+
+#if($tooMany)
+<p>Too many members you have access to matched your query (more than 100). Please refine your query.</p>
+#else
+<p>No members you have access to matched your query.</p>
+#end
+#end
+#end
+
+
+
+<h3>Search Form</h3>
+
+<ul>
+<li style="font-size: 10px;">	<span>All fields are optional.</span></li>
+	<li style="font-size: 10px;"><span>Specifying more than one field will narrow results.</span></li>
+	<li style="font-size: 10px;"><span>"Nic" and "nic" will both match "Nicolas" and "Veronica".</span></li>
+	</ul>
+	<br/>
+
+#parse("frame/form.vm")

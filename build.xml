@@ -1,0 +1,156 @@
+<?xml version="1.0"?>
+
+<project name="myewb" basedir="./WEB-INF">
+
+	<description>
+		Build file to install, deploy, and test the myEWB system
+	</description>
+	
+	<property environment="env" />
+
+	<path id="all.path">
+
+		<pathelement path="classes"/>
+		<fileset dir="${env.TOMCAT_HOME}/common/lib">
+			<include name="**/*.jar"/>
+		</fileset>
+
+		<fileset dir="lib">
+			<include name="**/*.jar"/>
+		</fileset>
+	</path>
+	
+	<!-- "helper" targets -->
+	
+	<target name="staticfiles" description="Build static files">
+		<delete dir="../style"/>
+		<mkdir dir="../style"/>
+
+		<java classname="ca.myewb.build.BuildStaticFiles" fork="yes" dir="../">
+			<classpath refid="all.path"/>
+		</java>
+	</target>
+
+	<target name="clean" description="nuke/remake classes dir">
+		<delete dir="classes"/>
+		<mkdir dir="classes"/>
+	</target>
+	
+	<target name="make" description="copy stuff to classes dir, compile">
+		<copy todir="classes">
+		<fileset dir="src">
+		  <exclude name="**/*.java"/>
+		</fileset>
+	  </copy>
+		<!-- debug must be on for line info to be logged by log4j -->
+		<javac srcdir="src" destdir="classes" source="1.5" target="1.5" debug="on"> 
+			<classpath refid="all.path" />
+		</javac>
+	</target>
+	
+	
+	<!-- ~~~TARGETS START HERE~~~ -->
+	<target name="testDB" description="Build a clean database for testing">
+		<java classname="ca.myewb.build.CreateDb" fork="yes" dir="../">
+			<arg value="test"/>
+			<arg value="new"/>
+			<classpath refid="all.path"/>
+		</java>
+	</target>
+
+	<!-- for this to work, junit.jar must be in Ant's classpath -->
+	<target name="test" description="Run the test suite">
+		<junit printsummary="yes">
+			<classpath refid="all.path"/>
+			
+			<test name="ca.myewb.tests.SystemTestSuite" haltonfailure="no">
+				<formatter type="brief" usefile="false"/>
+			</test>
+		</junit>
+	</target>
+
+	<!-- for this to work, junit.jar must be in Ant's classpath -->
+	<target name="invariants" description="Run the invariants test suite on the deploy db">
+		<junit printsummary="yes">
+			<classpath refid="all.path"/>
+			
+			<test name="ca.myewb.dbinvariants.InvariantTests" haltonfailure="no">
+				<formatter type="brief" usefile="false"/>
+			</test>
+		</junit>
+	</target>
+	
+	<target name="devDB" description="Build a partly populated database for development">
+		<java classname="ca.myewb.build.CreateDb" fork="yes" dir="../">
+			<classpath refid="all.path"/>
+			<arg value="dev"/>
+			<arg value="new"/>
+		</java>
+	</target>
+	
+	<target name="devPerms" description="Update controllers / permissions only for dev db">
+		<java classname="ca.myewb.build.CreateDb" fork="yes" dir="../">
+			<classpath refid="all.path"/>
+			<arg value="dev"/>
+			<arg value="perms"/>
+		</java>
+	</target>
+	
+<!-- commented out for safety
+	<target name="deployDB" description="Build a clean database for deployment">
+		<java classname="ca.myewb.build.CreateDb" fork="yes" dir="../">
+			<classpath refid="all.path"/>
+			<arg value="deploy"/>
+			<arg value="new"/>
+		</java>
+	</target>
+-->
+	<target name="deployPerms" description="Update controllers / permissions only for deploy db">
+		<java classname="ca.myewb.build.CreateDb" fork="yes" dir="../">
+			<classpath refid="all.path"/>
+			<arg value="deploy"/>
+			<arg value="perms"/>
+		</java>
+	</target>
+	
+	<target name="devPopulate" description="Populate the database for development" depends="devDB">
+		<java classname="ca.myewb.build.DevDBSetup" fork="yes" dir="../">
+			<classpath refid="all.path"/>
+		</java>
+	</target>
+	
+	<target name="dailyCron" description="run daily cron job">
+		<java classname="ca.myewb.frame.Cron" fork="yes" dir="../">
+			<classpath refid="all.path"/>
+			<arg value="deploy"/>
+			<arg value="daily"/>
+		</java>
+	</target>
+
+	<target name="dailyCronSafe" description="run daily cron job in safe mode">
+		<java classname="ca.myewb.frame.Cron" fork="yes" dir="../">
+			<classpath refid="all.path"/>
+			<arg value="deploy"/>
+			<arg value="daily"/>
+			<arg value="-safe"/>
+		</java>
+	</target>
+
+	<target name="applicationCron" description="send application session closing emails">
+		<java classname="ca.myewb.frame.Cron" fork="yes" dir="../">
+			<classpath refid="all.path"/>
+			<arg value="deploy"/>
+			<arg value="halfhourly"/>
+		</java>
+	</target>
+	
+	<target name="applicationCronSafe" description="send application session closing emails">
+		<java classname="ca.myewb.frame.Cron" fork="yes" dir="../">
+			<classpath refid="all.path"/>
+			<arg value="deploy"/>
+			<arg value="halfhourly"/>
+			<arg value="-safe"/>
+		</java>
+	</target>
+	
+</project>

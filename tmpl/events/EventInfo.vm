@@ -1,0 +1,3 @@
+#set($fullDisplay = true)
+
+#parse("frame/renderers/eventrenderer.vm")

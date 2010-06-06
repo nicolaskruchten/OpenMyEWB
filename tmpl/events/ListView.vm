@@ -1,0 +1,51 @@
+#if ($events.isEmpty())
+ 
+    <h2>No visible events...</h2>
+    
+	#if ($thetag)
+    	<h3>Tag: $thetag</h3> 
+    #end
+	
+    <p>No events could be found that you can currently see matching 
+    	the current display settings.</p>
+    
+    #if($isGuest) 
+    	<p align="center"><i>You are not signed in right now, but you might be able to see more if you were!</i></p>
+    #end	
+
+#else
+
+    <h2>Events</h2>
+	
+	#if ($thetag)
+		<h3>Tag: $thetag</h3> 
+		<p>The following events were tagged by their editors with 
+			tags containing "$thetag".</p>
+			
+
+        <form onSubmit="window.location = '$base/events/ListView/' + $('#formelemKeywords').val().replace(',',''); return false;">
+        <p align="center"><span class="fieldname required">Tag search:</span>		
+        <input type="text" id="formelemKeywords" style="width: 100px;"  onFocus="this.value='';" value="$thetag" />
+        <input name="searchButton" type="submit" value="go!" class="button" />
+        <br /><span class="instructions">does partial matches, so "book" will match "book" and "books"</span>
+         </p> </form>
+
+
+        #if($isGuest) 
+        	<p align="center"><i>You are not signed in right now, but you might be able to see more if you were!</i></p>
+        #end	
+	#end
+    
+    #parse("frame/postpagination.vm")
+    
+    <br />
+    
+    #foreach($event in $events)
+		#parse("frame/renderers/eventrenderer.vm")
+    #end
+    
+    <br/>
+    
+    #parse("frame/postpagination.vm")
+
+#end

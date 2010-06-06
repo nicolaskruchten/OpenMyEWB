@@ -1,0 +1,40 @@
+ 
+
+<h2>Chapters</h2>
+
+
+<table class="cellpadding8" style="border-collapse: collapse; width: 700px; margin: 0 auto;">
+
+	#foreach ($chapter in $chapters)
+		<tr>
+		<td style="border: 1px solid #EEE; border-right: #FFF;"><p><a href="$base/chapter/ChapterInfo/$chapter.shortname" class="nodeco nohover">	<b>$chapter.name</b>
+		#if (!$chapter.city.equals(""))
+
+
+		<br />$chapter.city, $chapter.province
+		#end
+		</a>
+			<br /><a href="$base/chapter/ChapterInfo/$chapter.shortname" class="more">more info &raquo;</a></p>
+		</td>
+		<td valign="middle" align="center" style="border: 1px solid #EEE; border-left: #FFF; width: 250px;">
+		#if (! $isguest)
+			#if ($nochapter)
+			<form action="$base/actions/JoinChapter/$chapter.shortname" method="post">
+				<input type="submit" value="join this chapter" class="button" onClick="this.disabled=true; this.style.color='#AAA'; this.form.submit();"/>
+			</form>			
+			#end
+		#else
+					<form action="${base}/actions/ModifyListMembership/$chapter.shortname" method="post" enctype="multipart/form-data">
+					<div style="font-size: 10px; margin-bottom: 3px;">Subscribe to chapter mailing list:</div>
+					<input type="text" name="Emails" onFocus="this.value='';" onBlur="if(this.value=='')this.value='(your email address)'" value="(your email address)"/>
+					<input type="hidden" name="ActionType" value="add"/>
+					<input type="submit" class="button" value="subscribe" onClick="this.disabled=true; this.style.color='#AAA'; this.form.submit();"/>
+				</form>
+		#end
+		</td>
+		
+		</tr>
+	#end
+
+
+</table>

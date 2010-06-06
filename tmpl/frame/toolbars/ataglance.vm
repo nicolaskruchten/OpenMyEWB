@@ -1,0 +1,48 @@
+#if(!$renderAtaglance)
+
+<div id="ataglancesidebar">
+
+		<div align="center" style="font-size: 11px;"> <br /> 
+		<img src="$base/images/indicator.white.gif" /> <br />  <br /> Loading...
+		</div>
+		<script> 
+$('#ataglancesidebar').load('$base/ajax/ataglancesidebar');
+</script>
+
+</div>
+
+#else
+<ul>
+	 <li><span style="font-size: 12px; text-decoration: none;">Since you last signed in<br />#postDateWithTime($user.lastLogin):</span></li>
+
+	#if ($toolbar.newPosts == 0)
+		#set ($text = "no new posts")
+	#elseif ($toolbar.newPosts == 1)
+		#set ($text = "1 new post")
+	#else
+		#set ($text = "$toolbar.newPosts new posts")
+	#end
+	 <li><a href="${base}/home/NewPosts" style="font-size: 11px; text-decoration: none;">$text</a></li>
+	
+	#if ($toolbar.newReplies == 0)
+		#set ($text = "no new replies")
+	#elseif ($toolbar.newReplies == 1)
+		#set ($text = "1 new reply")
+	#else
+		#set ($text = "$toolbar.newReplies new replies")
+	#end
+	 <li><a href="${base}/home/NewPosts"  style="font-size: 11px; text-decoration: none;">$text</a></li>
+	
+	#if ($toolbar.newEdits == 0)
+		#set ($text = "no whiteboards edited")
+	#elseif ($toolbar.newEdits == 1)
+		#set ($text = "1 whiteboard edited")
+	#else
+		#set ($text = "$toolbar.newEdits whiteboards edited")
+	#end
+	 <li><a href="${base}/home/RecentWhiteboards" style="font-size: 11px; text-decoration: none;">$text</a></li>
+	
+
+</ul>
+
+#end

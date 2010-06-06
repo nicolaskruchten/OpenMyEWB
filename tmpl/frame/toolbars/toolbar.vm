@@ -1,0 +1,6 @@
+
+<div>
+	<div class="toolbarheader">$toolbar.getTitle()</div>
+	<div class="toolbarcontent">#parse($toolbar.getTemplate())	</div>
+</div>
+<div class="toolbarbottom"> &nbsp; </div>

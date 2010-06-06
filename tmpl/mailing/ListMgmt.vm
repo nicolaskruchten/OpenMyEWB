@@ -1,0 +1,27 @@
+<h2>Mailing List Management</h2>
+
+<h3>$list.name<br /> <small>#if($list.public) (public: anyone may become a recipient) #else (private: only members added by list leaders are on this list) #end</small></h3>
+
+<p>You may use the form below to control this list by adding email addresses to the text box. </p>
+<ul>
+<li><span>Recipients receive messages</span></li>
+<li><span>Senders may send messages</span></li>
+<li><span>Leaders have access to this form like you do. </span></li>
+<li><span>You can submit addresses not already in the system (they receive an automatic welcome email).</span></li>
+<li><span>You can download a spreadsheet of people/addresses already on this list <a href="$base/actions/csv.MailingListCsv/$list.id">here</a></span></li>
+</ul>
+<br />
+
+
+<div align="center" style="padding: 10px 0;"><p style="border: 1px solid black; display: inline;">Note: please try to use this form with 50 addresses or less at one time :)</p></div>
+
+#parse("frame/form.vm")
+
+<h3>Group Statistics</h3>
+<br />
+#if($perms.canAdministerGroupMembership($user, $list))
+	<br/><img src="$base/graph/listmemberships/${list.id}.png"  class="graphborder"/><br/>
+#end
+
+
+

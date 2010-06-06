@@ -1,0 +1,11 @@
+BEGIN:VCARD
+VERSION:2.1
+FN:$u.firstname $u.lastname
+N:$u.lastname;$u.firstname
+TEL;HOME:$u.phone
+TEL;VOICE:$u.alternateno
+TEL;CELL;VOICE:$u.cellno
+TEL;WORK;VOICE:$u.businessno
+ADR;HOME:;$u.address1 $u.suite;$u.address2;$u.city;$u.province;$u.postalcode;$u.country
+EMAIL;PREF;INTERNET:$u.email
+END:VCARD

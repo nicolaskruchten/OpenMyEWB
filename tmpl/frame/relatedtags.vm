@@ -1,0 +1,11 @@
+#if ($thetag)
+    <h2>Tag: $thetag</h2>
+    
+    <p>Here is the list of posts that you can currently see which were tagged by their authors with tags containing "$thetag".</p>
+	
+	#if($isGuest) 
+		<p><i>You are not currently signed in and so you may be able to see more by signing in.</i></p>
+	#end
+
+    <br />
+#end

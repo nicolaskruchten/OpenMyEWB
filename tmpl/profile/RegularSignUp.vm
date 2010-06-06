@@ -1,0 +1,3 @@
+<h2>Sign Up and Become a Regular Member</h2>
+
+#parse ("frame/form.vm")

@@ -1,0 +1,19 @@
+<h2>Archived Mailing Lists</h2>
+
+<p>The following mailing lists have been 'archived', meaning that while you may still browse their posts/emails, you cannot join them, post to them or send email to them:</p>
+
+<table width="90%" class="cellpadding5" style="border-collapse: collapse; margin: 0 auto;">
+#foreach ($list in $lists)
+	<tr>
+		<td style="border: 1px solid #EEE; border-right: #FFF;">
+		<p><a href="$base/mailing/ListInfo/$list.id" class="nodeco nohover"><b>$list.name</b>
+		<br /><span style="font-size: 10px;">[$list.totalShortname]</span>
+		<br />$list.getDescription()</a>
+		<br /><a href="$base/mailing/ListInfo/$list.id" class="more">more info & list archives &raquo;</a>
+		</p>
+
+		</td>
+	</tr>
+	
+#end
+</table>

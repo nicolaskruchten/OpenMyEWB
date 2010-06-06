@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<chapter>
+	<name><![CDATA[$chapter.name]]></name>
+	<shortname>$chapter.shortname</shortname>
+	<address><![CDATA[$chapter.address1
+$chapter.suite
+$chapter.address2
+$chapter.city
+$chapter.province
+$chapter.postalcode
+$chapter.country]]></address>
+	<phone>$chapter.phone</phone>
+	<fax>$chapter.fax</fax>
+	
+	<executive>
+	#foreach($exec in $execs)
+		<member>
+        	<id>${exec.id}</id>
+        	<name><![CDATA[$exec.firstname $exec.lastname]]></name>
+        	<picture>http://${helpers.domain}${helpers.appPrefix}/userpictures/thumbs/${exec.id}.jpg</picture>
+        	<title><![CDATA[$exec.execTitle]]></title>
+			<info><![CDATA[#noWiki($exec.additionalInfo)]]></info>
+		</member>
+	#end
+	</executive>
+	
+	<mailinglists>
+	#foreach($list in $lists)
+		<list>
+			<id>$list.id</id>
+			<name>$list.name</name>
+			<shortname>$list.shortname</shortname>
+			<prefix>[$list.totalShortname]</prefix>
+			<description><![CDATA[#noWiki($list.description)]]></description>
+			<url>http://${helpers.domain}${helpers.appPrefix}/mailing/ListInfo/$list.id</url>
+		</list>
+	#end
+	</mailinglists>
+	
+	
+</chapter>

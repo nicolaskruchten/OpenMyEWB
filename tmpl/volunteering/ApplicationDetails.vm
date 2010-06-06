@@ -1,0 +1,34 @@
+<h2>Application Details for $session.name</h2>
+
+<form action="${base}/volunteering/ApplicationContactInfo/$session.id" method="post" enctype="multipart/form-data">
+
+
+<h3>General Information Required For the Application</h3>
+<ul>
+	<li><span>Your Firstname</span></li>
+	<li><span>Your Lastname</span></li>
+	<li><span>Your E-Mail address</span></li>
+	<li><span>Your Phone Number</span></li>
+	<li><span>Your English Language Ability (Reading, Writing and Speaking)</span></li>
+	<li><span>Your French Language Ability (Reading, Writing and Speaking)</span></li>
+	<li><span>Your Educational Background</span></li>
+	<li><span>Your Final Graduation Grade Percentage from Your Undergraduate Degree</span></li>
+	<li><span>Your Resum&eacute;</span></li>
+	<li><span>Two Professional References</span></li>
+</ul>
+#if($session.questions.size() > 0)
+<h3>Application Questions</h3>
+<ol>
+#foreach($q in $session.questions)
+	<li style="margin: 15px 0;"><span>$q.formattedQuestion</span></li>
+#end
+</ol>
+#end
+
+<p>Please print this page to have a copy of the questions for your reference while completing the 
+application.  We highly recommend that you sit and think about your answers to these questions, write your 
+answers down in a word processor first and then paste your answers into this application when you are ready 
+to do so.</p>
+
+	<center><input type="submit" class="button" value="Proceed &raquo;" onClick="this.disabled=true; this.style.color='#AAA'; this.form.submit();"/></center>
+</form>

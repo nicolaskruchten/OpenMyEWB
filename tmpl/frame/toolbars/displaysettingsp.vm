@@ -1,0 +1,57 @@
+
+<ul class="categorylist">
+
+
+#if($user.isAdmin())
+	<li><span><input type="checkbox"
+	#if($user.adminToggle)
+		onClick="window.location = '$base/actions/AdminToggle/$area/$herepage/$filterParam'" checked
+	#else
+		onClick="window.location = '$base/actions/AdminToggle/$area/$herepage/$filterParam'" 
+	#end 
+	id="adminOVision"/> 
+	<label for="adminOVision">Admin-o-vision</label></span></li>
+#elseif($user.isMember("Exec"))
+	<li><span><input type="checkbox"
+	#if($user.adminToggle)
+		onClick="window.location = '$base/actions/AdminToggle/$area/$herepage/$filterParam'" checked
+	#else
+		onClick="window.location = '$base/actions/AdminToggle/$area/$herepage/$filterParam'" 
+	#end 
+	id="adminOVision"/> 
+	<label for="adminOVision">Exec-o-vision</label></span>&nbsp;&nbsp;<a href="#" class="more" onClick="alert('If this box is checked, you will see all National Rep posts, even if you are not on those lists. If it is unchecked, you will only see posts from your own lists.');">huh?</a></li>
+#end
+
+#if($lastReplyOption.equals("yes"))
+<li style="margin-top: 5px;"><span style="font-size: 10px;">Sort order:</span></li>
+
+	#if ($modeSortByLastReply.equals("yes"))
+<li style="font-size: 11px;"><a href="#" style="font-weight: bold; text-decoration: none;">last reply date</a> | <a href="$base/actions/SetDisplayMode/$modeShowEmails/$modeShowReplies/no/$area/$herepage/$filterParam" style="text-decoration: none;">post date</a></li>
+	#else
+<li style="font-size: 11px;"><a href="$base/actions/SetDisplayMode/$modeShowEmails/$modeShowReplies/yes/$area/$herepage/$filterParam" style="text-decoration: none;">last reply date</a> | <a href="#" style="font-weight: bold; text-decoration: none;">post date</a></li>
+	#end 
+#end
+
+#if($emailOption.equals("yes"))
+	<li><span><input type="checkbox" 
+	#if ($modeShowEmails.equals("yes"))
+		onClick="window.location = '$base/actions/SetDisplayMode/no/$modeShowReplies/$modeSortByLastReply/$area/$herepage/$filterParam'" checked 
+	#else
+		onClick="window.location = '$base/actions/SetDisplayMode/yes/$modeShowReplies/$modeSortByLastReply/$area/$herepage/$filterParam'"
+	#end
+	id="showEmails"/> 
+	<label for="showEmails">Show emails</label></span></li>
+#end
+
+#if($replyOption.equals("yes"))
+	<li><span><input type="checkbox" 
+	#if ($modeShowReplies.equals("yes"))
+		onClick="window.location = '$base/actions/SetDisplayMode/$modeShowEmails/no/$modeSortByLastReply/$area/$herepage/$filterParam'" checked
+	#else
+		onClick="window.location = '$base/actions/SetDisplayMode/$modeShowEmails/yes/$modeSortByLastReply/$area/$herepage/$filterParam'"
+	#end 
+	id="showReplies"/> 
+	<label for="showReplies">Show replies</label></span></li>
+#end
+
+</ul>

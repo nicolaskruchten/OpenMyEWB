@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+      "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="ca.myewb.model">
+
+    <class name="FacultyRegistrationModel" table="facultyregs">
+
+        <id name="id" type="int" unsaved-value="0">
+            <generator class="native"/>
+        </id>
+        
+        
+	<property name="name" type="string"/>
+	<property name="affiliation" type="string"/>
+	<property name="email" type="string"/>
+	<property name="phone" type="string"/>
+	<property name="address1" type="string"/>
+	<property name="suite" type="string"/>
+	<property name="address2" type="string"/>
+	<property name="city" type="string"/>
+	<property name="province" type="string"/>
+	<property name="postalcode" type="string"/>
+	<property name="country" type="string"/>
+	<property name="specialNeeds" type="text"/>
+	<property name="headset" type="boolean"/>
+	<property name="receiptNum" type="string"/>
+	<property name="date" type="timestamp"/>
+	<property name="language" type="string"/>
+	
+	<property name="hotelWed" type="boolean"/>
+	<property name="hotelThu" type="boolean"/>
+	<property name="hotelFri" type="boolean"/>
+	<property name="hotelSat" type="boolean"/>
+	<property name="banquetTicket" type="boolean"/>
+        
+        
+
+
+    </class>
+
+</hibernate-mapping>

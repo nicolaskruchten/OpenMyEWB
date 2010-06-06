@@ -1,0 +1,150 @@
+#if( $type.equals( "post" ) )
+	#set( $editURL = "$base/home/EditPostWhiteboard/$parent.getWhiteboard().getId()" )
+	#set( $moreURL = "$base/home/ShowPost/$parent.getId()" )
+#elseif( $type.equals( "event" ) )
+	#set( $editURL = "$base/events/EditWhiteboard/$parent.getWhiteboard().getId()" )
+	#set( $moreURL = "$base/events/EventInfo/$parent.getId()" )
+#else
+	#set( $editURL = "$base/mailing/EditGroupWhiteboard/$parent.getWhiteboard().getId()" )
+	#set( $moreURL = "$base/mailing/ListInfo/$parent.getId()" )
+#end
+
+#if( $fullDisplay )
+	<fieldset style="margin: 20px 40px">
+    	<legend style="font-weight: bold; font-size: 14px;">
+    		Whiteboard
+    		<a href="$editURL" class="more" style="font-weight: normal">
+    			[edit]
+    		</a>
+    	</legend>
+#else
+	#if( $type.equals( "post" ))
+		#set( $parentGroup = $parent.group )
+		#set( $title = $parent.subject )
+	#elseif( $type.equals( "event" ) )
+		#set( $parentGroup = $parent.group )
+		#set( $title = $parent.name )
+    #else
+		#set( $parentGroup = $parent )
+		#set( $title = $parent.name )
+    #end
+	<div class="post">
+    	<div class="postheader">
+			#if ($parent.whiteboard.hasfile)
+				<a href="$moreURL"><img src="$base/images/paperclip.gif" style="float: right; margin-left: 4px; padding: 0;" border="0"/></a>
+    		#end
+<div style="float: right; font-size: 10px; font-weight: normal; padding-top: 3px;">
+($parent.whiteboard.numEdits edit#if($parent.whiteboard.numEdits > 1)s#end)
+		</div>
+
+    		<a href="$moreURL" name="$parent.id" class="postheaderlink"	style="text-decoration:none;">
+				$title
+			</a>
+    	</div>
+		<div class="postsubheader">
+    		<table width="100%" style="margin:0; padding: 0;">
+    			<tr>
+    				<td>
+						#if( $type.equals( "post" ))
+							Posted By <a href="$base/profile/UserProfile/${parent.poster.id}">$parent.poster.firstname $parent.poster.lastname</a>, #postDateWithTime($parent.date)
+						#elseif( $type.equals( "event" ) )
+							Event starts #dateWithTime($parent.startDate)
+						#else
+							This is a mailing list whiteboard
+						#end
+					</td>
+    				<td align="right" width="270">
+    					#if(!$parentGroup.visible)
+    						Whiteboard from an archived list:<br /><a href="${base}/mailing/ListInfo/$parentGroup.id">[$parentGroup.totalShortname]</a>
+    					#elseif($parentGroup.id != 1)
+    						<a href="${base}/mailing/ListInfo/$parentGroup.id">$parentGroup.postName</a><br /> can edit this whiteboard
+    					#else
+    						Anyone can edit this whiteboard
+    					#end
+    				</td>
+    			</tr>
+    		</table>
+    	</div>
+		<div class="postcontent" style="width: 98%">
+#end
+
+	#if($parent.whiteboard.lastEditor.hasPicture() && !$fullDisplay)
+	<a href="$base/profile/UserProfile/${parent.whiteboard.lastEditor.id}">
+		<img 
+            src="$base/userpictures/minithumbs/${parent.whiteboard.lastEditor.id}.jpg" 
+            style="border: 
+            1px solid #CCC; float:right; margin: 10px; margin-left:14px; padding:5px;" width="75" title="$parent.whiteboard.lastEditor.firstname $parent.whiteboard.lastEditor.lastname" alt="Picture of $parent.whiteboard.lastEditor.firstname $parent.whiteboard.lastEditor.lastname"/>
+	</a>
+	#end
+
+
+	#if ($parent.whiteboard.body.length() > 600 && !$fullDisplay)
+		#set($splitPoint = $parent.whiteboard.body.indexOf(" ", 300))
+		#if ($splitPoint != -1)
+			#wiki( $parent.whiteboard.body.substring(0, $splitPoint).concat("... ^^(more inside)^^") )
+		#else
+			#wiki($parent.whiteboard.body)
+		#end
+	#elseif($parent.getWhiteboard().getBody().equals(" ") || $parent.getWhiteboard().getBody().equals(""))
+		#wiki("Anyone can edit the text in this whiteboard. You can use this feature to plan events, manage volunteers, share files... or whatever else you can think of!")
+	#else
+		#wiki($parent.getWhiteboard().getBody())
+	#end
+	
+		<br style="clear:both; height: 1px; line-height: 1px;" />
+    #if($fullDisplay)
+	#if(!$type.equals("group"))
+    		<div style="padding-left: 15px; font-size: 10px; margin-top: 15px;">
+            	whiteboard files:
+            	<ul style="margin-top: 0px; margin-bottom: 5px; margin-left: 25px;">
+                    #if ($parent.getWhiteboard().getHasfile())
+                		#foreach ($file in $parent.getWhiteboard().getAttachedFiles())
+                		<li class="file_$file.extension">
+        					<a href="$base/whiteboardfile/$parent.getWhiteboard().getId()/$file.getURLEncodedname()"  #if($file.needsThickBox()) class="thickbox more"  rel="$parent.getId()" #else class="more" #if($file.needsNewWindow()) target="_blank" #end #end>
+        						$file.getName()
+        					</a>
+        					<span style="font-size: 10px;">
+        						($file.getFormattedSize())
+        					</span>
+        				</li>
+                		#end
+                    #else
+                    	<li>
+        					<span>
+        						No files yet.
+        					</span>
+        					<a href="$editURL" class="more" style="font-weight: normal">
+        						[upload files to whiteboard]
+        					</a>
+        				</li>
+                    #end
+            	</ul>
+            </div>
+		#end
+		#if($parent.whiteboard.numEdits != 0)
+   <p align="right" style=" font-size: 10px;">$parent.whiteboard.numEdits edits, latest by
+					<a href="$base/profile/UserProfile/${parent.whiteboard.lastEditor.id}" class="nodeco">$parent.whiteboard.lastEditor.firstname $parent.whiteboard.lastEditor.lastname</a>, #postDateWithTime($parent.whiteboard.lastEditDate)</p>
+		#end
+	#end
+	
+	<table width="100%" style="margin:0; padding: 0; margin-top: 6px;"> <!-- tags and drill-in link table -->
+		#if (!$fullDisplay)
+			<tr>
+				<td align="right" valign="top" colspan="2" style="font-size: 10px; padding-right: 10px;">
+							Latest edit by
+							<a href="$base/profile/UserProfile/${parent.whiteboard.lastEditor.id}" class="nodeco">$parent.whiteboard.lastEditor.firstname $parent.whiteboard.lastEditor.lastname</a>, #postDateWithTime($parent.whiteboard.lastEditDate)
+							<br/>
+							<a href="$moreURL" class="more">more &raquo;</a>
+
+							
+				</td>
+			</tr>
+		#end
+	</table>
+
+#if( $fullDisplay )
+	</fieldset>
+#else
+		</div>
+	</div>
+#end

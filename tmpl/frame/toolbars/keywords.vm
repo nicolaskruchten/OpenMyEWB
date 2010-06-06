@@ -1,0 +1,7 @@
+<span class="tagcloudbar">
+#foreach ($word in $tags)
+#set ($size =  8 + 8 * $percentTagged.get($word) /100 )
+<a href="$base/$area/$herepage/$word" style="font-size: ${size}px;" title="$usage.get($word)">$word</a>
+#end
+</span>
+<p align="right" style="padding-top: 0; margin-top: 0;"><a href="${base}/$area/TopKeywords" class="more">more &raquo;</a></p>

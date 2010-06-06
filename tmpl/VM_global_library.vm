@@ -1,0 +1,24 @@
+#macro(date $date)$helpers.formatDate($date)#end
+
+#macro(dateWithTime $date)$helpers.formatDateAndTime($date)#end
+
+#macro(postDateWithTime $date)$helpers.formatPostDateTime($date)#end
+
+#macro(postDate $date)$helpers.formatPostDateTime($date, false)#end
+
+#macro(rfcDate $date)$helpers.formatRFCDate($date)#end
+
+#macro(absDate $date)$helpers.formatAbsDate($date)#end
+
+#macro(iCalDateTime $date)$helpers.formatICalDateTime($date)#end
+
+#macro(dollars $amount)$helpers.formatDollarAmount($amount)#end
+
+#macro(wiki $text)<p class="postbody">$helpers.wikiFormat($text)</p>#end
+
+#macro(noWiki $text)$helpers.textFormat($text)#end
+
+#macro(htmlSafe $text)$helpers.htmlSafe($text)#end
+
+#macro(iCalText $text)$helpers.iCalTextFormat($text)#end
+

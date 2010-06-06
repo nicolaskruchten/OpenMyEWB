@@ -1,0 +1,8 @@
+<h2>Send email about: $event.name</h2>
+<h3>Email will go to $list.postName</h3>
+
+<br />
+
+#parse("frame/form.vm")
+
+

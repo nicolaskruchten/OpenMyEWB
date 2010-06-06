@@ -1,0 +1,50 @@
+<h2>How to turn cookies on</h2>
+
+		<p>Follow the directions below to turn cookies on in your web browser:</p>
+
+<p><b>For Internet Explorer 6 Users:</b></p>
+		<ol>
+
+			<li>Open Internet Explorer 6</li>
+			<li>Go to Tools, Internet Options on the menu.</li>
+			<li>Click on the Privacy tab.</li>
+			<li>The slider on the left should NOT be set to "Block All Cookies".</li>
+			<li>If you don't know which settings to put the slider on, put it on the "Medium" option.</li>
+			<li>Click Ok to exit the option window and then close Internet Explorer.</li>
+			<li>Cookies are now enabled!</li>
+		</ol>
+
+		<p><b>For Firefox Users:</b></p>
+		<ol>
+			<li>Open Firefox.</li>
+			<li>Go to Tools, Options on the menu.</li>
+			<li>Click the Privacy link on the left side menu.</li>
+			<li>Click "Allow site to set cookies" under the Cookies section</li>
+			<li>Click Ok to exit the window and then close Firefox.</li>
+			<li>Cookies are now enabled!</li>
+		</ol>
+
+<p><b>For Internet Explorer 5 Users:</b></p>
+		<ol>
+			<li>Open Internet Explorer 5</li>
+			<li>Go to Tools, Internet Options on the menu.</li>
+			<li>Click on the Security tab, and then the Custom Level button.</li>
+			<li>Look through the list for the section titled Cookies.</li>
+			<li>There should be two options in this section.  Enable both of them.</li>
+			<li>Click Ok to save the settings, clicking Yes when it asks if you want to change the security settings for the zone.</li>
+			<li>Click Ok to exit the rest of the open windows and then close Internet Explorer.</li>
+			<li>Cookies are now enabled!</li>
+		</ol>
+
+		<p><b>For Netscape Users:</b></p>
+		<ol>
+			<li>Open Netscape.</li>
+			<li>Go to Edit, Preferences on the menu.</li>
+			<li>Click the Advanced link on the left side menu.</li>
+			<li>Click "Accept all cookies" under the Cookies section</li>
+			<li>Click Ok to exit the window and then close Netscape.</li>
+			<li>Cookies are now enabled!</li>
+		</ol>
+
+
+

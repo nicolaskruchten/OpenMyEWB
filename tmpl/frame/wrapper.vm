@@ -1,0 +1,158 @@
+
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<title>$helpers.longName#if($herepage.equals("ShowPost")) - $post.subject #else - $heretitle #end</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="SHORTCUT ICON" href="$base/images/favicon.ico" />
+	<link rel="alternate" type="application/rss+xml" title="Front Page" href="$base/api/posts/Any" />
+
+	<link  href="$base/style/${area}.css?v14" rel="stylesheet" type="text/css" />
+	<script src="$base/js/helpers.js?v3" type="text/javascript"></script>
+	<script src="$base/js/datepicker.js?minified" type="text/javascript"></script>
+	<script src="$base/js/jquery-1.2.6.min.js" type="text/javascript"></script>
+	<script src="$base/js/jquery.autocomplete.min.js" type="text/javascript"></script>
+	<script src="$base/js/thickbox.js?v3" type="text/javascript"></script>
+	
+#if(!$filterParam.equals("Any") && $filterParam)
+<link rel="alternate" type="application/rss+xml" title="$filterParam" href="$base/api/posts/${filterParam}" />
+#end
+
+</head>
+
+#if ($printable)
+
+<body style="color:black; background: white; margin: 10px;">
+	
+
+	
+	<h1 align="center"><img src="$base/images/emaillogo.jpg" height="103" width="200"/> <br /> http://${helpers.domain}${helpers.appPrefix}</h1>
+
+	<br style="clear: both;" />
+	#parse($localTemplate)
+	
+	
+</body>
+	
+#else  
+
+
+<body onload="handleLoad('$base', #if($isGuest) false #else true #end, '$area');">
+	
+		#if ($safemodeon.equals("yes"))
+		<div id="safemode">safe mode on</div>
+		#end
+		
+
+		<div id="headertop">&nbsp;</div>
+		<div id="header">
+
+			#parse ("frame/statsbox.vm")
+
+			<div style="text-align: center;">
+			<a href="$base/home/Posts" style="text-decoration: none; font-size: 46px;"> $helpers.longName </a>
+			
+			</div>
+
+<div>
+			#foreach ($message in $stickyMessages)
+			#parse("frame/message.vm")
+			#end
+</div>
+
+
+			<div id="navmenu" style="margin-top: 15px; clear:both;">					
+				<ul >
+					<li id="hometab" onmouseover="this.className='pop';" onmouseout="this.className='';">
+						<a href="${base}/home/Posts" >Home</a>
+					</li>
+					<li id="profiletab" onmouseover="this.className='pop';" onmouseout="this.className='';">
+						<a href="${base}/profile/Profile" >#if($isGuest) Sign Up #else Profile #end</a>
+					</li>
+					<li id="chaptertab" onmouseover="this.className='pop';" onmouseout="this.className='';">
+						<a href="${base}/chapter/Chapter" >Chapters</a>
+					</li>
+					<li id="mailingtab" onmouseover="this.className='pop';" onmouseout="this.className='';">
+						<a href="${base}/mailing/Mailing" >Mailing Lists</a>
+					</li>
+					<li id="eventstab" onmouseover="this.className='pop';" onmouseout="this.className='';">
+						<a href="${base}/events/Events" >Events</a>
+					</li>
+					<li id="volunteeringtab" onmouseover="this.className='pop';" onmouseout="this.className='';">
+						<a href="${base}/volunteering/Volunteering" >Volunteering</a>
+					</li>
+				</ul>
+			</div>
+
+		</div>
+
+		<div id="subnavmenu">
+			<ul>
+				#foreach ($menuitem in $menu)
+					#if ($menuitem.getName().equals($herepage))
+						<li class="active"><a>$menuitem.displayName</a></li>
+					#else
+						<li><a href="${base}/$area/$menuitem.name">$menuitem.displayName</a></li>
+					#end
+				#end
+			</ul>
+		</div>
+
+
+		<div id="columncontainer">
+
+		
+			<div id="maincolumn" #if(! $toolbars.isEmpty()) class="withtoolbars" #end style="overflow-x: hidden;">
+				
+				#if($herepage.equals("Posts"))
+					#parse("frame/toolbars/PostsRHBars.vm")
+					#set($rbar=true)
+				#else
+					#set($rbar=false)
+				#end
+				
+				#if($messages)
+					#set ($message = $messages)
+				#end
+				#parse("frame/message.vm")
+				
+				<div id="maincontent">
+					#parse($localTemplate)
+				</div>
+			</div>
+			#if (! $toolbars.isEmpty())
+			<div id="toolbarcolumn">
+				#foreach($toolbar in $toolbars)
+				#parse("frame/toolbars/toolbar.vm")
+				#end
+			</div>
+			
+			#end
+
+
+			<div class="clearer">&nbsp;</div>
+
+		</div>
+		
+		<div id="bottomdiv">&nbsp;</div>
+		
+		<div id="footer">
+			<a href="$base/home/TermsOfUse" class="more">Terms of Use</a> &nbsp; |
+			&nbsp; <a href="$base/home/PrivacyPolicy" class="more">Privacy Policy</a> &nbsp; |
+			&nbsp; <a href="mailto:$helpers.systemEmail" class="more">Contact</a><br />
+			<!-- Page initially generated in $helpers.findElapsedTime($renderStart) seconds. -->
+		</div>
+		<div id="footerbottom">&nbsp;</div>
+
+
+	<div style="height: 25px;"></div>
+	<div id="bottomspacing" style="height: 168px; display: none;"></div>
+
+    </body>
+#end
+
+</html>
+

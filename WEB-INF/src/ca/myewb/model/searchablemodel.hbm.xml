@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+      "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="ca.myewb.model">
+
+    <class name="SearchableModel" table="searchables">
+        <cache usage="nonstrict-read-write"/>
+
+        <id name="id" type="int" unsaved-value="0">
+            <generator class="native"/>
+        </id>
+
+        <property name="body" type="text"/>
+        <property name="date" type="timestamp"/>
+        
+        <many-to-one name="parentEvent" column="parentEvent" class="EventModel"   />
+        <many-to-one name="parentPost" column="parentPost" class="PostModel"    />
+        <many-to-one name="parentWhiteboard" column="parentWhiteboard" class="WhiteboardModel"  />
+      	<many-to-one name="group" column="groupid" class="GroupModel"  />
+
+    </class>
+
+</hibernate-mapping>

@@ -1,0 +1,3 @@
+<h2>Confirmation Required!</h2>
+
+						#parse ("frame/confirmation.vm")

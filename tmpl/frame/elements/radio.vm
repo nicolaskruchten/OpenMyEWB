@@ -1,0 +1,8 @@
+
+#foreach ($option in $element.options)
+	<input type="radio" name="$element.internalName" id="radioelem${element.internalName}$velocityCount" value="$option.get(0)" #if($option.get(0).equals($element.value))checked#end />
+	<label for="radioelem${element.internalName}$velocityCount" style="font-size: 10px;">$option.get(1)</label> &nbsp; 
+	#if(($velocityCount+1) % $element.numAcross == 0)
+	<br />
+	#end
+#end

@@ -1,0 +1,17 @@
+
+<div style="margin: 0 auto; width: 700px;">
+<h4>Email Info</h4>
+<ul style="font-size: 12px;">
+	#if($list.id == 5)
+		<li><span><b style="color: red">Sending to all-chapter exec list</b></span></li>
+	#else
+		<li><span><b>List</b>: $list.name</span></li>
+	#end
+	<li><span><b>Subject</b>: $subject</span></li>
+</ul>
+
+<h4 style="margin-top: 20px;">Email Body</h4>
+#wiki($body)
+
+<p class="fieldname required highlight">NOTE: This e-mail will not be archived.</p>
+</div>

@@ -1,0 +1,9 @@
+<h2>Update Public Profile Info</h2>
+
+<p>
+	Your public profile info is a place where you can type whatever you like, which any member can see when they view your profile. Suggested uses include telling others a bit about yourself, or posting any contact information (email, IM, phone etc) that you want to make accessible to all signed-in users so that they can reach you.
+</p>
+
+#parse("frame/form.vm")
+
+<p><b>Note:</b> This will be visible to everyone with a user account.</p>

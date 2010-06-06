@@ -1,0 +1,7 @@
+<h2>Upload files to ${group.name}'s Files #if($uploadPath.equals(""))/#else$uploadPath#end</h2>
+	<span class="instructions">$group.postName will be able to view these files</span>
+
+<p>
+#parse("frame/form.vm")
+</p>
+

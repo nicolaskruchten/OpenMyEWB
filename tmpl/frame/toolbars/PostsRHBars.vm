@@ -1,0 +1,57 @@
+<div id="toolbarcolumn_right">
+
+
+#if($isGuest)
+
+#else
+
+	<div>
+		<div class="toolbarheader_right">Upcoming Events</div>
+
+		<div class="toolbarcontent_right" style="padding: 6px;" id="calendarsidebar">
+		<div align="center" style="font-size: 11px;"> <br /> 
+		<img src="$base/images/indicator.white.gif" /> <br />  <br /> Loading...
+		</div>
+		<script> 
+		$('#calendarsidebar').load('$base/ajax/calendarsidebar');
+</script>
+		</div>
+	</div>
+	<div class="toolbarbottom_right"> &nbsp; </div>
+
+#end
+
+
+
+
+
+
+	<div>
+		<div class="toolbarheader_right">Hot Posts</div>
+		<div class="toolbarcontent_right">
+		#if(!$featuredPosts.isEmpty())
+    		
+		<ul class="postlinklist">
+			#foreach($post in $featuredPosts)
+			<li><a href="$base/$area/ShowPost/$post.id/hot">$post.subject</a></li>
+			#end
+		</ul>
+		#else
+			<p align="center"><i>There are no hot posts yet!</i></p>
+		#end
+			
+
+				
+			<p style="text-align: right; padding-top: 0; margin-top: 0; padding-right: 0px; margin-right: 6px;"><a href="${base}/home/FeaturedPosts" class="more">more hot posts &raquo;</a></p>
+		</div>
+	</div>
+	<div class="toolbarbottom_right"> &nbsp; </div>
+	
+	
+	
+	
+	
+	
+	
+
+</div>

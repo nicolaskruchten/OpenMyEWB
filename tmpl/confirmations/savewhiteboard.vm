@@ -1,0 +1,10 @@
+
+<div style="margin: 0 auto; width: 700px;">
+<h4>Whiteboard Info</h4>
+<ul style="font-size: 12px;">
+	<li><span><b>New file(s) attached</b>: $hasFile</span></li>
+</ul>
+
+<h4 style="margin-top: 20px;">Whiteboard</h4>
+#wiki($body)
+</div>

@@ -1,0 +1,134 @@
+#if (!$printable)
+
+<div class="reply">
+	<a name="$post.id"></a>
+	#if (!$fullDisplay)
+	<div class="postheader">
+		#if ($post.hasFilesInSelfOrResponses())
+		<a href="${base}/home/ShowPost/$post.id"><img src="$base/images/paperclip.gif" style="float: right; margin-left: 4px; padding: 0;" border="0"/></a>
+		#end 
+		
+		<div style="float: right; font-size: 10px; font-weight: normal; padding-top: 3px;">
+				#set($numReplies = $post.parent.replies.size())
+				#if ($numReplies == 1)
+					(<a href="${base}/home/ShowPost/$post.id#$post.id" style="color: white;" class="nodeco">no other replies</a>)
+				#else
+					(<a href="${base}/home/ShowPost/$post.id#$post.id" style="color: white;" class="nodeco">one of $numReplies replies#if(!$isGuest) - $post.parent.getNewReplies($user.lastLogin) new#end</a>)
+				#end
+		</div>
+		<a href="${base}/home/ShowPost/$post.id"><img src="${base}/images/reply.gif"
+			style="float: left; margin-right: 5px; margin-top: 3px; padding: 0;" border="0" title="this is a reply"/></a>
+		Re: 
+		<a href="${base}/home/ShowPost/$post.parent.id" class="postheaderlink">$post.parent.subject</a>
+
+	</div>
+	#else
+	#end
+	<div class="postsubheader"> <!-- stat row -->
+		<table width="100%" style="margin:0; padding: 0;">
+			<tr>
+				<td>By <a href="$base/profile/UserProfile/${post.poster.id}">$post.poster.firstname $post.poster.lastname</a>, #postDateWithTime($post.date) </td>
+				<td align="right" width="330">
+					#if (!$fullDisplay)
+						#if($post.parent.group.id != 1)
+							<a href="${base}/mailing/ListInfo/$post.parent.group.id">$post.parent.group.postName</a><br /> can see this post
+						#else
+							Anyone can see this post
+						#end
+					#end
+				</td>
+			</tr>
+		</table>
+	</div>
+
+	<div class="postcontent" style="width: 98%;"> <!-- main row -->
+
+		#if($post.poster.hasPicture())
+		<div style="border: 
+1px solid #CCC; float:right; margin: 10px; margin-left:14px; padding:5px; line-height: 0;">
+		<a href="$base/profile/UserProfile/${post.poster.id}">
+			<img 
+src="$base/userpictures/minithumbs/${post.poster.id}.jpg" width="75"
+ title="$post.poster.firstname $post.poster.lastname" alt="Picture of $post.poster.firstname $post.poster.lastname"
+ style="border: 0;"/>
+		</a>
+		</div>
+		#end
+
+		#if ($fullDisplay || $post.body.length() < 600)
+			#wiki($post.body)
+		#else
+			#set($splitPoint = $post.body.indexOf(" ", 300))
+			#if ($splitPoint != -1)
+				#wiki( $post.body.substring(0, $splitPoint).concat("... ^^(more inside)^^") )
+			#else
+				#wiki($post.body)
+			#end
+		#end
+
+
+		<br style="clear:both; height: 1px; line-height: 1px;" />
+		
+		<table width="100%" style="margin:0; padding: 0; margin-top: 6px;"> <!-- tags and drill-in link table -->
+
+		#if(!$fullDisplay && ($numReplies != 1))
+		<tr>
+			<td align="right" valign="top" colspan="2" style="font-size: 10px; padding-right: 10px;">
+				#set ($lreply = $post.parent.latestReply)
+				#if(!$lreply.equals($post))<a href="$base/home/ShowPost/${post.parent.id}#${post.id}" class="nodeco">Latest reply</a> by <a href="$base/profile/UserProfile/${lreply.poster.id}" class="nodeco">$lreply.poster.firstname $lreply.poster.lastname</a>, #postDateWithTime($lreply.date)
+				#end
+			</td>
+		</tr>
+		#end
+
+		<tr>
+			<td valign="top" style="padding-left: 15px; font-size: 10px;">
+			
+			#if(!$fullDisplay)
+				#if(!$isGuest)
+					#if($user.hasFlagged($post.parent))
+						<a href="#" onclick="return togglePostFlag('$base/actions/UnFlagPost/$post.id', this, '$base/home/FlaggedPosts', 'removed from watch list')" class="more">[remove from watch-list]</a>
+					#else
+						<a href="#" onclick="return togglePostFlag('$base/actions/FlagPost/$post.id', this, '$base/home/FlaggedPosts', 'added to watch list')" class="more">[add to watch-list]</a>
+					#end	
+				#end
+
+			#else
+				#if ($post.hasfile)
+
+					attached files:
+
+					<ul style="margin-top: 0px; margin-bottom: 5px; margin-left: 25px;">
+						#foreach ($file in $post.getAttachedFiles())
+						<li class="file_$file.extension"><a href="$base/postfile/$post.id/$file.getURLEncodedname()"  #if($file.needsThickBox()) class="thickbox more" rel="$post.getId()" #else class="more" #if($file.needsNewWindow()) target="_blank" #end #end >$file.getName()</a> <span style="font-size: 10px;">($file.getFormattedSize())</span></li>
+						#end
+					</ul>
+				#end
+			#end
+			
+			</td>
+			<td align="right" valign="top" width="300" style="font-size: 10px; padding-right: 10px;">
+				#if(!$fullDisplay)
+					
+					<a href="${base}/home/ShowPost/$post.parent.id#$post.id" class="more">read more or reply &raquo;</a>
+
+				#else
+					#if ($isLeader)
+						<a href="$base/actions/DeletePost/$post.id" class="more">[delete this reply]</a>
+					#end
+				#end
+			</td>
+		</tr>
+		</table><!-- end tags and drill-in link table -->	
+
+	</div>
+
+</div>
+
+#else
+	<p><b><i>Reply by $post.poster.firstname $post.poster.lastname #postDateWithTime($post.date)</i></b></p>
+
+	#wiki($post.body)
+	<br />
+#end
+		

@@ -1,0 +1,6 @@
+<h2>Update My Profile: Step 2 of 3</h2> 
+<h3>Canadian Contact Info</h3>
+
+<p style="font-size: 12px; border: 1px solid black; width: 600px; margin: 0 auto; margin-bottom: 20px;" align="center">Your profile information will not be made publicly available, as per our <a href="$base/home/PrivacyPolicy">Privacy Policy</a>.</p>
+
+#parse ("frame/form.vm")

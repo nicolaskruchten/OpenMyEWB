@@ -1,0 +1,5 @@
+<h2>Thank you for your application!</h2>
+
+#wiki($session.completedApplicationMessage)
+
+<p align="center"><a href="$base/volunteering/ApplicationInstructions/$session.id">click here to go back through your application &raquo;</a></p>

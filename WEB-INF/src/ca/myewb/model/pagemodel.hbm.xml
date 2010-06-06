@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+      "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="ca.myewb.model">
+
+    <class name="PageModel" table="pages">
+        <cache usage="nonstrict-read-write"/>
+
+        <id name="id" type="int" unsaved-value="0">
+            <generator class="native"/>
+        </id>
+
+        <property name="name" type="string"/>
+        <property name="oldName" type="string"/>
+        <property name="displayName" type="string"/>
+        <property name="area" type="string"/>
+        <property name="weight" type="int"/>
+        
+        <set name="groups" table="pages2groups">
+                <cache usage="nonstrict-read-write"/>
+        	<key column="pageid"/>
+        	<many-to-many column="groupid" class="GroupModel"/>
+        </set>
+        
+        <set name="invisibleGroups" table="pages2invisible">
+                <cache usage="nonstrict-read-write"/>
+        	<key column="pageid"/>
+        	<many-to-many column="groupid" class="GroupModel"/>
+        </set>
+
+    </class>
+
+</hibernate-mapping>

@@ -1,0 +1,33 @@
+<h2>Mailing List Member Mgmt</h2>
+
+		#parse ($memberpage)
+
+#if ($targetUser)
+
+	<h3 align="center">Manage Mailing List Membership</h3>
+	<table border="0" width="80%" style="margin: 0 auto;">
+	
+	#if ($showform2)
+		<tr>
+		<td align="center">
+		Remove from:
+		#set($form = $form2)
+		#parse("frame/form.vm")
+		</td>
+		</tr>
+	#end
+	
+	#if ($showform3)
+		<tr>
+		<td align="center">
+		<p>&nbsp;</p>
+		Add to:
+		#set($form = $form3)
+		#parse("frame/form.vm")
+		</td>
+		</tr>
+	#end
+	
+	</table>
+
+#end

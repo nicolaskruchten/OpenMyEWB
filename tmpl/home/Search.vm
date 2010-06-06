@@ -1,0 +1,53 @@
+<h2>Search</h2>
+
+<p>This system searches through visible posts, whiteboards and events and sorts by relevance rather than chronologically.
+
+<br/>
+<br/>
+
+#parse("frame/form.vm")
+
+#if(!$noterms)
+	
+	#if ($searchables.isEmpty() == true)
+    
+    	<p>Nothing could be found <i>that you can currently see</i> matching your chosen query.</p>
+    	
+	#else
+		<p>The following $numSearchables items matched your query.</p>
+		
+		#parse ("frame/postpagination.vm")
+		<br/>
+		
+		#foreach($searchable in $searchables)
+			
+			#set($classname = $searchable.getClass().getName())
+			#if($classname.contains("Whiteboard"))
+				
+				#set($whiteboard = $searchable)
+				#set($parent = $whiteboard.parent)
+        		#set($type = $whiteboard.parentType)
+        		#parse("frame/renderers/whiteboardrenderer.vm")
+				
+			#elseif($classname.contains("Post"))
+				
+				#set($post = $searchable)
+				#if($post.getParent())
+    				#parse("frame/renderers/replyrenderer.vm")
+    			#else
+    				#parse("frame/renderers/postrenderer.vm")
+    			#end
+
+			#elseif($classname.contains("Event"))
+				
+				#set($event = $searchable)
+				#parse("frame/renderers/eventrenderer.vm")
+				
+			#end
+		#end
+		
+		
+		#parse ("frame/postpagination.vm")
+
+	#end
+#end

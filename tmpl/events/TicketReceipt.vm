@@ -1,0 +1,23 @@
+<h3 align="center">2009 National Conference Receipt</h3>
+<h3 align="center">Not a Tax Receipt</h3>
+<h3 align="center">$reg.name</h3>
+<h3 align="center">Receipt ID: $reg.receiptNum</h3>
+<h3 align="center">#absDate($reg.date)</h3>
+
+<br />
+
+<table width="70%" class="cellpadding5" style="border-collapse: collapse; margin: 0 auto;">
+<tr>
+<th align="center" style="border: 1px solid black;">Item</th>
+<th align="center" style="border: 1px solid black;">Cost</th>
+</tr>
+
+<tr>
+<td align="center" style="border: 1px solid black;">$reg.numtickets Gala Banquet Ticket(s)</td>
+#set($total = $reg.numtickets*250)
+<td align="center" style="border: 1px solid black;">#dollars($total)</td>
+</tr>
+</table>
+
+
+

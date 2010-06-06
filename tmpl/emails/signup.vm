@@ -1,0 +1,18 @@
+[$helpers.enShortName] Welcome!
+
+
+password: $password 
+
+Dear $name,
+
+Welcome to $helpers.longName!
+
+You are receiving this email because you have just signed up to $helpers.longName. We would like to thank you for registering as an associate member of $helpers.longName. 
+
+By becoming an associate member, you have become an FILL THIS IN
+
+If you are concerned about the privacy of your personal information, please know that we have taken the utmost care in making this site as secure as possible, and we urge you to read our Privacy Policy (http://${helpers.domain}${helpers.appPrefix}/home/PrivacyPolicy).
+
+Included at the top of this email is your password, which you can use to sign in to $helpers.longName (http://${helpers.domain}${helpers.appPrefix}/) where you may join or start discussions, manage your membership information, upgrade to a regular membership by paying your fees online, or sign up to mailing lists. (when copy-pasting this value, please do not include any leading or trailing spaces)
+
+Thanks for becoming part of $helpers.longName!

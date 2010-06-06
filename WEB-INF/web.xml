@@ -1,0 +1,132 @@
+<!-- DOCTYPE web-app
+  PUBLIC "-//Sub Microsystems, Inc.//DTD Web Application 2.3//EN"
+  "http://java.sun.com/dtd/web-app_2_3.dtd" -->
+
+<web-app>
+  <display-name>myEWB</display-name>
+
+  <!-- Listener for "who's online" user listing -->
+  <listener>
+    <listener-class>ca.myewb.frame.SessionListener</listener-class>
+  </listener>
+
+  <!-- SERVLET DEFINITIONS -->
+
+  <servlet>
+    <servlet-name>InitServlet</servlet-name>
+    <servlet-class>ca.myewb.frame.servlet.InitServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  
+  <servlet>
+    <servlet-name>WrapperServlet</servlet-name>
+    <servlet-class>ca.myewb.frame.servlet.WrapperServlet</servlet-class>
+  </servlet> 
+
+  <servlet>
+    <servlet-name>FileServlet</servlet-name>
+    <servlet-class>ca.myewb.frame.servlet.FileServlet</servlet-class>
+  </servlet> 
+
+  <servlet>
+    <servlet-name>CSVServlet</servlet-name>
+    <servlet-class>ca.myewb.frame.servlet.CSVServlet</servlet-class>
+  </servlet> 
+
+  <servlet>
+    <servlet-name>GraphServlet</servlet-name>
+    <servlet-class>ca.myewb.frame.servlet.GraphServlet</servlet-class>
+  </servlet> 
+  
+   <servlet>
+    <servlet-name>ApiServlet</servlet-name>
+    <servlet-class>ca.myewb.frame.servlet.ApiServlet</servlet-class>
+  </servlet>  
+
+  <servlet>
+    <servlet-name>AjaxServlet</servlet-name>
+    <servlet-class>ca.myewb.frame.servlet.AjaxServlet</servlet-class>
+  </servlet> 
+  
+  <!-- MAPPINGS -->
+  <servlet-mapping>
+    <servlet-name>AjaxServlet</servlet-name>
+    <url-pattern>/ajax/*</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>FileServlet</servlet-name>
+    <url-pattern>/postfile/*</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>FileServlet</servlet-name>
+    <url-pattern>/whiteboardfile/*</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>FileServlet</servlet-name>
+    <url-pattern>/groupfiles/*</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>CSVServlet</servlet-name>
+    <url-pattern>/csvfile/*</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>GraphServlet</servlet-name>
+    <url-pattern>/graph/*</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>ApiServlet</servlet-name>
+    <url-pattern>/feed/*</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>ApiServlet</servlet-name>
+    <url-pattern>/cal/*</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>ApiServlet</servlet-name>
+    <url-pattern>/api/*</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>WrapperServlet</servlet-name>
+    <url-pattern>/home/*</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>WrapperServlet</servlet-name>
+    <url-pattern>/profile/*</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>WrapperServlet</servlet-name>
+    <url-pattern>/chapter/*</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>WrapperServlet</servlet-name>
+    <url-pattern>/mailing/*</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>WrapperServlet</servlet-name>
+    <url-pattern>/events/*</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>WrapperServlet</servlet-name>
+    <url-pattern>/volunteering/*</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>WrapperServlet</servlet-name>
+    <url-pattern>/actions/*</url-pattern>
+  </servlet-mapping>
+  
+</web-app>

@@ -1,0 +1,5 @@
+$content
+
+----------
+This message was sent to you through http://${helpers.domain}${helpers.appPrefix}/
+#if($showUnsubscribe)Unsubscribe from this list at http://${helpers.domain}${helpers.appPrefix}/mailing/Unsubscription #end

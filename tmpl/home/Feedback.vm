@@ -1,0 +1,15 @@
+<h2>Signed out</h2>
+
+<h3 align="center">Please give us some feedback!</h3>
+
+<p>Thanks for using $helpers.longName! If you have a moment, please use the anonymous form below to give us some feedback:</p>
+<ul>
+<li><span>what do you like about this sytem?</span></li>
+<li><span>what don't you like about it?</span></li>
+<li><span>does anything not work as you think it should?</span></li>
+<li><span>were you able to find all the features you looked for?</span></li>
+<li><span>do you have any feature requests?</span></li>
+</ul>
+<br />
+#parse("frame/form.vm")
+

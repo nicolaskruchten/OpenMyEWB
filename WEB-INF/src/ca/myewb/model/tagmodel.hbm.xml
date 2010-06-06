@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+      "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="ca.myewb.model">
+
+    <class name="TagModel" table="tags">
+        <cache usage="nonstrict-read-write"/>
+
+        <id name="id" type="int" unsaved-value="0">
+            <generator class="native"/>
+        </id>
+
+        <property name="name" type="string"/>
+        <property name="uniqueName" type="string"/>
+        
+        <set name="posts" table="tags2posts" inverse="true" cascade="save-update">
+                <cache usage="nonstrict-read-write"/>
+        	<key column="tagid"/>
+        	<many-to-many column="postid" class="PostModel"/>
+        </set>
+        
+        <set name="events" table="tags2events" inverse="true" cascade="save-update">
+                <cache usage="nonstrict-read-write"/>
+        	<key column="tagid"/>
+        	<many-to-many column="eventid" class="EventModel"/>
+        </set>
+
+    </class>
+    
+</hibernate-mapping>

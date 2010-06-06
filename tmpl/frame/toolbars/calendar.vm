@@ -1,0 +1,59 @@
+<table style="border-collapse: collapse; font-size: 12px; color: gray; margin: 0; padding: 0;">
+		<tr>
+			<th align="center">S</th>
+			<th align="center">M</th>
+			<th align="center">T</th>
+			<th align="center">W</th>
+			<th align="center">T</th>
+			<th align="center">F</th>
+			<th align="center">S</th>
+		</tr>
+
+		#foreach($week in $datelist)
+			<tr>
+			#foreach($date in $week)
+				$cal.setTime($date)
+				
+				#set($day = $cal.get(5))
+				#set($month = $cal.get(2) + 1)
+				#set($year = $cal.get(1))
+				
+				<td align="center" style="padding: 3px;
+    				#if(($cal.getTime().equals( $today )))font-style: italic; font-weight: bold; color: black #end
+				">
+					#if($calendar.containsKey($date))
+    					<a
+						#if($calendar.get($date).size() > 1)				
+        				 href="$base/events/DayView/#if($filter.equals("Any"))nofilter#else$filter#end/$year/$month/$day" title="$calendar.get($date).size() events on $day/$month"
+        				#else
+							#set($firstEvent = $calendar.get($date).iterator().next())
+						 href="$base/events/EventInfo/$firstEvent.id/toolbar"  title="$firstEvent.name"
+						#end
+						style="font-weight: bold; text-decoration: none;">
+							$date.getDate()
+        				</a>
+					#else
+						$date.getDate()
+					#end
+				</td>
+			#end
+			</tr>
+		#end
+
+		</table>
+		
+		#if(!$nextEvents.isEmpty())
+				#foreach( $event in $nextEvents )
+					$cal.setTime($event.startDate)
+					#set($temp = $cal.get(2)+1)
+        			<p style="padding: 0; line-height: 1.1; padding-bottom: 5px;">
+						<a href="$base/events/EventInfo/$event.id/toolbar" style="font-size: 11px; text-decoration: none; margin-left: 4px;">
+							$temp/$cal.get(5): $event.name
+						</a></p>
+				#end
+		#end
+<p align="right" style="padding: 0px; margin 0px; margin-right: 6px;"><a href="${base}/events/ListUpcoming" class="more">more upcoming events &raquo;</a></p>
+
+#if($user.isMember("Exec"))
+<p align="right" style="padding: 0px; margin 0px; margin-right: 6px;"><a href="${base}/events/EditEvent" class="more">add an event &raquo;</a></p>
+#end

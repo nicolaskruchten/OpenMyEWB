@@ -1,0 +1,12 @@
+<h2>Potential OV Search</h2>
+
+		#parse ($memberpage)
+
+#if ($targetUser)
+
+	<h3 align="center">Assign this user to a placement</h3>
+	
+	#set($form = $form2)
+		#parse("frame/form.vm")
+	
+#end

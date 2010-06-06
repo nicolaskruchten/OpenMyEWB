@@ -1,0 +1,8 @@
+<h2>Change Picture</h2>
+
+<p> We would ask that this be a recent, recognizable photograph of yourself rather than something less useful like a cartoon, a baby picture, a picture of yourself in disguise or a picture of someone else.</p>
+
+<p>Your <b>public profile info</b> is a place where you can type whatever you like, which any member can see when they view your profile. Suggested uses include telling others a bit about yourself, or posting any contact information (email, IM, phone etc) that you want to make accessible to all signed-in users so that they can reach you.</p>	
+<br />
+
+#parse("frame/form.vm")

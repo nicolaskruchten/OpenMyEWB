@@ -1,0 +1,16 @@
+
+	<h2>My Profile</h2>
+	
+	#if ($mode.equals("needInfo") || $mode.equals("makeRegular"))
+
+	<p style="border: 2px solid black; margin: 20px 30px; padding: 10px;">
+		<b>Would you like to become a regular member?</b> To upgrade your membership status from associate to regular, please <a href="${base}/profile/PayDues">click here to pay the applicable fee</a>.</p>
+
+	#elseif ($mode.equals("renewRegular"))
+
+	<p style="border: 2px solid black; margin: 20px 30px; padding: 10px;">
+		<b>Would you like to renew your regular membership?</b> Click <a href="${base}/profile/PayDues">here</a> to pay the applicable fees for the coming year.</p>
+	#end
+	
+	
+#parse ("frame/memberinfo.vm")

@@ -1,0 +1,58 @@
+
+<ul>
+			#if ($toRegular)
+				<li><a href="$toRegular/$targetUser.id">upgrade to regular</a></li>
+			#end
+			
+			#if ($renewRegular)
+				<li><a href="$renewRegular/$targetUser.id">renew regular</a></li>
+			#end
+			
+			#if ($toNatlRep)
+				<li><a href="$toNatlRep/$targetUser.id">upgrade to national rep</a></li>
+			#end
+			
+			#if ($toExec)
+				<li><a href="$toExec/$targetUser.id">upgrade to exec</a></li>
+			#end
+			
+			#if ($toNMT)
+				<li><a href="$toNMT/$targetUser.id">upgrade to office member</a></li>
+			#end
+			
+			#if ($toAdmin)
+				<li><a href="$toAdmin/$targetUser.id">upgrade to admin</a></li>
+			#end
+						
+			#if ($fromNatlRep)
+				<li><a href="$base/chapter/ExecTitle/$targetUser.id">change national rep lists</a></li>
+				<li><a href="$fromNatlRep/$targetUser.id">downgrade from national rep</a></li>
+			#end
+			
+			#if ($fromExec)
+				<li><a href="$base/chapter/ExecTitle/$targetUser.id">change exec title</a></li>
+				<li><a href="$fromExec/$targetUser.id">downgrade from exec</a></li>
+			#end
+		
+			#if ($fromNMT)
+				<li><a href="$base/chapter/NMTTitle/$targetUser.id">change office member title</a></li>
+				<li><a href="$fromNMT/$targetUser.id">downgrade from office member</a></li>
+			#end
+			
+			#if ($fromAdmin)
+				<li><a href="$fromAdmin/$targetUser.id">downgrade from admin</a></li>
+			#end
+			
+			#if ($adminlevel)
+				<li><a href="$base/chapter/FindDupes/$targetUser.id">look for other accounts</a></li>
+				<li><a href="$base/actions/DoDeleteUser/$targetUser.id">delete user</a></li>
+				#if(!$targetUser.username.equals(""))
+				<li><a href="$base/actions/Impersonate/$targetUser.id">impersonate</a></li>
+				<li><a href="$base/volunteering/AssignOv/$targetUser.id">assign to placement &raquo;</a></li>
+				#end
+			#end
+			
+			<li><a href="${base}/api/person/${targetUser.id}.vcf">export to vCard</a></li>
+			<li><a href="${base}/mailing/ListMember/$targetUser.id">manage lists &raquo;</a></li>
+			<li><a href="${base}/chapter/MemberInfo/new">&laquo; search again</a></li>
+</ul>

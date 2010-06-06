@@ -1,0 +1,36 @@
+<h2>Placement Info</h2>
+
+<h3 align="center">$placement.name</h3>
+
+<ul>
+#if(!$placement.isAssigned())
+#if($placement.deleted)
+ <li><span>State: deleted</span></li>
+#else
+ <li><span>State: unassigned</span></li>
+#end
+#elseif($placement.active)
+ <li><span>State: active, assigned to <a href="$base/volunteering/OVInfo/$placement.ov.id">$placement.ov.firstname $placement.ov.lastname</a></span></li>
+#elseif(!$placement.active)
+ <li><span>State: inactive, assigned to <a href="$base/volunteering/OVInfo/$placement.ov.id">$placement.ov.firstname $placement.ov.lastname</a></span></li>
+#end
+
+#if($placement.startdate != "")
+ <li><span>Start date: $placement.startdate</span></li>
+#end
+#if($placement.enddate != "")
+ <li><span>End date: $placement.enddate</span></li>
+#end
+#if($placement.country != "")
+ <li><span>Location: #if($placement.town != "") $placement.town, #end $placement.country</span></li>
+#end
+#if($placement.accountingid != "")
+ <li><span>QuickBooks ID: $placement.accountingid</span></li>
+#end
+</ul>
+
+#if($placement.description != "")
+<h3>Description</h3>
+
+#wiki($placement.description)
+#end

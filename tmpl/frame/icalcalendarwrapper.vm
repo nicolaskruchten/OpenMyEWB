@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+#foreach($event in $events)
+BEGIN:VEVENT
+DTSTART:#iCalDateTime($event.startDate)
+
+DTEND:#iCalDateTime($event.endDate)
+
+UID:$base/events/EventInfo/$event.id
+URL:$base/events/EventInfo/$event.id
+LOCATION:#iCalText($event.location)
+
+SUMMARY:#iCalText($event.name)
+
+DESCRIPTION:#iCalText($event.notes)
+
+END:VEVENT
+#end
+END:VCALENDAR

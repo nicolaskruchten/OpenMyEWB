@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+      "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="ca.myewb.model">
+
+    <class name="EventModel" table="events">
+        <cache usage="nonstrict-read-write"/>
+
+        <id name="id" type="int" unsaved-value="0">
+            <generator class="native"/>
+        </id>
+
+        <property name="name" type="string"/>
+        <property name="location" type="string"/>
+        <property name="notes" type="text"/>
+        <property name="startDate" type="timestamp"/>
+        <property name="endDate" type="timestamp"/>
+
+		<set name="tags" table="tags2events" cascade="all">
+                <cache usage="nonstrict-read-write"/>
+        	<key column="eventid"/>
+        	<many-to-many column="tagid" class="TagModel"/>
+        </set>
+        
+
+        <bag name="whiteboards" cascade="save-update" inverse="true">
+            <cache usage="read-write"/>
+        	<key column="parentEvent"/>
+        	<one-to-many class="WhiteboardModel"/>
+        </bag>
+        
+        <bag name="searchables" cascade="save-update" inverse="true">
+            <cache usage="read-write"/>
+        	<key column="parentEvent"/>
+        	<one-to-many class="SearchableModel"/>
+        </bag>
+        
+      	<many-to-one name="group" column="groupid" class="GroupModel" />
+
+    </class>
+
+</hibernate-mapping>

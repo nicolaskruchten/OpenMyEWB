@@ -1,0 +1,58 @@
+#if ($posts.isEmpty())
+ 
+<h3>No visible posts...</h3>
+
+#if ($thetag)
+	<h3>Tag: $thetag</h3> 
+#end
+
+<p>No posts could be found that you can currently see matching 
+	the current display settings.</p>
+
+#if($isGuest) 
+	<p align="center"><i>You are not signed in right now, but you might be able to see more if you were!</i></p>
+#end	
+
+#else
+
+	#if ($thetag)
+		<h3>Tag: $thetag</h3> 
+		<p>The following posts were tagged by their authors or repliers with 
+			tags containing "$thetag".</p>
+			
+
+<form onSubmit="window.location = '$base/home/Posts/' + $('#formelemKeywords').val().replace(',',''); return false;">
+<p align="center"><span class="fieldname required">Tag search:</span>		
+<input type="text" id="formelemKeywords" style="width: 150px;"  onFocus="this.value='';" value="$thetag" />
+<input name="searchButton" type="submit" value="go!" class="button" />
+<br /><span class="instructions">does partial matches, so "book" will match "book" and "books"</span>
+ </p> </form>
+ 
+<script> 
+$("#formelemKeywords").autocomplete(base + "/ajax/autocomplete?area=home&", {multiple:true, minChars: 2}); 
+</script>
+
+        #if($isGuest) 
+        	<p align="center"><i>You are not signed in right now, but you might be able to see more if you were!</i></p>
+        #end	
+	#end
+		<br />
+	
+	#if(!$filterParam.equals("Any") || ($pageNum != 1))
+		#parse("frame/postpagination.vm")
+		<br />
+	#end
+	
+		#foreach($post in $posts)
+			#if($post.getParent())
+			<div class="post">
+				#parse("frame/renderers/replyrenderer.vm")
+			</div>
+			#else
+				#parse("frame/renderers/postrenderer.vm")
+			#end
+		#end
+	
+	#parse("frame/postpagination.vm")
+			
+#end

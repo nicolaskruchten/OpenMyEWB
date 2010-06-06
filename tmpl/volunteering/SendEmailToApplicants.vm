@@ -1,0 +1,6 @@
+<h2>Send an Email To Session applicants</h2>
+
+
+#parse("frame/form.vm")
+
+

@@ -1,0 +1,77 @@
+
+<ul>
+
+<li><a href="$base/mailing/ListInfo/$list.id">view list info</a></li>
+
+#if($isLeader.equals("yes"))
+
+	#if(!$listIsAdmin.equals("yes"))
+		<li>
+			<a href="$base/mailing/ListMgmt/$list.id">manage list members</a>
+		</li>
+	#end
+	
+	<li>
+		<a href="$base/actions/csv.MailingListCsv/$list.id" 
+			#if($list.admin && $list.visible) 
+				onclick="return confirm('This could take up to several minutes.');"
+			#end
+		>
+			view list spreadsheet
+		</a>
+	</li>
+	
+	#if(!$isChapter.equals("yes") && !$isExec.equals("yes")  && !$listIsAdmin.equals("yes") )
+		<li><a href="$base/mailing/EditList/$list.id">update list info</a></li>
+		<li><a href="$base/actions/DeleteList/$list.id">archive list</a></li>
+	#end
+
+	#if( !$listIsAdmin.equals("yes") && !$isExec.equals("yes") )
+	<li><a href="$base/mailing/EditWelcomeMessage/$list.id">update welcome e-mail</a></li>
+	#end
+
+#end
+
+
+#if($perms.canReadFilesInGroup($user, $list) && $list.id != 1)
+	<li>
+		<a href="$base/mailing/ShowGroupFiles/$list.id">see files</a>
+	</li>
+#end
+
+#if($perms.canSendEmailToGroup($user, $list))
+	<li><a href="$base/mailing/SendEmail/$list.id">send an email</a></li>
+#end
+
+#if($perms.canPostToGroup($user, $list))
+	<li><a href="$base/home/NewPost/$list.id">post to list</a></li>
+#end
+
+#if($perms.canUpdateEventInGroup($user, $list))
+	<li><a href="$base/events/EditEvent/new/$list.id">add event to calendar</a></li>
+#end
+
+#if(!$listIsAdmin.equals("yes"))
+	#if($level)
+		<li><a href="javascript: if(confirm('Please confirm: really leave this list?')) 
+document.getElementById('leaveform').submit()">leave list</a></li>
+	#else
+		<li><a href="javascript: document.getElementById('joinform').submit()">join list</a></li>
+	#end
+#end
+
+</ul>
+
+
+
+<form id="leaveform" action="${base}/actions/ModifyListMembership/$list.id" method="post" 
+enctype="multipart/form-data" style="position: absolute;">
+	<input type="hidden" name="Emails" value="$user.email"/>
+		<input type="hidden" name="ActionType" value="remove"/>
+</form>
+
+
+<form id="joinform" action="${base}/actions/ModifyListMembership/$list.id" method="post" enctype="multipart/form-data" style="position: absolute;">
+	<input type="hidden" name="Emails" value="$user.email"/>
+		<input type="hidden" name="ActionType" value="add"/>
+</form>

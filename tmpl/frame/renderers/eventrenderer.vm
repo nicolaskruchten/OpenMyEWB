@@ -1,0 +1,98 @@
+<div class="post">
+	<div class="postheader">
+    	#if( $event.hasActiveWhiteboard() )
+			<span style="float: right; margin-left: 4px; padding: 0;">
+    			#if ($event.whiteboard.getAttachedFiles().size() != 0)
+        			<a href="${base}/events/EventInfo/$event.id"><img src="$base/images/paperclip.gif" border="0"/></a>
+    			#end
+				<a href="${base}/events/EditWhiteboard/$event.whiteboard.id"><img src="$base/images/whiteboard.gif" border="0"/></a>
+			</span>
+		#end
+		<a href="$base/events/EventInfo/$event.id" name="$event.id" class="postheaderlink" style="text-decoration:none;">$event.name</a>
+	</div>
+
+
+	<div class="postsubheader"> 
+		<table width="100%" style="margin:0; padding: 0;">
+			<tr>
+				<td>#if(!$event.location.equals("")) Location: $event.location #end</td>
+				<td align="right" width="330">
+					#if($event.group.id == 1)
+						In the National Calendar
+					#elseif($event.group.parent)
+						In the <a href="$base/events/MonthView/$event.group.parent.shortname">$event.group.parent.name Calendar</a>
+					#elseif($event.group.isChapter())
+						In the <a href="$base/events/MonthView/$event.group.shortname">$event.group.name Calendar</a>
+					#else
+						In the $event.group.name Calendar
+					#end
+				</td>
+			</tr>
+		</table>
+	</div>
+
+	<div class="postcontent">
+
+		#if ($perms.canUpdateEvent($user, $event) && $fullDisplay)
+			<div align="right">
+				<a href="$base/events/EditEvent/$event.id" class="more">Edit event</a> |
+				<a href="$base/actions/DeleteEvent/$event.id" class="more">Delete event</a>
+				#if($perms.canSendEmailToGroup($user,$event.group))
+					| <a href="$base/events/SendEventEmail/$event.id" class="more">Send email about event...</a>
+				#end
+			</div>
+		#end
+
+		<p class="postbody">
+			#if($event.hasStartTime())
+			<b>Starts </b>#dateWithTime($event.startDate) <br/>
+			<b>Ends </b>#dateWithTime($event.endDate)
+			#else
+			<b>On </b>#date($event.startDate)
+			#end
+		</p>
+		
+		#if ($fullDisplay || $event.notes.length() < 600)
+			#wiki($event.notes)
+		#else
+			#set($splitPoint = $event.notes.indexOf(" ", 300))
+			#if ($splitPoint != -1)
+				#wiki( $event.notes.substring(0, $splitPoint).concat("... ^^(more inside)^^") )
+			#else
+				#wiki($event.notes)
+			#end
+		#end
+		
+		#if ($fullDisplay && $event.hasActiveWhiteboard())
+			#set($parent = $event)
+			#set($type = "event")
+			#parse("frame/renderers/whiteboardrenderer.vm")
+		#end
+		#if (!$fullDisplay)
+			<table width="100%" style="margin:0; padding: 0; margin-top: 6px;"> <!-- tags and drill-in link table -->
+        		<tr>
+        			<td valign="top" style="padding-left: 15px; font-size: 10px;">
+					</td>
+					<td valign="top" style="padding-left: 15px; font-size: 10px; text-align:right">
+						<a href="$base/events/EventInfo/$event.id" class="more">View Event &raquo;</a>
+					</td>
+				</tr>
+			</table>
+
+		#end
+		
+		#if($fullDisplay)
+			<p style="font-size: 10px; text-align: center; margin-bottom: 0;">
+
+
+			#if(!$event.tags.isEmpty())tags: 
+				#foreach ($tag in $event.sortedTags)
+					<a href="$base/events/ListView/$tag" class="more">$tag</a>
+				#end
+			#end
+			</p>
+			<p align="center"><a href="$base/api/event/${event.id}.ics" class="nodeco" style="font-size: 12px;"><img src="$base/images/ical.gif" border="0" /> export to iCalendar</a></p>
+		#end
+		
+	</div> 
+</div>

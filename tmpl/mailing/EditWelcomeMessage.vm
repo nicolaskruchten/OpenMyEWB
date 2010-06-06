@@ -1,0 +1,5 @@
+<h2>Edit a Group's Welcome E-mail Message</h2>
+
+#parse("frame/form.vm")
+
+	

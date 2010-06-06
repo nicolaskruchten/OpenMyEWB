@@ -1,0 +1,5 @@
+
+#noWiki($body)
+
+
+View this event through $helpers.longName at http://${helpers.domain}${helpers.appPrefix}/events/EventInfo/$event.id

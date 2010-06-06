@@ -1,0 +1,20 @@
+
+<ul>
+
+#if($user.isAdmin())
+<li><a href="$base/volunteering/EditPlacement/$placement.id">edit placement info</a></li>
+#end
+
+#if($placement.isAssigned())
+#if($placement.active)
+#if($user.isAdmin())
+<li><a href="$base/actions/PlacementLifecycle/deactivate/$placement.id">deactivate placement</a></li>
+#end
+#end
+#elseif(!$placement.deleted)
+#if($user.isAdmin())
+<li><a href="$base/volunteering/AssignOv">assign an OV</a></li>
+<li><a href="$base/actions/PlacementLifecycle/delete/$placement.id">delete placement</a></li>
+#end
+#end
+</ul>

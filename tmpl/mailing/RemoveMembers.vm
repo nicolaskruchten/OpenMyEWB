@@ -1,0 +1,7 @@
+<h2>Remove Members</h2>
+
+Enter a list of email addresses, one per line, of people you would like to 
+<i>remove from</i> your mailing list.
+<br /><br />
+#parse("frame/form.vm")
+

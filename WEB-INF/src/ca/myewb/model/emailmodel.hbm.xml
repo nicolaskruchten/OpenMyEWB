@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+      "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="ca.myewb.model">
+
+    <class name="EmailModel" table="email">
+        <cache usage="nonstrict-read-write"/>
+        <id name="id" type="int" unsaved-value="0">
+            <generator class="native"/>
+        </id>
+
+		<property name="progress" type="string"/>
+        <property name="recipients" type="text"/>
+        <property name="shortName" type="string"/>
+        <property name="sender" type="string"/>
+        <property name="subject" type="string"/>
+        <property name="textMessage" type="text"/>
+        <property name="htmlMessage" type="text"/>
+        <property name="numSentTo" type="int"/>
+        <property name="date" type="string"/>
+        
+    </class>
+
+</hibernate-mapping>

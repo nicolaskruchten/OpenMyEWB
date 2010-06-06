@@ -1,0 +1,76 @@
+<h2>System Dashboard</h2>
+
+<div align="center">
+<h3>Stats for today so far</h3>
+
+<table border="0" class="cellpadding3">
+<tr>
+	<th align="right" width="200">Signins:</th><td width="200">$dailyStats.signins</td>
+</tr>
+<tr>
+	<th align="right">Posts:</th><td>$dailyStats.posts</td>
+</tr>
+<tr>
+	<th align="right">Replies:</th><td>$dailyStats.replies</td>
+</tr>
+<tr>
+	<th align="right">Signups:</th><td>$dailyStats.signups</td>
+</tr>
+<tr>
+	<th align="right">List signups:</th><td>$dailyStats.mailinglistsignups</td>
+</tr>
+<tr>
+	<th align="right">List upgrades:</th><td>$dailyStats.mailinglistupgrades</td>
+</tr>
+<tr>
+	<th align="right">Deletions:</th><td>$dailyStats.deletions</td>
+</tr>
+<tr>
+	<th align="right">Upgrades:</th><td>$dailyStats.regupgrades</td>
+</tr>
+<tr>
+	<th align="right">Downgrades:</th><td>$dailyStats.regdowngrades</td>
+</tr>
+<tr>
+	<th align="right">Renewals:</th><td>$dailyStats.renewals</td>
+</tr>
+</table>
+
+<p>&nbsp;</p>
+<img src="$base/graph/daily4stats.png" class="graphborder" width="800" height="600">
+<p>&nbsp;</p>
+<img src="$base/graph/dailynewstats.png" class="graphborder" width="800" height="600">
+<p>&nbsp;</p>
+<img src="$base/graph/daily2stats.png" class="graphborder" width="800" height="600">
+<p>&nbsp;</p>
+<img src="$base/graph/dailyintegratedstats.png" class="graphborder" width="800" height="600">
+<p>&nbsp;</p>
+<img src="$base/graph/daily3stats.png" class="graphborder" width="800" height="600">
+<p>&nbsp;</p>
+<img src="$base/graph/rankpie.png" class="graphborder" width="800" height="600">
+<p>&nbsp;</p>
+<img src="$base/graph/nochapterpie.png" class="graphborder" width="800" height="600">
+<p>&nbsp;</p>
+<img src="$base/graph/chapterpie.png" class="graphborder" width="800" height="600">
+<p>&nbsp;</p>
+<img src="$base/graph/provincepie.png" class="graphborder" width="800" height="600">
+<p>&nbsp;</p>
+<img src="$base/graph/genderpie.png" class="graphborder" width="800" height="600">
+<p>&nbsp;</p>
+<img src="$base/graph/studentpie.png" class="graphborder" width="800" height="600">
+<p>&nbsp;</p>
+<img src="$base/graph/languagepie.png" class="graphborder" width="800" height="600">
+<p>&nbsp;</p>
+<img src="$base/graph/postpie.png" class="graphborder" width="800" height="600">
+<p>&nbsp;</p>
+<img src="$base/graph/post2pie.png" class="graphborder" width="800" height="600">
+<p>&nbsp;</p>
+<img src="$base/graph/post3pie.png" class="graphborder" width="800" height="600">
+<p>&nbsp;</p>
+<img src="$base/graph/logins.png" class="graphborder" width="800" height="600">
+<p>&nbsp;</p>
+<img src="$base/graph/lastlogin.png" class="graphborder" width="800" height="600">
+<p>&nbsp;</p>
+<img src="$base/graph/birthyears.png" class="graphborder" width="800" height="600">
+<p>&nbsp;</p>
+</div>

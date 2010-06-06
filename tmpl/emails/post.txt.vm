@@ -1,0 +1,17 @@
+
+#noWiki($post.stitchedPost)
+
+
+#if (!$post.getAttachedFiles().isEmpty())
+There are files associated with this email! (click to download from $helpers.longName)
+
+#foreach ($file in $post.getAttachedFiles())
+   - http://${helpers.domain}${helpers.appPrefix}/postfile/$post.id/$file.getURLEncodedname() ($file.getFormattedSize())
+#end
+#end
+
+#if( $post.hasActiveWhiteboard() )
+Edit this post's whiteboard on $helpers.longName at http://${helpers.domain}${helpers.appPrefix}/home/ShowPost/$post.id
+#else
+Reply to this email through $helpers.longName at http://${helpers.domain}${helpers.appPrefix}/home/ShowPost/$post.id
+#end

@@ -1,0 +1,51 @@
+<h2>OV Info</h2>
+
+#parse ("frame/memberinfo.vm")
+
+
+	<h3>General info</h3>
+	
+	<ul>
+		<li><span>Provincial health number: $info.healthnumber</span></li>
+		<li><span>Social insurance number: $info.sin</span></li>
+		<li><span>Date of Birth: $info.formattedDob</span></li>
+	</ul>
+		
+	<h3>Passport info</h3>
+	
+	<ul>
+		<li><span>Name on passport: $info.passportname</span></li>
+		<li><span>Passport number: $info.passportnumber</span></li>
+		<li><span>Place of issue: $info.passportplace</span></li>
+		<li><span>Date of issue: $info.formattedPassportstart</span></li>
+		<li><span>Expiry date: $info.formattedPassportend</span></li>
+	</ul>
+		
+	<h3>First Emergency Contact</h3>
+	
+	<ul>
+		<li><span>Name: $info.e1name</span></li>
+		<li><span>Relation: $info.e1relation</span></li>
+		<li><span>Address: $info.e1address</span></li>
+		<li><span>Business Phone: $info.e1business</span></li>
+		<li><span>Home Phone: $info.e1home</span></li>
+		<li><span>Fax: $info.e1fax</span></li>
+		<li><span>Email: $info.e1email</span></li>
+		<li><span>Preferred language: $info.e1language</span></li>
+		<li><span>Send this person updates? $info.formattedE1Updates</span></li>
+	</ul>
+		
+	<h3>Second Emergency Contact</h3>
+	
+	<ul>
+		<li><span>Name: $info.e2name</span></li>
+		<li><span>Relation: $info.e2relation</span></li>
+		<li><span>Address: $info.e2address</span></li>
+		<li><span>Business Phone: $info.e2business</span></li>
+		<li><span>Home Phone: $info.e2home</span></li>
+		<li><span>Fax: $info.e2fax</span></li>
+		<li><span>Email: $info.e2email</span></li>
+		<li><span>Preferred language: $info.e2language</span></li>
+		<li><span>Send this person updates? $info.formattedE2Updates</span></li>
+	</ul>
+	

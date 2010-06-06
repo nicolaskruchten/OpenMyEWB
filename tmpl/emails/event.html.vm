@@ -1,0 +1,4 @@
+#wiki($body)
+
+<br/>
+<p><b><a href="http://${helpers.domain}${helpers.appPrefix}/events/EventInfo/$event.id" target="_blank">View this event through $helpers.longName &raquo;</a></b></p>

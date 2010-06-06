@@ -1,0 +1,67 @@
+
+#if(!$param)
+
+<h2>Help page coming soon...</h2>
+
+<p>In the meantime, please feel free to email <a href="mailto:$helpers.systemEmail">$helpers.systemEmail</a> with any questions!</p>
+
+#elseif($param.equals("testing"))
+
+<a href="$base/ajax/help?fragment=formatting&height=450&width=850" class="thickbox">
+test link
+</a>
+
+#elseif($param.equals("formatting"))
+
+<h2>Post/Email/Whiteboard Formatting guide</h2>
+<br/><br />
+<table border="0" style="width: 850px; margin: 0 auto;">
+<tr>
+<td valign="top" style="width: 400px;">
+
+<fieldset style="width: 400px; height: 430px; padding-left: 10px">
+<legend style="font-weight: bold; font-size: 18px;">Typing this...</legend>
+
+<textarea style="width: 400px; height: 410px; border: 0; margin: 0 auto;">
+
+==Headings are nice==
+
+Paragraphs can be long or short like this one. They can also contain **bold** or ^^italic^^ text or **^^both^^**
+
+If you like lists:
+  - you can
+  - start a line
+    - with some
+    - spaces
+      - etc
+
+You can also make horizontal lines using four or more dashes.
+
+----
+
+You also can put links anywhere, either as http://ewb.ca or www.ewb.ca or http://www.ewb.ca
+
+Email addresses are also made into links automatically: email@address.com
+
+</textarea>
+</fieldset>
+
+</td>
+<td valign="top" style="width: 400px;">
+
+
+<fieldset style="width: 400px; height: 430px;">
+<legend style="font-weight: bold; font-size: 18px;">...will result in this:</legend>
+<h3 style="font-size: 15px;">Headings are nice</h3> <p class="postbody"> Paragraphs can be long or short like this one. They can also contain <b>bold</b> or <i>italic</i> text or <b><i>both</i></b></p> <p class="postbody"> If you like lists:<br/>&nbsp; &nbsp; - you can<br/>&nbsp; &nbsp; - start a line<br/>&nbsp; &nbsp; &nbsp; &nbsp; - with some<br/>&nbsp; &nbsp; &nbsp; &nbsp; - spaces<br/>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; - etc</p> <p class="postbody"> You can also make horizontal lines using four or more dashes.</p> <hr style="width: 75%; margin: 14px auto;"/> <p class="postbody"> You also can put links anywhere, either as <a href="http://ewb.ca" target="_blank">http://ewb.ca</a> or <a href="http://www.ewb.ca" target="_blank">&#119;ww.ewb.ca</a> or <a href="http://www.ewb.ca" target="_blank">http://www.ewb.ca</a></p> <p class="postbody"> Email addresses are also made into links automatically: <a href="mailto:email@address.com">email@address.com</a></p>
+
+
+</fieldset>
+</td>
+</tr>
+</table>
+
+
+
+
+#end
+

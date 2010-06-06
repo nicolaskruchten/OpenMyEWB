@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+      "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="ca.myewb.model">
+
+    <class name="RoleModel" table="roles">
+
+        <id name="id" type="int" unsaved-value="0">
+            <generator class="native"/>
+        </id>
+
+        <property name="start" type="date"/>
+        <property name="end" type="date"/>
+		<property name="title" type="string"/>
+		<property name="level" type="char"/>
+    
+   		<many-to-one name="user" class="UserModel" column="userid" />
+		<many-to-one name="group" class="GroupModel" column="groupid" />
+        
+    </class>
+
+</hibernate-mapping>

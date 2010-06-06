@@ -1,0 +1,14 @@
+[$helpers.enShortName] Welcome!
+
+
+Dear $helpers.longName supporter,
+
+Welcome to $helpers.longName! 
+
+You are receiving this email because $actor added your email address $email to the mailing list [$totalshortname] using $helpers.longName (http://${helpers.domain}${helpers.appPrefix}/). You are now connected to FILL THIS IN
+
+To manage your email settings, sign up for other mailing lists or get more involved in $helpers.longName, you may visit $helpers.longName at any time at http://${helpers.domain}${helpers.appPrefix}/profile/SignUp and sign up with this email address ($email) to obtain a password.
+
+To unsubscribe from any $helpers.longName mailing list, please visit http://${helpers.domain}${helpers.appPrefix}/mailing/Unsubscription at any time.
+
+Thank you for your support and involvement!

@@ -1,0 +1,12 @@
+[$helpers.enShortName] Email List sign-up
+
+
+Hello,
+
+Thank you again for your supporting $helpers.longName. Your recent gift is FILL THIS IN...
+
+To keep you up to date, we will be sending you our monthly email FILL THIS IN
+
+At any time, you can easily unsubscribe from our mailing list by visiting http://${helpers.domain}${helpers.appPrefix}/mailing/Unsubscription.
+
+Thank you again for your support!

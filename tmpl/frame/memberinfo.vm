@@ -1,0 +1,416 @@
+
+
+#if($form)
+
+	#parse("frame/form.vm")
+
+#else
+	
+	<h3 align="center">$targetUser.firstname $targetUser.lastname
+
+
+			#if($userexists && !$isGuest && (!$execTitle.equals("") || $targetUser.isAdmin()))
+				<br /><a href="mailto:$targetUser.email" style="font-size: 12px; font-weight: normal;">$targetUser.email</a>
+			#end</h3>
+		
+		
+		#if(!$restrictedView && $user.isMember("Exec", false) && !$targetUser.isAdmin())
+			#if ($basicType.equals("Mailing List"))
+
+		<p style="border: 2px solid black; margin: 20px 30px; padding: 10px;">
+		<b>This member is not a regular member according to the database!</b> However, one cannot upgrade a mailing list member to the status of regular in one step. You will have to sign out, then sign <i>up</i> as if you were this member using their name and this account's email address (you will need to choose a password). Once this is done, sign out, then sign back in as yourself and you will be able to upgrade them. Signing up with their email address will automatically send them an email with their password, but you may want to contact them directly also. Sorry for the complicated process!</p>
+
+			#elseif($toRegular)
+		
+		<p style="border: 2px solid black; margin: 20px 30px; padding: 10px;">
+		<b>This member is not a regular member according to the database!</b> If you have received membership fees from this member and wish to record that fact in the database, please click on 'upgrade to regular' in the sidebar.</p>
+
+			#elseif($renewRegular)
+		
+		<p style="border: 2px solid black; margin: 20px 30px; padding: 10px;">
+		<b>This member's regular membership expires soon!</b> If you have received membership fees from this member and wish to record that fact in the database, please click on 'renew regular' in the sidebar.</p>
+
+			#else
+				<br/>
+			#end
+		#else
+			<br/>
+		#end
+
+		<div align="center">
+			#set ($hasPic = $targetUser.hasPicture())
+
+			#if($hasPic)
+				
+				<a href="$base/userpictures/screensize/${targetUser.id}.jpg" class="thickbox" 
+title="$targetUser.firstname $targetUser.lastname">
+					<img src="$base/userpictures/thumbs/${targetUser.id}.jpg" style="border: 1px solid black;"/>
+
+				</a><br /><br/>
+				<a href="$base/userpictures/fullsize/${targetUser.id}.jpg" target="_blank" style="font-size: 11px;">(click for full size)</a>
+
+			#else
+				
+				<img src="$base/userpictures/nophoto.gif" style="border: 1px solid black;"/><br /><br />
+			
+			#end
+			
+			#if($targetUser.id == $user.id)
+				<a href="$base/profile/ChangePicture" style="font-size: 11px;">(click to update picture)</a> 
+			#end
+			
+			<br/>
+			<br/>
+		</div>
+
+	<table class="cellpadding5" style=" margin: 0 auto;">
+	
+		<tr><td width="200"></td><td width="370"></td></tr>
+
+		#if($userexists)
+			#if( (!$isGuest && !$targetUser.additionalInfo.equals("")) || $targetUser.id == $user.id)
+			<tr>
+				<td colspan="2">
+					<div align="center"><span class="fieldname required">Public Profile Information</span></div>
+					
+					<div style="width: 500px; margin-left: 30px;">
+					#if(!$targetUser.additionalInfo.equals(""))
+						#wiki($targetUser.additionalInfo)
+						#if($targetUser.id == $user.id)
+							<div align="center"><a href="$base/profile/ChangePicture" style="font-size: 11px;">(click to update your public profile info)</a></div>
+						#end
+					#else
+						<p align="center">(You currently don't have any public profile info)</p>
+						
+						<div align="center"><a href="$base/profile/ChangePicture" style="font-size: 11px;">(click to find out what public profile info is<br /> and how to update it)</a></div>
+					#end
+					</div>
+					
+					
+				</td>
+			</tr>
+			#end		
+			<tr>
+				<td colspan="2"><p align="center"><span class="fieldname required">Current Involvement</span></p>
+				
+					<ul style="margin-left: 55px; margin-top: -2px; margin-right:0; padding-right:0;">
+					
+					#if($targetUser.isMember("NMT", false))
+					<li><span>$targetUser.getNMTTitle(), <a href="$base/chapter/NationalOffice">National Office</a></span></li>
+					#end
+
+					#if($chapter)
+						<li><span>	
+						#if(!$execTitle.equals("")) 
+							$execTitle, 
+						#else 
+							$basicType member, 
+						#end
+						<a href="$base/chapter/ChapterInfo/$chapter.shortname">$chapter.name</a></span></li>
+					#elseif(!$targetUser.isAdmin())
+						<li><span>$basicType member</span></li>
+					#end
+
+					#if($user.isAdmin())
+					
+						#foreach($placement in $targetUser.placements)
+						<li><span>Overseas Volunteer, <a href="$base/volunteering/PlacementInfo/$placement.id">$placement.name</a></span></li>
+						#end
+						#foreach($app in $targetUser.applications)
+							<li><span>Applied to <a href="$base/volunteering/ApplicationInfo/$app.id">$app.session.name</a></span></li>
+						#end
+
+					#end
+
+					#if($user.isMember("Exec"))
+						#set($nrLists = $helpers.getNationalRepLists(true, true))
+						#foreach($nrList in $nrLists)
+							#if($targetUser.isMember($nrList, false))
+								<li><span>$nrList.postName.substring(4)</span></li>
+							#end
+						#end
+					#end
+
+					<li><span>User account created #postDate($targetUser.accountCreationDate)</span></li>
+
+					#if($targetUser.logins == 1)
+						<li><span>1 sign-in</span></li>
+						<li><span>Last signed in #postDateWithTime($targetUser.currentLogin)</span></li>
+					#elseif($targetUser.logins != 0)
+						<li><span>$targetUser.logins sign-ins</span></li>
+						<li><span>Last signed in #postDateWithTime($targetUser.currentLogin)</span></li>
+					#end
+
+					#set ( $numPosts = $targetUser.posts.size())
+					#if($numPosts == 1)
+					<li><a href="$base/profile/UserPosts/$targetUser.id">1 post or reply</a></li>
+					#elseif($numPosts != 0)
+					<li><a href="$base/profile/UserPosts/$targetUser.id">$numPosts posts/replies</a></li>
+					#else
+					<li><span>0 posts or replies</span></li>
+					#end
+
+
+					</ul>
+					<br />
+				</td>
+			</tr>
+
+		#end
+
+		#if(!$restrictedView)
+			#if (!$basicType.equals("Mailing List"))
+				<tr>
+					<td class="labelcell">First name:</td>
+					
+					<td>$targetUser.firstname</td>
+				</tr>
+				<tr>
+					<td class="labelcell">Last name:</td>
+					
+					<td>$targetUser.lastname</td>
+				</tr>
+			#end
+			
+			#if($userexists)
+				<tr>
+					<td class="labelcell">Primary email address:</td>
+					
+					<td><a href="mailto:$targetUser.email">$targetUser.email</a></td>
+				</tr>
+				
+				#if($verbose.equals("yes"))
+    				#if($targetUser.emails.size() != 1)
+        				
+						<tr>
+        					<td class="labelcell">Secondary #if($targetUser.emails.size() != 2) addresses#else address#end:</td>
+        					
+        					<td>
+								#foreach($email in $targetUser.emails)
+									#if(!$email.equals($targetUser.email))
+										<a href="mailto:$email" class="more">$email</a><br/>
+									#end
+								#end
+							</td>
+        				</tr>
+						
+    				
+    				#end
+					#if($targetUser.expiry)
+						<tr>
+							<td class="labelcell">Membership expiry date:</td>
+							
+							<td>#absDate($targetUser.expiry)</td>
+						</tr>
+					#end
+					
+					#if(!$targetUser.genderString.equals(""))
+						<tr>
+							<td class="labelcell">Gender:</td>
+							
+							<td>$targetUser.genderString</td>
+						</tr>
+					#end
+					
+					#if(!$targetUser.language.equals(""))
+						<tr>
+							<td class="labelcell">Preferred language:</td>
+							
+							<td>#if($targetUser.language.equals("en")) English #else French #end</td>
+						</tr>
+					#end
+					
+					#if(!$targetUser.studentString.equals(""))
+						<tr>
+							<td class="labelcell">Student status:</td>
+							
+							<td>$targetUser.studentString</td>
+						</tr>
+						
+						#if($targetUser.studentString.equals("Student"))
+						
+							#if(!$targetUser.studentnumber.equals(""))
+								<tr>
+									<td class="labelcell">Student number:</td>
+									
+									<td>$targetUser.studentnumber</td>
+								</tr>
+							#end
+						
+							#if(!$targetUser.studentinstitution.equals(""))
+								<tr>
+									<td class="labelcell">Institution:</td>
+									
+									<td>$targetUser.studentinstitution</td>
+								</tr>
+							#end
+						
+							#if(!$targetUser.studentfield.equals(""))
+								<tr>
+									<td class="labelcell">Field of study:</td>
+									
+									<td>$targetUser.studentfield</td>
+								</tr>
+							#end
+						
+							#if(($targetUser.studentgradmonth != 0) && ($targetUser.studentgradyear != 0))
+								<tr>
+									<td class="labelcell">Graduation date:</td>
+									
+									<td>$targetUser.studentgradmonthString $targetUser.studentgradyear</td>
+								</tr>
+							#end
+						
+							#if(!$targetUser.studentlevelString.equals(""))
+								<tr>
+									<td class="labelcell">Level of study:</td>
+									
+									<td>$targetUser.studentlevelString</td>
+								</tr>
+							#end
+						
+						#else <!-- if pro -->
+						
+							#if(!$targetUser.proemployer.equals(""))
+								<tr>
+									<td class="labelcell">Employer:</td>
+									
+									<td>$targetUser.proemployer</td>
+								</tr>
+							#end
+						
+							#if(!$targetUser.prosector.equals(""))
+								<tr>
+									<td class="labelcell">Sector:</td>
+									
+									<td>$targetUser.prosector</td>
+								</tr>
+							#end
+						
+							#if(!$targetUser.procompsizeString.equals(""))
+								<tr>
+									<td class="labelcell">Company size:</td>
+									
+									<td>$targetUser.procompsizeString</td>
+								</tr>
+							#end
+						
+							#if(!$targetUser.proposition.equals(""))
+								<tr>
+									<td class="labelcell">Position:</td>
+									
+									<td>$targetUser.proposition</td>
+								</tr>
+							#end
+						
+							#if(!$targetUser.proincomelevelString.equals(""))
+								<tr>
+									<td class="labelcell">Income level:</td>
+									
+									<td>$targetUser.proincomelevelString</td>
+								</tr>
+							#end
+						
+						#end <!-- end pro block -->
+						
+					#end <!-- end if student!="" -->
+					
+					#if($targetUser.birth != 0)
+						<tr>
+							<td class="labelcell">Year of Birth:</td>
+							
+							<td>$targetUser.birth</td>
+						</tr>
+					#end
+			
+					#if($targetUser.address1 && (!$targetUser.address1.equals("")))
+						<tr>
+							<td class="labelcell">Address:</td>
+							
+							<td>
+$targetUser.address1#if($targetUser.suite && !$targetUser.suite.equals("")), $targetUser.suite #end<br />
+#if($targetUser.address2 && !$targetUser.address2.equals(""))$targetUser.address2<br />#end
+$targetUser.city, $targetUser.province<br />
+$targetUser.postalcode<br />
+#if($targetUser.country.equals("CA"))Canada #else $targetUser.country #end
+
+							</td>
+						</tr>
+					#end
+				
+					#if($targetUser.phone && (!$targetUser.phone.equals("")))
+						<tr>
+							<td class="labelcell">Main phone number:</td>
+							
+							<td>$targetUser.phone</td>
+						</tr>
+					#end
+					
+					#if($targetUser.alternateno && (!$targetUser.alternateno.equals("")))
+						<tr>
+							<td class="labelcell">Alternate phone number:</td>
+							
+							<td>$targetUser.alternateno</td>
+						</tr>
+					#end
+					
+					#if($targetUser.cellno && (!$targetUser.cellno.equals("")))
+						<tr>
+							<td class="labelcell">Cell phone number:</td>
+							
+							<td>$targetUser.cellno</td>
+						</tr>
+					#end
+					
+					#if($targetUser.businessno && (!$targetUser.businessno.equals("")))
+						<tr>
+							<td class="labelcell">Work phone number:</td>
+							
+							<td>$targetUser.businessno</td>
+						</tr>
+					#end
+					
+	
+				#end <!-- end if verbose -->
+			#else <!-- if user does not exist -->
+				<tr>
+					<td align="center" colspan="2"><b style="color: red;">This user has been deleted.</b></td>
+				</tr>
+			#end
+		#end
+	</table>
+	
+#end
+
+#if($verbose.equals("yes") && $user.isAdmin())
+<br/>
+<h3 align="center">User History</h3>
+<table style="border-collapse: collapse; border: 1px solid black; margin: 0 auto;" class="cellpadding7">
+	<tr>
+		<th style="border: 1px solid black">Level</th>
+		<th style="border: 1px solid black">Group</th>
+		<th style="border: 1px solid black">Started</th>
+		<th style="border: 1px solid black">Ended</th>
+	</tr>
+	#foreach($role in $targetUser.roles)
+	#if($velocityCount %2 ==0) #set($odd = "background: #EEE;") #else #set($odd = "") #end
+	#if($role.end) #set($bold = "font-weight: normal;") #else #set($bold = "font-weight: bold;") #end
+	<tr>
+		<td style="border: 1px solid black; font-size: 12px; $odd $bold">$role.formattedLevel</td>
+		<td style="border: 1px solid black; font-size: 12px; $odd $bold"><a href="$base/mailing/ListMgmt/$role.group.id">$role.group.shortname</a></td>
+		<td style="border: 1px solid black; font-size: 12px; $odd ">#postDate($role.start)</td>
+		<td style="border: 1px solid black; font-size: 12px; $odd ">#if($role.end) #postDate($role.end) #else <i>(ongoing)</i> #end</td>
+	</tr>
+	#end
+</table>
+
+	#if($form2)
+	<br/>
+	<h3 align="center">Email Control</h3>
+
+		#set($form = $form2)
+		#parse("frame/form.vm")
+	#end
+#end
+
+<p>&nbsp;</p>

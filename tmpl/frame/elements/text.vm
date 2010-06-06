@@ -1,0 +1,16 @@
+#if ($element.lock)
+	$element.value
+#else
+	<input type="text" name="$element.internalName" 
+value="$element.safeValue" style="width: ${element.size}px;" 
+id="formelem$element.internalName"/>
+#end
+
+
+#if($element.instructionTemplate.equals("tags"))
+<div class="instructions" style="margin-bottom: 3px; width: 400px;">
+list tags separated by commas 
+<br />tags are short (truncated to 30 characters or less) words or phrases 
+to help other users find this item later.
+</div>
+#end

@@ -1,0 +1,50 @@
+
+<h2>Placement List</h2>
+
+<h3>Unassigned placements</h3>
+<ul>
+#if ($unassigned.isEmpty())
+	<li><span>none</span></li>
+	#else
+		#foreach($placement in $unassigned)
+	<li><span><a href="$base/volunteering/PlacementInfo/$placement.id">$placement.name</a></span></li>
+	#end
+	#end
+		</ul>
+	
+	<br />
+<h3>Active placements</h3>
+<ul>
+#if ($active.isEmpty())
+	<li><span>none</span></li>
+	#else
+		#foreach($placement in $active)
+	<li><span><a href="$base/volunteering/PlacementInfo/$placement.id">$placement.name</a>  ($placement.ov.firstname $placement.ov.lastname)</span></li>
+	#end
+	#end
+		</ul>
+	
+	<br />
+<h3>Inactive placements</h3>
+<ul>
+#if ($inactive.isEmpty())
+	<li><span>none</span></li>
+	#else
+		#foreach($placement in $inactive)
+	<li><span><a href="$base/volunteering/PlacementInfo/$placement.id">$placement.name</a>  ($placement.ov.firstname $placement.ov.lastname)</span></li>
+	#end
+	#end
+		</ul>
+	
+	<br />
+<h3>Deleted placements</h3>
+<ul>
+#if ($deleted.isEmpty())
+	<li><span>none</span></li>
+	#else
+		#foreach($placement in $deleted)
+	<li><span><a href="$base/volunteering/PlacementInfo/$placement.id">$placement.name</a></span></li>
+	#end
+	#end
+	</ul>
+	

@@ -1,0 +1,17 @@
+log4j.rootLogger = DEBUG, ganymede
+
+log4j.appender.ganymede = org.apache.log4j.varia.NullAppender
+log4j.appender.ganymede.layout = org.apache.log4j.SimpleLayout
+
+
+log4j.logger.ca.myewb = DEBUG
+
+#log4j.rootLogger = ERROR, ganymede
+#
+#log4j.appender.ganymede=org.apache.log4j.net.SocketAppender
+#log4j.appender.ganymede.RemoteHost=localhost
+#log4j.appender.ganymede.Port=4445
+#log4j.appender.ganymede.locationInfo=true
+#
+#
+#log4j.logger.ca.myewb = DEBUG

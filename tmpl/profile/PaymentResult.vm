@@ -1,0 +1,7 @@
+<h2>Payment Received</h2>
+
+<p>Your membership payment of <b>#dollars($receipt.totalAmount)</b> has been received and recorded, thank you!</p>
+
+<p>Please keep this receipt number for your records: <b>Receipt ID: $receipt.orderNumber</b>. An electronic receipt has also been sent to you by email.</p>
+
+<p>If you have any questions about this online transaction, please contact <a href="mailto:$helpers.systemEmail">$helpers.systemEmail</a>.</p>

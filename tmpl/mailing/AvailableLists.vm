@@ -1,0 +1,46 @@
+<h2>Available Mailing Lists</h2>
+
+#if($names.isEmpty())
+<p>You already subscribe to every mailing list you can belong to!</p>
+#else
+
+<p>You can subscribe to the following mailing lists:</p>
+
+
+
+<table width="90%" class="cellpadding5" style="border-collapse: collapse; margin: 0 auto;">
+#foreach ($name in $names2)
+	<tr><td colspan="2"><a name="$name"></a><h3 style="margin: 0px; margin-top: 10px; ">$name</h3></td></tr>
+	#set ($lists = $hash.get($name))
+	#foreach ($list in $lists)
+			<tr>
+				<td style="border: 1px solid #EEE; border-right: #FFF;">
+				<p><a href="$base/mailing/ListInfo/$list.id" class="nodeco nohover"><b>$list.name</b>
+				<br /><span style="font-size: 10px;">[$list.totalShortname]</span>
+				<br />$list.getDescription() </a>
+				<br /><a href="$base/mailing/ListInfo/$list.id" class="more">more info & list archives &raquo;</a></p>
+				</td>
+				
+				<td valign="middle" align="center" style="border: 1px solid #EEE; border-left: #FFF; width: 250px;">
+					<form action="${base}/actions/ModifyListMembership/$list.id" method="post" enctype="multipart/form-data">
+					#if($isGuest)
+						<input type="text" name="Emails" onFocus="this.value='';" onBlur="if(this.value=='')this.value='(your email address)'" value="(your email address)"/>
+					#else
+						<input type="hidden" name="Emails" value="$user.email"/>
+					#end
+						<input type="hidden" name="ActionType" value="add"/>
+
+					#if(!$list.admin)
+						<input type="submit" class="button" value="subscribe" onClick="this.disabled=true; this.style.color='#AAA'; this.form.submit();"/>
+					#elseif($list.name.equals("Org"))
+						<input type="submit" class="button" value="subscribe" onClick="this.disabled=true; this.style.color='#AAA'; this.form.submit();"/>
+					#end
+
+					</form>
+				</td>
+			</tr>
+	#end
+#end
+</table>
+
+#end

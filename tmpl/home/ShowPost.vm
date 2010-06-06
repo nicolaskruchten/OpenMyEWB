@@ -1,0 +1,73 @@
+
+
+#if (($formmessage || ($message && $message.message.contains("confirm"))) && $form)
+	#if(!$post.hasActiveWhiteboard())
+		#if($canSend)
+			<h3 align="center">Post or Email a Reply</h3>
+    	#else
+			<h3 align="center">Post a Reply</h3>
+		#end
+	
+		#parse("frame/form.vm")
+	#end
+	<br />
+#end
+
+	#set ($fullDisplay = true)
+	#parse("frame/renderers/postrenderer.vm")
+
+	
+	#if ($replies.isEmpty() == false)
+		<div class="postheader" style="margin-top: 25px;"><img src="${base}/images/reply.gif"
+			style="float: left; margin-right: 5px; margin-top: 3px; padding: 0;" border="0"/>Replies</div>
+	#end
+	
+	#foreach ($post in $replies)
+		#parse("frame/renderers/replyrenderer.vm")
+	#end	
+	
+	
+	#if(!$isGuest && !$replies.isEmpty())
+
+		<div style="margin: 0; padding: 0;" align="center">
+		#if($user.hasFlagged($post))
+    				<a href="#" onclick="return togglePostFlag('$base/actions/UnFlagPost/$post.id', this, '$base/home/FlaggedPosts', 'removed from watch list')" style="font-size: 10px;">[remove this post from my watch-list]</a>
+		#else
+    				<a href="#" onclick="return togglePostFlag('$base/actions/FlagPost/$post.id', this, '$base/home/FlaggedPosts', 'added to watch list')" style="font-size: 10px;">[add this post to my watch-list]</a>
+		#end	
+		#if($user.isAdmin())
+			#if($post.isFeatured())
+				<a href="#" onclick="return togglePostFlag('$base/actions/UnFeaturePost/$post.id', this, '$base/home/Posts', 'removed from global hot-list')"  class="more">[remove post from global hot-list]</a>
+			#else
+				<a href="#" onclick="return togglePostFlag('$base/actions/FeaturePost/$post.id', this, '$base/home/Posts', 'added to global hot-list')"  class="more">[add post to global hot-list]</a>
+			#end
+		#end
+		
+					<br /><br />get replies to watch-listed posts  as emails <a href="$base/home/FlaggedPosts">click here &raquo;</a>
+		
+		</div>
+		<br />
+	#end
+			
+
+#if(!$post.hasActiveWhiteboard())
+    #if ($form)
+    	#if( ! ($formmessage || ($message && $message.message.contains("confirm")))   )
+        	#if($canSend)
+        		<h3 align="center">Post or Email a Reply</h3>
+        	#else
+        		<h3 align="center">Post a Reply</h3>
+        	#end
+        
+        	#parse("frame/form.vm")
+    	#else
+        	<br />
+        	<p align="center">(reply form is at top of page)</p>
+    	#end
+    #elseif($post.group.visible)
+    	<h3 align="center">Sign In to Respond</h3>
+    	
+    	#set($inline = "true")
+    	#parse ("frame/statsbox.vm")
+    #end
+#end

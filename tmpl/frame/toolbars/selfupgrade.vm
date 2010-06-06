@@ -1,0 +1,31 @@
+
+<ul>
+    <li><a href="${base}/profile/EditProfile">update profile info</a></li>
+    <li><a href="${base}/profile/EditProfile">change password</a></li>
+	
+    #if(!$targetUser.chapter)
+    <li><a href="${base}/chapter/ListChapters">join a chapter</a></li>
+    #end
+    
+    <li><a href="${base}/profile/ChangePicture">update picture</a></li>
+    
+    #if($targetUser.hasPicture())
+    <li><a href="${base}/actions/SavePicture/delete">delete picture</a></li>
+    #end
+    	
+    <li><a href="${base}/profile/ChangePicture">update public profile info</a></li>
+    	
+    #if($targetUser.isAdmin())
+    <li><a href="${base}/chapter/NMTTitle/$targetUser.id">update office member title</a></li>	
+    #end
+    		
+    #if ($isExec.equals("yes") && !$targetUser.isAdmin())
+    <li><a href="${base}/chapter/ExecTitle/$targetUser.id">update exec title</a></li>	
+    #end
+    
+    #if ($mode.equals("makeRegular"))
+    <li><a href="${base}/profile/PayDues">become a regular member</a></li>
+    #elseif ($mode.equals("renewRegular"))
+    <li><a href="${base}/profile/PayDues">renew regular membership</a></li>
+    #end
+</ul>

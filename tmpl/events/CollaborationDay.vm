@@ -1,0 +1,6 @@
+
+<h2>Collaboration Day Registration</h2>
+
+<p>The cost of attending Collaboration Day, on Friday, January 23, 2009 is $150 per person.</p>
+
+#parse("frame/form.vm")

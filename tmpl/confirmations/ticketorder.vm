@@ -1,0 +1,18 @@
+ 
+
+<table width="70%" class="cellpadding5" style="border-collapse: collapse; margin: 0 auto;">
+<tr>
+<th align="center" style="border: 1px solid black;">Item</th>
+<th align="center" style="border: 1px solid black;">Cost</th>
+</tr>
+
+#set($cost = 250*$num)
+
+<tr>
+<td align="center" style="border: 1px solid black;">$num Gala Banquet Ticket(s)</td>
+<td align="center" style="border: 1px solid black;"> #dollars($cost)</td>
+</tr>
+
+</table>
+
+<br /><br />

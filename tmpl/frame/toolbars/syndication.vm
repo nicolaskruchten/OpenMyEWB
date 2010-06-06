@@ -1,0 +1,16 @@
+
+<ul class="feedlist">
+
+<li><a href="$base/api/posts/Any" class="nodeco">Front Page</a></li>
+<li><a href="$base/api/posts/Any plus Replies" class="nodeco">Front Page w/ replies</a></li>
+
+
+#if(!$filterParam.equals("Any"))
+<li><a href="$base/api/posts/$filterParam" class="nodeco">$filterParam</a></li>
+#end
+
+<li><a href="$base/api/hot/Any" class="nodeco">Hot-list</a></li>
+<li><a href="$base/api/hot/Any plus Replies" class="nodeco">Hot-list w/ replies</a></li>
+
+</ul>
+

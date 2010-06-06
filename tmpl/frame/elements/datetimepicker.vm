@@ -1,0 +1,30 @@
+
+
+<input type="hidden" name="$element.internalName" 
+value="$element.safeValue"
+id="formelem$element.internalName"/>
+
+
+&nbsp; 
+<span style="font-size: 10px">Date:</span> <input type="text" name="date$element.internalName" 
+value="#if(!$element.value.equals("") && ($element.value.length() > 12))$element.safeValue.substring(0, 10)#end" 
+style="width: 80px;" 
+id="dateformelem$element.internalName" 
+onKeyUp =  "$('#formelem$element.internalName').val( $('#dateformelem$element.internalName').val() + ' ' + $('#timeformelem$element.internalName').val() );"
+onBlur =   "$('#formelem$element.internalName').val( $('#dateformelem$element.internalName').val() + ' ' + $('#timeformelem$element.internalName').val() );"
+onChange = "$('#formelem$element.internalName').val( $('#dateformelem$element.internalName').val() + ' ' + $('#timeformelem$element.internalName').val() );"
+
+ onclick="displayDatePicker('date$element.internalName', false, 'ymd', '-');"
+/>
+<img src="$base/images/cal.gif" onclick="displayDatePicker('date$element.internalName', false, 'ymd', '-');">
+
+
+&nbsp; 
+<span style="font-size: 10px">Time:</span> <input type="text" name="time$element.internalName" 
+value="#if(!$element.value.equals("") && ($element.value.length() > 12))$element.safeValue.substring(11)#end" 
+style="width: 40px;"
+id="timeformelem$element.internalName"
+onKeyUp =  "$('#formelem$element.internalName').val( $('#dateformelem$element.internalName').val() + ' ' + $('#timeformelem$element.internalName').val() );"
+onBlur =   "$('#formelem$element.internalName').val( $('#dateformelem$element.internalName').val() + ' ' + $('#timeformelem$element.internalName').val() );"
+onChange = "$('#formelem$element.internalName').val( $('#dateformelem$element.internalName').val() + ' ' + $('#timeformelem$element.internalName').val() );"
+/>

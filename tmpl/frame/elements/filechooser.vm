@@ -1,0 +1,20 @@
+<div name="div_fileChooser">
+
+<input type="file" name="${element.internalName}0" id="formelem$element.internalName" />
+
+#if($element.multifile)
+	<a id="fileChooser_addField" onmouseover="mouseHand()" onmouseout="mousePointer()" onclick="addField('app_form', 'fileChooser_addField', '${element.internalName}')" class="instructions"> add more files </a>
+	<noscript>
+		<input type="file" name="${element.internalName}1" id="formelem${element.internalName}1" />
+		<input type="file" name="${element.internalName}2" id="formelem${element.internalName}2" />
+		<input type="file" name="${element.internalName}3" id="formelem${element.internalName}3" />
+		<input type="file" name="${element.internalName}4" id="formelem${element.internalName}4" />
+		<input type="file" name="${element.internalName}5" id="formelem${element.internalName}5" />
+		<input type="file" name="${element.internalName}6" id="formelem${element.internalName}6" />
+		<input type="file" name="${element.internalName}7" id="formelem${element.internalName}7" />
+		<input type="file" name="${element.internalName}8" id="formelem${element.internalName}8" />
+		<input type="file" name="${element.internalName}9" id="formelem${element.internalName}9" />
+	</noscript>
+#end
+
+</div>
